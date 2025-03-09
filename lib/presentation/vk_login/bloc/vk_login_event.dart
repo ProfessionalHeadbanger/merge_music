@@ -6,3 +6,15 @@ abstract class VkLoginEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class OpenMainPage extends VkLoginEvent {
+  const OpenMainPage();
+}
+
+class VkLoginAuthError extends VkLoginEvent {
+  const VkLoginAuthError();
+}
+
+class VkLoginAuthSuccess extends VkLoginEvent {
+  const VkLoginAuthSuccess();
+}

@@ -4,7 +4,6 @@ import 'package:merge_music/presentation/vk_login/pages/vk_login_page.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
-  initialLocation: Routes.vkLogin,
   routes: [
     GoRoute(
       path: Routes.mainPage,

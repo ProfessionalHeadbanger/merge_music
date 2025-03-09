@@ -1,9 +1,14 @@
 part of 'vk_login_bloc.dart';
 
 abstract class VkLoginState extends Equatable {
-  const VkLoginState();  
+  const VkLoginState();
 
   @override
   List<Object> get props => [];
 }
+
 class VkLoginInitial extends VkLoginState {}
+
+class VkLoginSuccess extends VkLoginState {}
+
+class VkLoginFailure extends VkLoginState {}
