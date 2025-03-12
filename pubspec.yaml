@@ -1,6 +1,6 @@
 name: merge_music
 description: "MergeMusic"
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -16,6 +16,7 @@ dependencies:
     sdk: flutter
   flutter_native_splash: ^2.4.4
   flutter_secure_storage: ^9.2.4
+  flutter_svg: ^2.0.17
   fpdart: ^1.1.1
   get_it: ^8.0.3
   go_router: ^14.8.0
@@ -35,15 +36,16 @@ flutter:
 
   assets:
     - assets/fonts/
+    - assets/icons/
+    - assets/images/
   fonts:
     - family: VK Sans Display
       fonts:
-      - asset: assets/fonts/VKSansDisplay-Regular.ttf
-        weight: 400
-      - asset: assets/fonts/VKSansDisplay-Medium.ttf
-        weight: 500
-      - asset: assets/fonts/VKSansDisplay-DemiBold.ttf
-        weight: 600
-      - asset: assets/fonts/VKSansDisplay-Bold.ttf
-        weight: 700
-      
+        - asset: assets/fonts/VKSansDisplay-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/VKSansDisplay-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/VKSansDisplay-DemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/VKSansDisplay-Bold.ttf
+          weight: 700
