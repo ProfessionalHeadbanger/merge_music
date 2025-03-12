@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:merge_music/common/global_state/access_token/access_token_cubit.dart';
-import 'package:merge_music/core/constants/constants.dart';
+import 'package:merge_music/core/constants/api_constants.dart';
 import 'package:merge_music/data/models/audio_model.dart';
 import 'package:merge_music/service_locator.dart';
 
@@ -22,11 +22,11 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
         while (true) {
           int offset = 0;
           final response = await dio.get(
-            Constants.baseUrl + Constants.audioGet,
+            ApiConstants.baseUrl + ApiConstants.audioGet,
             queryParameters: {
               'access_token': token,
               'v': '5.199',
-              'count': Constants.batchCount,
+              'count': ApiConstants.batchCount,
               'offset': offset,
             },
           );
@@ -38,11 +38,11 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
                 audiosJson.map((json) => AudioModel.fromJson(json)).toList();
             audios.addAll(currentBatch);
 
-            if (currentBatch.length < Constants.batchCount) {
+            if (currentBatch.length < ApiConstants.batchCount) {
               break;
             }
 
-            offset += Constants.batchCount;
+            offset += ApiConstants.batchCount;
           } else {
             serviceLocator
                 .get<Logger>()
