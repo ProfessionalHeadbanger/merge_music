@@ -14,47 +14,84 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: BottomNavigationBar(
-        items: buildBottomNavBarItems,
-        currentIndex: navigationShell.currentIndex,
-        onTap: (index) => navigationShell.goBranch(index,
-            initialLocation: index == navigationShell.currentIndex),
-        selectedItemColor: LightAppColors.selectedNavBarItem,
-        unselectedItemColor: LightAppColors.unselectedNavBarItem,
+      bottomNavigationBar: NavigationBar(
+        destinations: _navBarItems,
+        selectedIndex: navigationShell.currentIndex,
+        onDestinationSelected: navigationShell.goBranch,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+        indicatorShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     );
   }
 
-  List<BottomNavigationBarItem> get buildBottomNavBarItems => [
-        BottomNavigationBarItem(
+  List<Widget> get _navBarItems => [
+        NavigationDestination(
           icon: SvgPicture.asset(
             IconsConstants.homeOutline,
             width: SizeConstants.navBarIconSize,
             height: SizeConstants.navBarIconSize,
+            colorFilter: const ColorFilter.mode(
+                LightAppColors.unselectedNavBarItem, BlendMode.srcIn),
+          ),
+          selectedIcon: SvgPicture.asset(
+            IconsConstants.homeOutline,
+            width: SizeConstants.navBarIconSize,
+            height: SizeConstants.navBarIconSize,
+            colorFilter: const ColorFilter.mode(
+                LightAppColors.selectedNavBarItem, BlendMode.srcIn),
           ),
           label: 'Home',
         ),
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: SvgPicture.asset(
             IconsConstants.searchOutline,
             width: SizeConstants.navBarIconSize,
             height: SizeConstants.navBarIconSize,
+            colorFilter: const ColorFilter.mode(
+                LightAppColors.unselectedNavBarItem, BlendMode.srcIn),
+          ),
+          selectedIcon: SvgPicture.asset(
+            IconsConstants.searchOutline,
+            width: SizeConstants.navBarIconSize,
+            height: SizeConstants.navBarIconSize,
+            colorFilter: const ColorFilter.mode(
+                LightAppColors.selectedNavBarItem, BlendMode.srcIn),
           ),
           label: 'Search',
         ),
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: SvgPicture.asset(
             IconsConstants.musicOutline,
             width: SizeConstants.navBarIconSize,
             height: SizeConstants.navBarIconSize,
+            colorFilter: const ColorFilter.mode(
+                LightAppColors.unselectedNavBarItem, BlendMode.srcIn),
+          ),
+          selectedIcon: SvgPicture.asset(
+            IconsConstants.musicOutline,
+            width: SizeConstants.navBarIconSize,
+            height: SizeConstants.navBarIconSize,
+            colorFilter: const ColorFilter.mode(
+                LightAppColors.selectedNavBarItem, BlendMode.srcIn),
           ),
           label: 'Library',
         ),
-        BottomNavigationBarItem(
+        NavigationDestination(
           icon: SvgPicture.asset(
             IconsConstants.settingsOutline,
             width: SizeConstants.navBarIconSize,
             height: SizeConstants.navBarIconSize,
+            colorFilter: const ColorFilter.mode(
+                LightAppColors.unselectedNavBarItem, BlendMode.srcIn),
+          ),
+          selectedIcon: SvgPicture.asset(
+            IconsConstants.settingsOutline,
+            width: SizeConstants.navBarIconSize,
+            height: SizeConstants.navBarIconSize,
+            colorFilter: const ColorFilter.mode(
+                LightAppColors.selectedNavBarItem, BlendMode.srcIn),
           ),
           label: 'Settings',
         )

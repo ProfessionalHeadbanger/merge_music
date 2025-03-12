@@ -6,18 +6,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: Text('Main Page'),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Logout'),
-          ),
-        ],
-      ),
+      body: Center(child: Text('Main Page')),
     );
   }
 }
