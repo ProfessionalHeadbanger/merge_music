@@ -7,9 +7,7 @@ import 'package:merge_music/service_locator.dart';
 import 'package:vkid_flutter_sdk/library_vkid.dart';
 
 class OneTapWidget extends StatelessWidget {
-  final void Function(String? refreshToken) onAuth;
-
-  const OneTapWidget({super.key, required this.onAuth});
+  const OneTapWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

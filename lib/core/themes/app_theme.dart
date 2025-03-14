@@ -5,25 +5,29 @@ import 'package:merge_music/core/themes/styles/text_styles.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
-    scaffoldBackgroundColor: LightAppColors.primaryBackground,
+    brightness: Brightness.light,
+    useMaterial3: true,
+    scaffoldBackgroundColor: ColorStyles.lightColorStyle.primaryBackground,
+    appBarTheme: AppBarTheme(
+      backgroundColor: ColorStyles.lightColorStyle.primaryBackground,
+      titleTextStyle: TextStyles.lightTextStyle.largeTitle,
+    ),
     extensions: [
-      TextStyles(
-        largeTitle: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.w700,
-          color: LightAppColors.primaryText,
-          fontFamily: 'VK Sans Display',
-        ),
-        mediumTitle: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-          color: LightAppColors.primaryText,
-          fontFamily: 'VK Sans Display',
-        ),
-      ),
-      const LightColorStyles(
-        primaryBackground: LightAppColors.primaryBackground,
-      ),
+      TextStyles.lightTextStyle,
+      ColorStyles.lightColorStyle,
+    ],
+  );
+
+  static final darkTheme = ThemeData(
+    useMaterial3: true,
+    scaffoldBackgroundColor: DarkAppColors.primaryBackground,
+    appBarTheme: AppBarTheme(
+      backgroundColor: ColorStyles.darkColorStyle.primaryBackground,
+      titleTextStyle: TextStyles.darkTextStyle.largeTitle,
+    ),
+    extensions: [
+      TextStyles.darkTextStyle,
+      ColorStyles.darkColorStyle,
     ],
   );
 }

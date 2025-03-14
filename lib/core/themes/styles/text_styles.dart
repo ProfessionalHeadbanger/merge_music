@@ -1,33 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/themes/constants/app_colors.dart';
+import 'package:merge_music/core/themes/style_extensions/text_style_extension.dart';
 
-class TextStyles extends ThemeExtension<TextStyles> {
-  final TextStyle? largeTitle;
-  final TextStyle? mediumTitle;
+class TextStyles {
+  static const lightTextStyle = TextStyleExtension(
+    largeTitle: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      color: LightAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    mediumTitle: TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
+      color: LightAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    smallTitle: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: LightAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    subtitle: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: LightAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+  );
 
-  const TextStyles({
-    this.largeTitle,
-    this.mediumTitle,
-  });
-
-  @override
-  ThemeExtension<TextStyles> copyWith({
-    TextStyle? largeTitle,
-    TextStyle? mediumTitle,
-  }) {
-    return TextStyles(
-      largeTitle: largeTitle ?? this.largeTitle,
-      mediumTitle: mediumTitle ?? this.mediumTitle,
-    );
-  }
-
-  @override
-  ThemeExtension<TextStyles> lerp(ThemeExtension<TextStyles>? other, double t) {
-    if (other is! TextStyles) {
-      return this;
-    }
-    return TextStyles(
-      largeTitle: TextStyle.lerp(largeTitle, other.largeTitle, t),
-      mediumTitle: TextStyle.lerp(mediumTitle, other.mediumTitle, t),
-    );
-  }
+  static const darkTextStyle = TextStyleExtension(
+    largeTitle: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      color: DarkAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    mediumTitle: TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
+      color: DarkAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    smallTitle: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: DarkAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    subtitle: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: DarkAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+  );
 }

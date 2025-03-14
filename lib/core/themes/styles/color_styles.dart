@@ -1,41 +1,26 @@
-import 'package:flutter/material.dart';
+import 'package:merge_music/core/themes/constants/app_colors.dart';
+import 'package:merge_music/core/themes/style_extensions/color_style_extension.dart';
 
-class LightColorStyles extends ThemeExtension<LightColorStyles> {
-  final Color? primaryBackground;
-  final Color? primaryText;
-  final Color? secondaryBackground;
+class ColorStyles {
+  static const lightColorStyle = ColorStyleExtension(
+    primaryBackground: LightAppColors.primaryBackground,
+    primaryText: LightAppColors.primaryText,
+    secondaryText: LightAppColors.secondaryText,
+    tertiaryText: LightAppColors.tertiaryText,
+    textButton: LightAppColors.textButton,
+    selectedNavBarItem: LightAppColors.selectedNavBarItem,
+    unselectedNavBarItem: LightAppColors.unselectedNavBarItem,
+    selectedNavBarItemBoxColor: LightAppColors.selectedNavBarItemBoxColor,
+  );
 
-  const LightColorStyles({
-    this.primaryBackground,
-    this.primaryText,
-    this.secondaryBackground,
-  });
-
-  @override
-  ThemeExtension<LightColorStyles> copyWith({
-    Color? primaryBackground,
-    Color? primaryText,
-    Color? secondaryBackground,
-  }) {
-    return LightColorStyles(
-      primaryBackground: primaryBackground ?? this.primaryBackground,
-      primaryText: primaryText ?? this.primaryText,
-      secondaryBackground: secondaryBackground ?? this.secondaryBackground,
-    );
-  }
-
-  @override
-  ThemeExtension<LightColorStyles> lerp(
-      ThemeExtension<LightColorStyles>? other, double t) {
-    if (other is! LightColorStyles) {
-      return this;
-    }
-    return LightColorStyles(
-      primaryBackground:
-          Color.lerp(primaryBackground, other.primaryBackground, t),
-      primaryText: Color.lerp(primaryText, other.primaryText, t),
-      secondaryBackground:
-          Color.lerp(secondaryBackground, other.secondaryBackground, t),
-    );
-  }
+  static const darkColorStyle = ColorStyleExtension(
+    primaryBackground: DarkAppColors.primaryBackground,
+    primaryText: DarkAppColors.primaryText,
+    secondaryText: DarkAppColors.secondaryText,
+    tertiaryText: DarkAppColors.tertiaryText,
+    textButton: DarkAppColors.textButton,
+    selectedNavBarItem: DarkAppColors.selectedNavBarItem,
+    unselectedNavBarItem: DarkAppColors.unselectedNavBarItem,
+    selectedNavBarItemBoxColor: DarkAppColors.selectedNavBarItemBoxColor,
+  );
 }

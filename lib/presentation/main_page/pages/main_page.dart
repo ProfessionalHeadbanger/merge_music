@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/extensions/extensions.dart';
+import 'package:merge_music/presentation/main_page/widgets/vk_mix_sliver.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -6,7 +8,16 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Main Page')),
+      appBar: AppBar(
+        title: Text(
+          context.l10n.mainPage,
+        ),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          VkMixSliver(),
+        ],
+      ),
     );
   }
 }

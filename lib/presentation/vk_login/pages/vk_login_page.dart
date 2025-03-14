@@ -19,15 +19,16 @@ class VkLoginPage extends StatelessWidget {
                 style: context.text.largeTitle,
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(
+                height: 8,
+              ),
               Text(
                 context.l10n.loginVk,
-                style: context.text.mediumTitle,
+                style: context.text.smallTitle,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
-              OneTapWidget(
-                onAuth: (refreshToken) => {},
-              ),
+              OneTapWidget(),
             ],
           ),
         ),

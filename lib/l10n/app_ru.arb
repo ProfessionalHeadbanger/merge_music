@@ -1,6 +1,23 @@
 {
-    "welcome": "Добро пожаловать в Merge Music",
-    "loginVk": "Для начала необходимо авторизоваться в VK",
+    "welcome": "Добро пожаловать в\nMerge Music",
+    "loginVk": "Для начала необходимо\nавторизоваться в VK",
     "language": "Русский",
-    "errorOccured" : "Произошла непредвиденная ошибка"
+    "errorOccured" : "Произошла непредвиденная ошибка",
+
+    "mainPage": "Главная",
+    "searchPage": "Поиск",
+    "libraryPage": "Библиотека",
+    "settingsPage": "Настройки",
+
+    "listenVKMix": "Слушать VK Mix",
+    "recsForYou": "Музыкальные рекомендации для Вас",
+    "listen": "Слушать",
+
+    "myTracks": "Мои треки",
+    "showAll": "Показать все",
+
+    "madeByAlgorithms": "Собрано алгоритмами",
+    "setUpRecommendations": "Настроить рекомендации",
+
+    "madeByRedactors": "Собрано редакцией"
 }

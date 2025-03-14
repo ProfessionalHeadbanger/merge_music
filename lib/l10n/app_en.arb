@@ -2,5 +2,22 @@
     "welcome": "Welcome to Merge Music",
     "loginVk": "To start, you need to authorize in VK",
     "language": "English",
-    "errorOccured" : "An unexpected error occurred"
+    "errorOccured" : "An unexpected error occurred",
+
+    "mainPage": "Home",
+    "searchPage": "Search",
+    "libraryPage": "Library",
+    "settingsPage": "Settings",
+
+    "listenVKMix": "Listen to VK Mix",
+    "recsForYou": "Music recommendations for you",
+    "listen": "Listen",
+
+    "myTracks": "My tracks",
+    "showAll": "Show all",
+
+    "madeByAlgorithms": "Made by algorithms",
+    "setUpRecommendations": "Set up recommendations",
+
+    "madeByRedactors": "Made by redactors"
 }
