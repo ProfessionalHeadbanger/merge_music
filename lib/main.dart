@@ -6,6 +6,7 @@ import 'package:merge_music/common/navigation/routes.dart';
 import 'package:merge_music/core/themes/app_theme.dart';
 import 'package:merge_music/common/navigation/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
 import 'package:merge_music/service_locator.dart';
 
@@ -24,7 +25,10 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<VkLoginBloc>(),
-        )
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<MainPageBloc>(),
+        ),
       ],
       child: const MainApp(),
     ),

@@ -6,3 +6,9 @@ abstract class MainPageEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class LoadMainPageAudios extends MainPageEvent {}
+
+//class LoadAlgorithmsPlaylists extends MainPageEvent {}
+
+//class LoadRedactorsPlaylists extends MainPageEvent {}

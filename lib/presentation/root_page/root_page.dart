@@ -92,6 +92,7 @@ class RootPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         indicatorColor: context.color.selectedNavBarItemBoxColor!,
+        backgroundColor: context.color.primaryBackground,
       ),
     );
   }

@@ -7,6 +7,8 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   final TextStyle? subtitle;
   final TextStyle? trackName;
   final TextStyle? artistName;
+  final TextStyle? customButtonText;
+  final TextStyle? textButton;
 
   const TextStyleExtension({
     this.largeTitle,
@@ -15,6 +17,8 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
     this.subtitle,
     this.trackName,
     this.artistName,
+    this.customButtonText,
+    this.textButton,
   });
 
   @override
@@ -25,6 +29,8 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
     TextStyle? subtitle,
     TextStyle? trackName,
     TextStyle? artistName,
+    TextStyle? customButtonText,
+    TextStyle? textButton,
   }) {
     return TextStyleExtension(
       largeTitle: largeTitle ?? this.largeTitle,
@@ -33,6 +39,8 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
       subtitle: subtitle ?? this.subtitle,
       trackName: trackName ?? this.trackName,
       artistName: artistName ?? this.artistName,
+      customButtonText: customButtonText ?? this.customButtonText,
+      textButton: textButton ?? this.textButton,
     );
   }
 
@@ -49,6 +57,9 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
       subtitle: TextStyle.lerp(subtitle, other.subtitle, t),
       trackName: TextStyle.lerp(trackName, other.trackName, t),
       artistName: TextStyle.lerp(artistName, other.artistName, t),
+      customButtonText:
+          TextStyle.lerp(customButtonText, other.customButtonText, t),
+      textButton: TextStyle.lerp(textButton, other.textButton, t),
     );
   }
 }

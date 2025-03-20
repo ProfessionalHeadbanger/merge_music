@@ -11,6 +11,9 @@ class LightAppColors {
   static const selectedNavBarItem = Color(0xff5181b1);
   static const unselectedNavBarItem = Color(0xff5f5f5f);
   static const selectedNavBarItemBoxColor = Color(0xffdee7f0);
+
+  static const customButtonColor = Color(0xff000000);
+  static const invertedPrimaryText = Color(0xffffffff);
 }
 
 class DarkAppColors {
@@ -24,4 +27,7 @@ class DarkAppColors {
   static const selectedNavBarItem = Color(0xff71aaeb);
   static const unselectedNavBarItem = Color(0xffb8b8b8);
   static const selectedNavBarItemBoxColor = Color(0xff242f3b);
+
+  static const customButtonColor = Color(0xffffffff);
+  static const invertedPrimaryText = Color(0xff000000);
 }

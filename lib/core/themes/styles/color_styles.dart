@@ -11,6 +11,8 @@ class ColorStyles {
     selectedNavBarItem: LightAppColors.selectedNavBarItem,
     unselectedNavBarItem: LightAppColors.unselectedNavBarItem,
     selectedNavBarItemBoxColor: LightAppColors.selectedNavBarItemBoxColor,
+    customButtonColor: LightAppColors.customButtonColor,
+    invertedPrimaryText: LightAppColors.invertedPrimaryText,
   );
 
   static const darkColorStyle = ColorStyleExtension(
@@ -22,5 +24,7 @@ class ColorStyles {
     selectedNavBarItem: DarkAppColors.selectedNavBarItem,
     unselectedNavBarItem: DarkAppColors.unselectedNavBarItem,
     selectedNavBarItemBoxColor: DarkAppColors.selectedNavBarItemBoxColor,
+    customButtonColor: DarkAppColors.customButtonColor,
+    invertedPrimaryText: DarkAppColors.invertedPrimaryText,
   );
 }

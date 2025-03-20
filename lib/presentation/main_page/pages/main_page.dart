@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
+import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
+import 'package:merge_music/presentation/main_page/widgets/audio_list_sliver.dart';
 import 'package:merge_music/presentation/main_page/widgets/vk_mix_sliver.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,10 +21,27 @@ class MainPage extends StatelessWidget {
           context.l10n.mainPage,
         ),
       ),
-      body: CustomScrollView(
-        slivers: [
-          VkMixSliver(),
-        ],
+      body: BlocBuilder<MainPageBloc, MainPageState>(
+        builder: (context, state) {
+          if (state is MainPageLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is MainPageError) {
+            return Center(child: Text(state.message));
+          }
+          if (state is MainPageLoaded) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: CustomScrollView(
+                slivers: [
+                  VkMixSliver(),
+                  AudioListSliver(audios: state.audios),
+                ],
+              ),
+            );
+          }
+          return const SizedBox.shrink();
+        },
       ),
     );
   }

@@ -28,6 +28,18 @@ class TextStyles {
       color: LightAppColors.primaryText,
       fontFamily: 'VK Sans Display',
     ),
+    customButtonText: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      color: LightAppColors.invertedPrimaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    textButton: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: LightAppColors.textButton,
+      fontFamily: 'VK Sans Display',
+    ),
   );
 
   static const darkTextStyle = TextStyleExtension(
@@ -53,6 +65,18 @@ class TextStyles {
       fontSize: 16,
       fontWeight: FontWeight.w400,
       color: DarkAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    customButtonText: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      color: DarkAppColors.invertedPrimaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    textButton: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: DarkAppColors.textButton,
       fontFamily: 'VK Sans Display',
     ),
   );

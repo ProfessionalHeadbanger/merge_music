@@ -12,6 +12,9 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
   final Color? unselectedNavBarItem;
   final Color? selectedNavBarItemBoxColor;
 
+  final Color? customButtonColor;
+  final Color? invertedPrimaryText;
+
   const ColorStyleExtension({
     this.primaryBackground,
     this.primaryText,
@@ -21,6 +24,8 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
     this.selectedNavBarItem,
     this.unselectedNavBarItem,
     this.selectedNavBarItemBoxColor,
+    this.customButtonColor,
+    this.invertedPrimaryText,
   });
 
   @override
@@ -33,6 +38,8 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
     Color? selectedNavBarItem,
     Color? unselectedNavBarItem,
     Color? selectedNavBarItemBoxColor,
+    Color? customButtonColor,
+    Color? invertedPrimaryText,
   }) {
     return ColorStyleExtension(
       primaryBackground: primaryBackground ?? this.primaryBackground,
@@ -44,6 +51,8 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
       unselectedNavBarItem: unselectedNavBarItem ?? this.unselectedNavBarItem,
       selectedNavBarItemBoxColor:
           selectedNavBarItemBoxColor ?? this.selectedNavBarItemBoxColor,
+      customButtonColor: customButtonColor ?? this.customButtonColor,
+      invertedPrimaryText: invertedPrimaryText ?? this.invertedPrimaryText,
     );
   }
 
@@ -66,6 +75,10 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
           Color.lerp(unselectedNavBarItem, other.unselectedNavBarItem, t),
       selectedNavBarItemBoxColor: Color.lerp(
           selectedNavBarItemBoxColor, other.selectedNavBarItemBoxColor, t),
+      customButtonColor:
+          Color.lerp(customButtonColor, other.customButtonColor, t),
+      invertedPrimaryText:
+          Color.lerp(invertedPrimaryText, other.invertedPrimaryText, t),
     );
   }
 }

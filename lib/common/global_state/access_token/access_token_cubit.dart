@@ -11,6 +11,7 @@ class AccessTokenCubit extends Cubit<AccessTokenState> {
 
   Future<void> updateToken() async {
     try {
+      (await VKID.getInstance()).refreshToken();
       final authData = await (await VKID.getInstance()).currentAuthData;
       final token = authData?.token;
       serviceLocator.get<Logger>().d('Saved token: $token');
