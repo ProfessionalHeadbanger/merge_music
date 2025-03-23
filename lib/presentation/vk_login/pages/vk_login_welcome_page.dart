@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
-import 'package:merge_music/presentation/vk_login/widgets/one_tap_widget.dart';
+import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
+import 'package:merge_music/presentation/vk_login/widgets/vk_login_button.dart';
+import 'package:provider/provider.dart';
 
-class VkLoginPage extends StatelessWidget {
-  const VkLoginPage({super.key});
+class VkLoginWelcomePage extends StatelessWidget {
+  const VkLoginWelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,13 @@ class VkLoginPage extends StatelessWidget {
                 style: context.text.smallTitle,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 24),
-              OneTapWidget(),
+              const SizedBox(height: 16),
+              VkLoginButton(
+                label: context.l10n.signIn,
+                onTap: () {
+                  context.read<VkLoginBloc>().add(const OpenInputLoginPage());
+                },
+              ),
             ],
           ),
         ),

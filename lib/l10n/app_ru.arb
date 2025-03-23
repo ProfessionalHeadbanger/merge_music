@@ -1,8 +1,17 @@
 {
-    "welcome": "Добро пожаловать в\nMerge Music",
-    "loginVk": "Для начала необходимо\nавторизоваться в VK",
     "language": "Русский",
     "errorOccured" : "Произошла непредвиденная ошибка",
+
+    "welcome": "Добро пожаловать в\nMerge Music",
+    "loginVk": "Для начала необходимо\nавторизоваться в VK",
+    "signIn": "Войти",
+
+    "signInVk": "Войти в VK",
+    "textFieldLoginLabel": "Введите номер телефона или email",
+    "textFieldPasswordLabel": "Введите пароль",
+    "continueLabel": "Продолжить",
+
+    
 
     "mainPage": "Главная",
     "searchPage": "Поиск",

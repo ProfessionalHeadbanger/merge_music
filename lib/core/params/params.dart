@@ -13,3 +13,19 @@ class AudioListParams {
     required this.v,
   });
 }
+
+class VkLoginParams {
+  final String login;
+  final String password;
+
+  VkLoginParams({
+    required this.login,
+    required this.password,
+  });
+}
+
+class Request2faParams {
+  final String redirectUri;
+
+  Request2faParams({required this.redirectUri});
+}

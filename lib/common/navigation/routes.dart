@@ -1,5 +1,7 @@
 class Routes {
   static const vkLogin = '/vk_login';
+  static const inputLogin = 'input_login';
+  static const confirmSms = 'confirm_sms';
 
   // Пути для bottom navigation bar
   static const mainPage = '/main_page';

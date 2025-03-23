@@ -1,8 +1,17 @@
 {
-    "welcome": "Welcome to Merge Music",
-    "loginVk": "To start, you need to authorize in VK",
     "language": "English",
     "errorOccured" : "An unexpected error occurred",
+
+    "welcome": "Welcome to Merge Music",
+    "loginVk": "To start, you need to authorize in VK",
+    "signIn": "Sign in",
+
+    "signInVk": "Sign in to VK",
+    "textFieldLoginLabel": "Enter phone number or email",
+    "textFieldPasswordLabel": "Enter password",
+    "continueLabel": "Continue",
+
+    
 
     "mainPage": "Home",
     "searchPage": "Search",
