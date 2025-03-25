@@ -46,7 +46,7 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    context.read<AccessTokenCubit>().updateToken();
+    context.read<AccessTokenCubit>().checkToken();
   }
 
   @override
@@ -57,7 +57,7 @@ class _MainAppState extends State<MainApp> {
         if (state is AccessTokenLoaded) {
           router.go(Routes.mainPage);
         } else if (state is AccessTokenNull) {
-          router.go(Routes.vkLogin);
+          router.go(Routes.welcomePage);
         }
       },
       child: MaterialApp.router(

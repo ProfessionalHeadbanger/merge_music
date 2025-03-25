@@ -6,7 +6,6 @@ import 'package:merge_music/presentation/root_page/root_page.dart';
 import 'package:merge_music/presentation/search_page/pages/search_page.dart';
 import 'package:merge_music/presentation/settings_page/pages/settings_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_input_login_page.dart';
-import 'package:merge_music/presentation/vk_login/pages/vk_login_2fa_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_welcome_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -55,18 +54,12 @@ final router = GoRouter(
       ],
     ),
     GoRoute(
-      path: Routes.vkLogin,
+      path: Routes.welcomePage,
       builder: (_, __) => const VkLoginWelcomePage(),
       routes: [
         GoRoute(
           path: Routes.inputLogin,
           builder: (_, __) => const VkLoginInputLoginPage(),
-          routes: [
-            GoRoute(
-              path: Routes.confirmSms,
-              builder: (_, __) => const VkLogin2faPage(),
-            ),
-          ],
         ),
       ],
     ),

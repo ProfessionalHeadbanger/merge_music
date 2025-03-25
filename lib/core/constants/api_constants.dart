@@ -3,13 +3,9 @@ class ApiConstants {
   static const String v = '5.199';
 
   // Константы для авторизации
-  static const String oauthUrl = 'https://oauth.vk.com/token';
-  static const String clientId = '2274003';
-  static const String clientSecret = 'hHbZxrka2uZ6jB1inYsH';
-  static const String grantType = 'password';
-  static const String scope = 'nohttps.audio';
-  static const String validateToken = 'true';
-  static const String faSupport = '1';
+  static const String oauthUrl =
+      'https://oauth.vk.com/authorize?client_id=2685278&scope=69634&redirect_uri=https://oauth.vk.com/blank.html&display=page&response_type=token&revoke=1';
+  static const String blankRedirectUri = 'https://oauth.vk.com/blank.html';
 
   // Константы для API
   static const String baseUrl = 'https://api.vk.com/method/';

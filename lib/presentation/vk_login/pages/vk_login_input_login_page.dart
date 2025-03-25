@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:merge_music/core/extensions/extensions.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:merge_music/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/constants/api_constants.dart';
+import 'package:merge_music/core/utils/utils.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
-import 'package:merge_music/presentation/vk_login/widgets/vk_login_button.dart';
 import 'package:provider/provider.dart';
 
 class VkLoginInputLoginPage extends StatefulWidget {
@@ -12,16 +14,6 @@ class VkLoginInputLoginPage extends StatefulWidget {
 }
 
 class _VkLoginInputLoginPageState extends State<VkLoginInputLoginPage> {
-  final _loginController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    _loginController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,49 +25,20 @@ class _VkLoginInputLoginPageState extends State<VkLoginInputLoginPage> {
           icon: Icon(Icons.arrow_back),
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(context.l10n.signInVk, style: context.text.largeTitle),
-              const SizedBox(
-                height: 8,
-              ),
-              Form(
-                child: TextFormField(
-                  controller: _loginController,
-                  decoration: InputDecoration(
-                    labelText: context.l10n.textFieldLoginLabel,
-                    labelStyle: context.text.subtitle,
-                  ),
-                ),
-              ),
-              Form(
-                child: TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    labelText: context.l10n.textFieldPasswordLabel,
-                    labelStyle: context.text.subtitle,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              VkLoginButton(
-                onTap: () {
-                  context.read<VkLoginBloc>().add(
-                        TapSignInButton(
-                            login: _loginController.text,
-                            password: _passwordController.text),
-                      );
-                },
-                label: context.l10n.continueLabel,
-              ),
-            ],
+      body: SafeArea(
+        child: InAppWebView(
+          initialUrlRequest: URLRequest(
+            url: WebUri(ApiConstants.oauthUrl),
           ),
+          shouldOverrideUrlLoading: (controller, navigationAction) async {
+            final url = navigationAction.request.url.toString();
+            if (url.startsWith(ApiConstants.blankRedirectUri)) {
+              final token = Utils.extractAccessToken(url);
+              context.read<AccessTokenCubit>().updateToken(token);
+              return NavigationActionPolicy.CANCEL;
+            }
+            return NavigationActionPolicy.ALLOW;
+          },
         ),
       ),
     );

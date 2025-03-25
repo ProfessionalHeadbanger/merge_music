@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:merge_music/service_locator.dart';
-import 'package:vkid_flutter_sdk/library_vkid.dart';
 
 part 'access_token_state.dart';
 
 class AccessTokenCubit extends Cubit<AccessTokenState> {
-  AccessTokenCubit() : super(AccessTokenInitial());
+  AccessTokenCubit() : super(AccessTokenNull());
 
-  Future<void> updateToken() async {
-    try {
-      (await VKID.getInstance()).refreshToken();
-      final authData = await (await VKID.getInstance()).currentAuthData;
-      final token = authData?.token;
+  void checkToken() async {
+    final token =
+        await serviceLocator<FlutterSecureStorage>().read(key: 'token');
+    serviceLocator.get<Logger>().d('Saved token: $token');
+    updateToken(token);
+  }
+
+  void updateToken(String? token) async {
+    if (token != null) {
       serviceLocator.get<Logger>().d('Saved token: $token');
-
-      if (token != null) {
-        emit(AccessTokenLoaded(token: token));
-      } else {
-        emit(AccessTokenNull());
-      }
-    } catch (e) {
+      await serviceLocator<FlutterSecureStorage>()
+          .write(key: 'token', value: token);
+      emit(AccessTokenLoaded(token: token));
+    } else {
       emit(AccessTokenNull());
     }
   }

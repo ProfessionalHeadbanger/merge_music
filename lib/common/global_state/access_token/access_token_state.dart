@@ -3,8 +3,6 @@ part of 'access_token_cubit.dart';
 @immutable
 sealed class AccessTokenState {}
 
-final class AccessTokenInitial extends AccessTokenState {}
-
 final class AccessTokenNull extends AccessTokenState {}
 
 final class AccessTokenLoaded extends AccessTokenState {
