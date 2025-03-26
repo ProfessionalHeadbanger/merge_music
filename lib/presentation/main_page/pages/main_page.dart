@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:merge_music/common/widgets/retry_button.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
 import 'package:merge_music/presentation/main_page/widgets/audio_list_sliver.dart';
@@ -27,7 +28,13 @@ class _MainPageState extends State<MainPage> {
             return const Center(child: CircularProgressIndicator());
           }
           if (state is MainPageError) {
-            return Center(child: Text(state.message));
+            return Center(
+              child: RetryButton(
+                onPressed: () {
+                  context.read<MainPageBloc>().add(LoadMainPageAudios());
+                },
+              ),
+            );
           }
           if (state is MainPageLoaded) {
             return Padding(

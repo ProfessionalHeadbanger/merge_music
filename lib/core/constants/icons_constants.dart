@@ -6,4 +6,5 @@ class IconsConstants {
   static const String musicOutline = '${basePath}music_outline$format';
   static const String searchOutline = '${basePath}search_outline$format';
   static const String settingsOutline = '${basePath}settings_outline$format';
+  static const String refreshOutline = '${basePath}refresh_outline$format';
 }
