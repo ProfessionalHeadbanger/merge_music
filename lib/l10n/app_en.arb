@@ -1,6 +1,7 @@
 {
     "language": "English",
     "errorOccured" : "An unexpected error occurred",
+    "noInternet" : "No internet connection",
 
     "welcome": "Welcome to Merge Music",
     "loginVk": "To start, you need to authorize in VK",

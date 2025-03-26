@@ -5,7 +5,6 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:logger/logger.dart';
 import 'package:merge_music/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/network/internet_connection_checker.dart';
-import 'package:merge_music/core/usecases/usecase.dart';
 import 'package:merge_music/data/data_sources/remote/audio_remote_data_source.dart';
 import 'package:merge_music/data/repositories/audio_repository_impl.dart';
 import 'package:merge_music/domain/repositories/audio_repository.dart';
@@ -54,7 +53,9 @@ Future<void> setupServiceLocator() async {
 
   // VK Login Page
   serviceLocator.registerLazySingleton<VkLoginBloc>(
-    () => VkLoginBloc(),
+    () => VkLoginBloc(
+      serviceLocator(),
+    ),
   );
 
   // Main Page
@@ -66,7 +67,7 @@ Future<void> setupServiceLocator() async {
       serviceLocator(),
     ),
   );
-  serviceLocator.registerFactory<UseCase>(
+  serviceLocator.registerFactory(
     () => GetMainPageAudioList(
       serviceLocator(),
     ),

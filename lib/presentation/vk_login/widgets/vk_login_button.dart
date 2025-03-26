@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 
 class VkLoginButton extends StatelessWidget {
-  final String label;
   final VoidCallback onTap;
+  final Widget content;
 
-  const VkLoginButton({super.key, required this.label, required this.onTap});
+  const VkLoginButton({super.key, required this.onTap, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,7 @@ class VkLoginButton extends StatelessWidget {
             WidgetStatePropertyAll(context.color.customButtonColor),
         minimumSize: WidgetStatePropertyAll(Size(250, 45)),
       ),
-      child: Text(
-        label,
-        style: context.text.customButtonText,
-      ),
+      child: content,
     );
   }
 }
