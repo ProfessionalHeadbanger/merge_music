@@ -8,6 +8,7 @@ class AudioModel extends AudioEntity {
     required super.title,
     required super.duration,
     required super.url,
+    required super.hasLyrics,
     required super.lyricsId,
     required super.albumId,
     required super.genreId,
@@ -19,34 +20,35 @@ class AudioModel extends AudioEntity {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'ownerId': ownerId,
+      'owner_id': ownerId,
       'artist': artist,
       'title': title,
       'duration': duration,
       'url': url,
-      'lyricsId': lyricsId,
-      'albumId': albumId,
-      'genreId': genreId,
+      'lyrics_id': lyricsId,
+      'album_id': albumId,
+      'genre_id': genreId,
       'date': date,
-      'noSearch': noSearch,
-      'isHq': isHq,
+      'no_search': noSearch,
+      'is_hq': isHq,
     };
   }
 
   factory AudioModel.fromJson(Map<String, dynamic> json) {
     return AudioModel(
       id: json['id'],
-      ownerId: json['ownerId'],
+      ownerId: json['owner_id'],
       artist: json['artist'],
       title: json['title'],
       duration: json['duration'],
       url: json['url'],
-      lyricsId: json['lyricsId'],
-      albumId: json['albumId'],
-      genreId: json['genreId'],
+      hasLyrics: json['has_lyrics'] ?? false,
+      lyricsId: json['lyrics_id'],
+      albumId: json['album_id'],
+      genreId: json['genre_id'],
       date: json['date'],
-      noSearch: json['noSearch'],
-      isHq: json['isHq'],
+      noSearch: json['no_search'] ?? 0,
+      isHq: json['is_hq'],
     );
   }
 
@@ -57,6 +59,7 @@ class AudioModel extends AudioEntity {
     String? title,
     int? duration,
     String? url,
+    bool? hasLyrics,
     int? lyricsId,
     int? albumId,
     int? genreId,
@@ -71,6 +74,7 @@ class AudioModel extends AudioEntity {
       title: title ?? this.title,
       duration: duration ?? this.duration,
       url: url ?? this.url,
+      hasLyrics: hasLyrics ?? this.hasLyrics,
       lyricsId: lyricsId ?? this.lyricsId,
       albumId: albumId ?? this.albumId,
       genreId: genreId ?? this.genreId,

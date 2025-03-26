@@ -5,12 +5,13 @@ class AudioEntity {
   final String title;
   final int duration;
   final String url;
-  final int lyricsId;
-  final int albumId;
-  final int genreId;
+  final bool hasLyrics;
+  final int? lyricsId;
+  final int? albumId;
+  final int? genreId;
   final int date;
   final int noSearch;
-  final int isHq;
+  final int? isHq;
 
   AudioEntity({
     required this.id,
@@ -19,6 +20,7 @@ class AudioEntity {
     required this.title,
     required this.duration,
     required this.url,
+    required this.hasLyrics,
     required this.lyricsId,
     required this.albumId,
     required this.genreId,
