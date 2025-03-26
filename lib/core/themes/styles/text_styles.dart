@@ -40,6 +40,18 @@ class TextStyles {
       color: LightAppColors.textButton,
       fontFamily: 'VK Sans Display',
     ),
+    trackName: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: LightAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    artistName: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: LightAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
   );
 
   static const darkTextStyle = TextStyleExtension(
@@ -77,6 +89,18 @@ class TextStyles {
       fontSize: 14,
       fontWeight: FontWeight.w500,
       color: DarkAppColors.textButton,
+      fontFamily: 'VK Sans Display',
+    ),
+    trackName: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: DarkAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    artistName: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: DarkAppColors.primaryText,
       fontFamily: 'VK Sans Display',
     ),
   );
