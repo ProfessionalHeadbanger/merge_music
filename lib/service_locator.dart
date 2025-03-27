@@ -25,8 +25,6 @@ Future<void> setupServiceLocator() async {
         headers: {
           "User-Agent":
               "KateMobileAndroid/109.1 lite-550 (Android 13; SDK 33; x86_64; Google Pixel 5; ru)",
-          // "User-Agent":
-          //     "VKAndroidApp/4.13.1-1206 (Android 4.4.3; SDK 19; armeabi; ; ru)",
         },
       ),
     ),
