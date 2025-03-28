@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:merge_music/common/widgets/audio_tile.dart';
+import 'package:merge_music/core/common/widgets/audio_tile.dart';
 import 'package:merge_music/core/constants/size_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/audio_entity.dart';

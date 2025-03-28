@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:logger/logger.dart';
-import 'package:merge_music/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/network/internet_connection_checker.dart';
 import 'package:merge_music/data/data_sources/remote/audio_remote_data_source.dart';
 import 'package:merge_music/data/repositories/audio_repository_impl.dart';

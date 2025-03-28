@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:merge_music/common/widgets/loading_widget.dart';
-import 'package:merge_music/common/widgets/snackbar.dart';
+import 'package:merge_music/core/common/widgets/loading_widget.dart';
+import 'package:merge_music/core/common/widgets/snackbar.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
 import 'package:merge_music/presentation/vk_login/widgets/vk_login_button.dart';

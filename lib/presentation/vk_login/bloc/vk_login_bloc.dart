@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:merge_music/common/navigation/router.dart';
-import 'package:merge_music/common/navigation/routes.dart';
+import 'package:merge_music/core/common/navigation/router.dart';
+import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/core/network/internet_connection_checker.dart';
 
 part 'vk_login_event.dart';

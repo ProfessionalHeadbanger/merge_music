@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:logger/logger.dart';
-import 'package:merge_music/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/constants/api_constants.dart';
 import 'package:merge_music/core/errors/exception.dart';
 import 'package:merge_music/core/errors/failure.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:merge_music/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/constants/api_constants.dart';
 import 'package:merge_music/core/utils/utils.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';

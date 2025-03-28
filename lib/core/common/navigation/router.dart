@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:merge_music/presentation/library_page/pages/library_page.dart';
 import 'package:merge_music/presentation/main_page/pages/main_page.dart';
-import 'package:merge_music/common/navigation/routes.dart';
+import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/presentation/root_page/root_page.dart';
 import 'package:merge_music/presentation/search_page/pages/search_page.dart';
 import 'package:merge_music/presentation/settings_page/pages/settings_page.dart';

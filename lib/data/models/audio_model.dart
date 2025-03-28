@@ -25,6 +25,7 @@ class AudioModel extends AudioEntity {
       'title': title,
       'duration': duration,
       'url': url,
+      'has_lyrics': hasLyrics,
       'lyrics_id': lyricsId,
       'album_id': albumId,
       'genre_id': genreId,

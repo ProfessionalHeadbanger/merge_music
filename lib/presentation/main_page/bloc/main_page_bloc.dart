@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:merge_music/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/params/params.dart';
 import 'package:merge_music/domain/entities/audio_entity.dart';
 import 'package:merge_music/domain/usecases/get_main_page_audio_list.dart';
