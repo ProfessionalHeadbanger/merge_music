@@ -15,7 +15,6 @@ class UserParams {
 }
 
 class AudioListParams {
-  final int? ownerId;
   final int? albumId;
   final int? count;
   final int? offset;
@@ -23,7 +22,6 @@ class AudioListParams {
   final String v;
 
   AudioListParams({
-    this.ownerId,
     this.albumId,
     required this.count,
     this.offset,

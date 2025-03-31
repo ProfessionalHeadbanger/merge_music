@@ -21,7 +21,6 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
       final response = await dio.get(
         ApiConstants.baseUrl + ApiConstants.audioGet,
         queryParameters: {
-          'owner_id': params.ownerId,
           'album_id': params.albumId,
           'count': params.count,
           'offset': params.offset,
