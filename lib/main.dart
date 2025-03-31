@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/core/themes/app_theme.dart';
 import 'package:merge_music/core/common/navigation/router.dart';
@@ -29,6 +30,9 @@ void main() async {
         BlocProvider(
           create: (_) => serviceLocator<MainPageBloc>(),
         ),
+        BlocProvider(
+          create: (_) => serviceLocator<UserCubit>(),
+        ),
       ],
       child: const MainApp(),
     ),
@@ -47,6 +51,16 @@ class _MainAppState extends State<MainApp> {
   void initState() {
     super.initState();
     context.read<AccessTokenCubit>().checkToken();
+
+    context.read<AccessTokenCubit>().stream.listen(
+      (state) {
+        if (state is AccessTokenLoaded) {
+          if (mounted) {
+            context.read<UserCubit>().loadUser();
+          }
+        }
+      },
+    );
   }
 
   @override

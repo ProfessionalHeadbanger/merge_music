@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
 import 'package:merge_music/core/constants/api_constants.dart';
 import 'package:merge_music/core/utils/utils.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
@@ -34,7 +35,8 @@ class _VkLoginInputLoginPageState extends State<VkLoginInputLoginPage> {
             final url = navigationAction.request.url.toString();
             if (url.startsWith(ApiConstants.blankRedirectUri)) {
               final token = Utils.extractAccessToken(url);
-              context.read<AccessTokenCubit>().updateToken(token);
+              await context.read<AccessTokenCubit>().updateToken(token);
+              context.read<UserCubit>().loadUser();
               return NavigationActionPolicy.CANCEL;
             }
             return NavigationActionPolicy.ALLOW;

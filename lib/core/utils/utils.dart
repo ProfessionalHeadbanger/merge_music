@@ -14,6 +14,14 @@ class Utils {
     return token;
   }
 
+  static String? extractUserId(String url) {
+    final uri = Uri.parse(url);
+    final fragment = uri.fragment;
+    final params = Uri.splitQueryString(fragment);
+
+    return params['user_id'];
+  }
+
   static String formatDuration(int duration) {
     final minutes = duration ~/ 60;
     final seconds = duration % 60;

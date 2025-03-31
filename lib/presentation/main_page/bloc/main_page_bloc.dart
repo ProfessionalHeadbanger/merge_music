@@ -15,10 +15,10 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   final AccessTokenCubit accessTokenCubit;
   late final StreamSubscription accessTokenSubscription;
 
-  MainPageBloc(
-      {required GetMainPageAudioList getMainPageAudioList,
-      required this.accessTokenCubit})
-      : _getMainPageAudioList = getMainPageAudioList,
+  MainPageBloc({
+    required GetMainPageAudioList getMainPageAudioList,
+    required this.accessTokenCubit,
+  })  : _getMainPageAudioList = getMainPageAudioList,
         super(MainPageInitial()) {
     on<LoadMainPageAudios>(_onLoadMainPageAudios);
 

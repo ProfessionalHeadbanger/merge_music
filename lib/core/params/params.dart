@@ -1,5 +1,19 @@
 class NoParams {}
 
+class UserParams {
+  final String? userIds;
+  final List<String>? fields;
+  final String accessToken;
+  final String v;
+
+  UserParams({
+    this.userIds,
+    this.fields,
+    required this.accessToken,
+    required this.v,
+  });
+}
+
 class AudioListParams {
   final int? ownerId;
   final int? albumId;

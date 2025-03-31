@@ -7,6 +7,15 @@ abstract class VkLoginEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class GetUserInfoEvent extends VkLoginEvent {
+  final String userId;
+
+  const GetUserInfoEvent(this.userId);
+
+  @override
+  List<Object> get props => [userId];
+}
+
 class OpenInputLoginPage extends VkLoginEvent {
   const OpenInputLoginPage();
 }

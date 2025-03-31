@@ -16,7 +16,7 @@ class AccessTokenCubit extends Cubit<AccessTokenState> {
     updateToken(token);
   }
 
-  void updateToken(String? token) async {
+  Future<void> updateToken(String? token) async {
     if (token != null) {
       serviceLocator.get<Logger>().d('Saved token: $token');
       await serviceLocator<FlutterSecureStorage>()
