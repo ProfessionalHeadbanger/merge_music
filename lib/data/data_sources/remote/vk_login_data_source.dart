@@ -24,7 +24,7 @@ class VkLoginDataSourceImpl implements VkLoginDataSource {
         },
       );
 
-      final List<dynamic> usersJson = response.data['value'];
+      final List<dynamic> usersJson = response.data['response'];
       return usersJson.map((json) => UserModel.fromJson(json)).toList().first;
     } on DioException catch (e) {
       throw ServerException(e.message);
