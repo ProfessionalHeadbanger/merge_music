@@ -11,16 +11,7 @@ class MainPageInitial extends MainPageState {}
 
 class MainPageLoading extends MainPageState {}
 
-class MainPageLoaded extends MainPageState {
-  final List<AudioEntity> audios;
-
-  const MainPageLoaded({
-    required this.audios,
-  });
-
-  @override
-  List<Object> get props => [audios];
-}
+class MainPageLoaded extends MainPageState {}
 
 class MainPageError extends MainPageState {
   final String message;

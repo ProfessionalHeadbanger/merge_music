@@ -5,6 +5,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:logger/logger.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
+import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
 import 'package:merge_music/core/network/internet_connection_checker.dart';
 import 'package:merge_music/data/data_sources/remote/audio_remote_data_source.dart';
 import 'package:merge_music/data/data_sources/remote/vk_login_data_source.dart';
@@ -12,7 +13,8 @@ import 'package:merge_music/data/repositories/audio_repository_impl.dart';
 import 'package:merge_music/data/repositories/vk_login_repository_impl.dart';
 import 'package:merge_music/domain/repositories/audio_repository.dart';
 import 'package:merge_music/domain/repositories/vk_login_repository.dart';
-import 'package:merge_music/domain/usecases/get_main_page_audio_list.dart';
+import 'package:merge_music/domain/usecases/get_user_albums.dart';
+import 'package:merge_music/domain/usecases/get_user_audios.dart';
 import 'package:merge_music/domain/usecases/get_user_info.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
@@ -87,13 +89,23 @@ Future<void> setupServiceLocator() async {
     ),
   );
   serviceLocator.registerFactory(
-    () => GetMainPageAudioList(
+    () => GetUserAudios(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => GetUserAlbums(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerLazySingleton<UserTracksCubit>(
+    () => UserTracksCubit(
       serviceLocator(),
     ),
   );
   serviceLocator.registerLazySingleton<MainPageBloc>(
     () => MainPageBloc(
-      getMainPageAudioList: serviceLocator(),
+      userTracksCubit: serviceLocator(),
       accessTokenCubit: serviceLocator<AccessTokenCubit>(),
     ),
   );

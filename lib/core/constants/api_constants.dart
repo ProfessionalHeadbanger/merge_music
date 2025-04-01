@@ -17,4 +17,8 @@ class ApiConstants {
   static const int mainPageBatchCount = 16;
 
   static const String playlistsGet = 'audio.getPlaylists';
+  static const String allFilter = 'all';
+  static const String ownedfilter = 'owned';
+  static const String followedfilter = 'followed';
+  static const String albumsfilter = 'albums';
 }

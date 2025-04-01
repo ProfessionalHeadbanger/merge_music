@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
+import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/core/themes/app_theme.dart';
 import 'package:merge_music/core/common/navigation/router.dart';
@@ -32,6 +33,9 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<UserCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<UserTracksCubit>(),
         ),
       ],
       child: const MainApp(),

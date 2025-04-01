@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
             return Center(
               child: RetryButton(
                 onPressed: () {
-                  context.read<MainPageBloc>().add(LoadMainPageAudios());
+                  context.read<MainPageBloc>().add(LoadMainPageData());
                 },
               ),
             );
@@ -42,7 +42,7 @@ class _MainPageState extends State<MainPage> {
               child: CustomScrollView(
                 slivers: [
                   VkMixSliver(),
-                  AudioListSliver(audios: state.audios),
+                  AudioListSliver(),
                 ],
               ),
             );
