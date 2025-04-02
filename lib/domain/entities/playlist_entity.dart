@@ -4,7 +4,7 @@ class PlaylistEntity {
   final int type;
   final String title;
   final bool isFollowing;
-  final int year;
+  final int? year;
   final String photo135;
   final String photo300;
   final String photo1200;

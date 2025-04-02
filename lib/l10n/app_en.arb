@@ -12,8 +12,6 @@
     "textFieldPasswordLabel": "Enter password",
     "continueLabel": "Continue",
 
-    
-
     "mainPage": "Home",
     "searchPage": "Search",
     "libraryPage": "Library",
@@ -28,5 +26,5 @@
 
     "myAlbums": "My albums",
     "myPlaylists": "My playlists",
-    "myFollowedPlaylists": "My followed playlists"
+    "myFollowedPlaylists": "Followed"
 }

@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_albums/user_albums_cubit.dart';
+import 'package:merge_music/core/common/global_state/user_playlists/user_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
 
 part 'main_page_event.dart';
@@ -12,15 +14,21 @@ part 'main_page_state.dart';
 class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   final UserTracksCubit userTracksCubit;
   final UserAlbumsCubit userAlbumsCubit;
+  final UserPlaylistsCubit userPlaylistsCubit;
+  final FollowedPlaylistsCubit followedPlaylistsCubit;
   final AccessTokenCubit accessTokenCubit;
 
   late final StreamSubscription userTracksSubscription;
   late final StreamSubscription userAlbumsSubscription;
+  late final StreamSubscription userPlaylistsSubscription;
+  late final StreamSubscription followedPlaylistsSubscription;
   late final StreamSubscription accessTokenSubscription;
 
   MainPageBloc({
     required this.userTracksCubit,
     required this.userAlbumsCubit,
+    required this.userPlaylistsCubit,
+    required this.followedPlaylistsCubit,
     required this.accessTokenCubit,
   }) : super(MainPageInitial()) {
     on<CheckMainPageState>(_onCheckMainPageState);
@@ -40,12 +48,20 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     userAlbumsSubscription = userAlbumsCubit.stream.listen((_) {
       add(CheckMainPageState());
     });
+    userPlaylistsSubscription = userPlaylistsCubit.stream.listen((_) {
+      add(CheckMainPageState());
+    });
+    followedPlaylistsSubscription = followedPlaylistsCubit.stream.listen((_) {
+      add(CheckMainPageState());
+    });
   }
 
   void _onLoadMainPageData(
       LoadMainPageData event, Emitter<MainPageState> emit) {
     userTracksCubit.loadUserTracks();
     userAlbumsCubit.loadUserAlbums();
+    userPlaylistsCubit.loadUserPlaylists();
+    followedPlaylistsCubit.loadFollowedPlaylists();
   }
 
   void _onCheckMainPageState(
@@ -53,22 +69,33 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     final states = [
       userTracksCubit.state,
       userAlbumsCubit.state,
+      userPlaylistsCubit.state,
+      followedPlaylistsCubit.state,
     ];
 
-    if (states.any(
-        (state) => state is UserTracksLoading || state is UserAlbumsLoading)) {
+    if (states.any((state) =>
+        state is UserTracksLoading ||
+        state is UserAlbumsLoading ||
+        state is UserPlaylistsLoading ||
+        state is FollowedPlaylistsLoading)) {
       emit(MainPageLoading());
       return;
     }
 
-    if (states
-        .any((state) => state is UserTracksError || state is UserAlbumsError)) {
+    if (states.any((state) =>
+        state is UserTracksError ||
+        state is UserAlbumsError ||
+        state is UserPlaylistsError ||
+        state is FollowedPlaylistsError)) {
       emit(MainPageError(message: "Ошибка загрузки данных"));
       return;
     }
 
-    if (states.every(
-        (state) => state is UserTracksLoaded || state is UserAlbumsLoaded)) {
+    if (states.every((state) =>
+        state is UserTracksLoaded ||
+        state is UserAlbumsLoaded ||
+        state is UserPlaylistsLoaded ||
+        state is FollowedPlaylistsLoaded)) {
       emit(MainPageLoaded());
     }
   }
@@ -78,6 +105,8 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     accessTokenSubscription.cancel();
     userTracksSubscription.cancel();
     userAlbumsSubscription.cancel();
+    userPlaylistsSubscription.cancel();
+    followedPlaylistsSubscription.cancel();
     return super.close();
   }
 }

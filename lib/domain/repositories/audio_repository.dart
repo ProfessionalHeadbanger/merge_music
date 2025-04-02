@@ -5,7 +5,7 @@ import 'package:merge_music/domain/entities/playlist_entity.dart';
 
 abstract interface class AudioRepository {
   Future<Either<Failure, List<AudioEntity>>> getUserAudios();
-  Future<Either<Failure, List<PlaylistEntity>>> getUserOwnedPlaylists();
-  Future<Either<Failure, List<PlaylistEntity>>> getUserFollowedPlaylists();
   Future<Either<Failure, List<PlaylistEntity>>> getUserAlbums();
+  Future<Either<Failure, List<PlaylistEntity>>> getUserPlaylists();
+  Future<Either<Failure, List<PlaylistEntity>>> getFollowedPlaylists();
 }

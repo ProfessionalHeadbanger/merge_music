@@ -74,14 +74,48 @@ class AudioRepositoryImpl implements AudioRepository {
   }
 
   @override
-  Future<Either<Failure, List<PlaylistEntity>>> getUserFollowedPlaylists() {
-    // TODO: implement getUserFollowedPlaylists
-    throw UnimplementedError();
+  Future<Either<Failure, List<PlaylistEntity>>> getFollowedPlaylists() async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      final userState = serviceLocator.get<UserCubit>().state;
+      if (tokenState is AccessTokenLoaded && userState is UserLoggedIn) {
+        final albums = await audioRemoteDataSource.getPlaylists(
+          params: PlaylistListParams(
+            ownerId: userState.user.id,
+            filters: ApiConstants.followedfilter,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(albums);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
   }
 
   @override
-  Future<Either<Failure, List<PlaylistEntity>>> getUserOwnedPlaylists() {
-    // TODO: implement getUserOwnedPlaylists
-    throw UnimplementedError();
+  Future<Either<Failure, List<PlaylistEntity>>> getUserPlaylists() async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      final userState = serviceLocator.get<UserCubit>().state;
+      if (tokenState is AccessTokenLoaded && userState is UserLoggedIn) {
+        final albums = await audioRemoteDataSource.getPlaylists(
+          params: PlaylistListParams(
+            ownerId: userState.user.id,
+            filters: ApiConstants.ownedfilter,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(albums);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
   }
 }

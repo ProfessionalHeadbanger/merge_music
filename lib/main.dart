@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_albums/user_albums_cubit.dart';
+import 'package:merge_music/core/common/global_state/user_playlists/user_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/core/themes/app_theme.dart';
@@ -40,6 +42,12 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<UserAlbumsCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<UserPlaylistsCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<FollowedPlaylistsCubit>(),
         ),
       ],
       child: const MainApp(),
