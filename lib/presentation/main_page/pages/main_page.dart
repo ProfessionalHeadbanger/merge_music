@@ -4,6 +4,7 @@ import 'package:merge_music/core/common/widgets/retry_button.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
 import 'package:merge_music/presentation/main_page/widgets/audio_list_sliver.dart';
+import 'package:merge_music/presentation/main_page/widgets/user_albums_sliver.dart';
 import 'package:merge_music/presentation/main_page/widgets/vk_mix_sliver.dart';
 
 class MainPage extends StatefulWidget {
@@ -43,6 +44,7 @@ class _MainPageState extends State<MainPage> {
                 slivers: [
                   VkMixSliver(),
                   AudioListSliver(),
+                  UserAlbumsSliver(),
                 ],
               ),
             );

@@ -20,10 +20,9 @@ class AudioTile extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: context.color.primaryBackground,
-            borderRadius: BorderRadius.circular(8),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+            padding: const EdgeInsets.all(4),
             child: Row(
               children: [
                 ClipRRect(

@@ -26,8 +26,7 @@
     "myTracks": "My tracks",
     "showAll": "Show all",
 
-    "madeByAlgorithms": "Made by algorithms",
-    "setUpRecommendations": "Set up recommendations",
-
-    "madeByRedactors": "Made by redactors"
+    "myAlbums": "My albums",
+    "myPlaylists": "My playlists",
+    "myFollowedPlaylists": "My followed playlists"
 }

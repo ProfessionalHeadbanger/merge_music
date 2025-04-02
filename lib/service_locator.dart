@@ -5,6 +5,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:logger/logger.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
+import 'package:merge_music/core/common/global_state/user_albums/user_albums_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
 import 'package:merge_music/core/network/internet_connection_checker.dart';
 import 'package:merge_music/data/data_sources/remote/audio_remote_data_source.dart';
@@ -103,9 +104,16 @@ Future<void> setupServiceLocator() async {
       serviceLocator(),
     ),
   );
+  serviceLocator.registerLazySingleton<UserAlbumsCubit>(
+    () => UserAlbumsCubit(
+      serviceLocator(),
+      serviceLocator(),
+    ),
+  );
   serviceLocator.registerLazySingleton<MainPageBloc>(
     () => MainPageBloc(
       userTracksCubit: serviceLocator(),
+      userAlbumsCubit: serviceLocator(),
       accessTokenCubit: serviceLocator<AccessTokenCubit>(),
     ),
   );

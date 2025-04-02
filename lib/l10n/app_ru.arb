@@ -12,8 +12,6 @@
     "textFieldPasswordLabel": "Введите пароль",
     "continueLabel": "Продолжить",
 
-    
-
     "mainPage": "Главная",
     "searchPage": "Поиск",
     "libraryPage": "Библиотека",
@@ -26,8 +24,7 @@
     "myTracks": "Мои треки",
     "showAll": "Показать все",
 
-    "madeByAlgorithms": "Собрано алгоритмами",
-    "setUpRecommendations": "Настроить рекомендации",
-
-    "madeByRedactors": "Собрано редакцией"
+    "myAlbums": "Мои альбомы",
+    "myPlaylists": "Мои плейлисты",
+    "myFollowedPlaylists": "Мои отслеживаемые плейлисты"
 }

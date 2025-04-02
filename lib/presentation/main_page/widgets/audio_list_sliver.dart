@@ -17,7 +17,7 @@ class AudioListSliver extends StatelessWidget {
           return const SliverToBoxAdapter();
         }
 
-        final List<AudioEntity> audios = state.audios.take(15).toList();
+        final audios = state.audios.take(15).toList();
 
         if (audios.isEmpty) {
           return const SliverToBoxAdapter();
