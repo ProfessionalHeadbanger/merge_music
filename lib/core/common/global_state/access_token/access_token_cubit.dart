@@ -26,4 +26,9 @@ class AccessTokenCubit extends Cubit<AccessTokenState> {
       emit(AccessTokenNull());
     }
   }
+
+  Future<void> clearToken() async {
+    await serviceLocator<FlutterSecureStorage>().delete(key: 'token');
+    emit(AccessTokenNull());
+  }
 }

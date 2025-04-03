@@ -22,6 +22,7 @@ import 'package:merge_music/domain/usecases/get_user_audios.dart';
 import 'package:merge_music/domain/usecases/get_user_info.dart';
 import 'package:merge_music/domain/usecases/get_user_playlists.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
+import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc_bloc.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
 
 final serviceLocator = GetIt.instance;
@@ -142,6 +143,12 @@ Future<void> setupServiceLocator() async {
       userAlbumsCubit: serviceLocator(),
       userPlaylistsCubit: serviceLocator(),
       followedPlaylistsCubit: serviceLocator(),
+      accessTokenCubit: serviceLocator<AccessTokenCubit>(),
+    ),
+  );
+
+  serviceLocator.registerLazySingleton<SettingsPageBlocBloc>(
+    () => SettingsPageBlocBloc(
       accessTokenCubit: serviceLocator<AccessTokenCubit>(),
     ),
   );

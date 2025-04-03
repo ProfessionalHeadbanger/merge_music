@@ -26,5 +26,9 @@
 
     "myAlbums": "My albums",
     "myPlaylists": "My playlists",
-    "myFollowedPlaylists": "Followed"
+    "myFollowedPlaylists": "Followed",
+
+    "logout": "Are you sure you want to log out?",
+    "cancel": "Cancel",
+    "exit": "Exit"
 }

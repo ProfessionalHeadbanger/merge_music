@@ -26,5 +26,9 @@
 
     "myAlbums": "Мои альбомы",
     "myPlaylists": "Мои плейлисты",
-    "myFollowedPlaylists": "Отслеживаемое"
+    "myFollowedPlaylists": "Отслеживаемое",
+
+    "logout": "Вы уверены, что хотите выйти из аккаунта?",
+    "cancel": "Отмена",
+    "exit": "Выйти"
 }
