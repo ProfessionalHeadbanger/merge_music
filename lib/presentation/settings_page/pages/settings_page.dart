@@ -6,8 +6,9 @@ import 'package:merge_music/core/common/navigation/router.dart';
 import 'package:merge_music/core/constants/icons_constants.dart';
 import 'package:merge_music/core/constants/size_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
-import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc_bloc.dart';
+import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc.dart';
 import 'package:merge_music/presentation/settings_page/widgets/logout_dialog_builder.dart';
+import 'package:merge_music/presentation/settings_page/widgets/theme_switcher_sliver.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -39,7 +40,7 @@ class SettingsPage extends StatelessWidget {
                         router.pop();
                       },
                       () {
-                        context.read<SettingsPageBlocBloc>().add(LogoutEvent());
+                        context.read<SettingsPageBloc>().add(LogoutEvent());
                       },
                     ),
                     icon: SvgPicture.asset(
@@ -48,6 +49,29 @@ class SettingsPage extends StatelessWidget {
                       height: SizeConstants.navBarIconSize,
                       colorFilter: ColorFilter.mode(
                           context.color.primaryText!, BlendMode.srcIn),
+                    ),
+                  ),
+                ],
+              ),
+              body: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Text(
+                        context.l10n.settings,
+                        style: context.text.mediumTitle,
+                      ),
+                    ),
+                  ),
+                  ThemeSwitcherSliver(),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Text(
+                        context.l10n.more_settings,
+                        style: context.text.mediumTitle,
+                      ),
                     ),
                   ),
                 ],

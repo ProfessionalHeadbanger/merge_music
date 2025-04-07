@@ -30,5 +30,12 @@
 
     "logout": "Are you sure you want to log out?",
     "cancel": "Cancel",
-    "exit": "Exit"
+    "exit": "Exit",
+
+    "settings": "Settings",
+    "more_settings": "I'm going to make something up here",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
 }

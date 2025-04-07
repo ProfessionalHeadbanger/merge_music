@@ -4,20 +4,19 @@ import 'package:merge_music/core/common/global_state/access_token/access_token_c
 import 'package:merge_music/core/common/navigation/router.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
 
-part 'settings_page_bloc_event.dart';
-part 'settings_page_bloc_state.dart';
+part 'settings_page_event.dart';
+part 'settings_page_state.dart';
 
-class SettingsPageBlocBloc
-    extends Bloc<SettingsPageBlocEvent, SettingsPageBlocState> {
+class SettingsPageBloc extends Bloc<SettingsPageEvent, SettingsPageState> {
   final AccessTokenCubit accessTokenCubit;
 
-  SettingsPageBlocBloc({required this.accessTokenCubit})
-      : super(SettingsPageBlocInitial()) {
+  SettingsPageBloc({required this.accessTokenCubit})
+      : super(SettingsPageInitial()) {
     on<LogoutEvent>(_onLogoutEvent);
   }
 
   void _onLogoutEvent(
-      LogoutEvent event, Emitter<SettingsPageBlocState> emit) async {
+      LogoutEvent event, Emitter<SettingsPageState> emit) async {
     await accessTokenCubit.clearToken();
     router.go(Routes.welcomePage);
   }

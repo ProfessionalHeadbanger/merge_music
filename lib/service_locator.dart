@@ -5,6 +5,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:logger/logger.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
+import 'package:merge_music/core/common/global_state/theme/theme_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_albums/user_albums_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_playlists/user_playlists_cubit.dart';
@@ -22,8 +23,9 @@ import 'package:merge_music/domain/usecases/get_user_audios.dart';
 import 'package:merge_music/domain/usecases/get_user_info.dart';
 import 'package:merge_music/domain/usecases/get_user_playlists.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
-import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc_bloc.dart';
+import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -45,6 +47,9 @@ Future<void> setupServiceLocator() async {
   serviceLocator.registerSingleton<FlutterSecureStorage>(
     FlutterSecureStorage(),
   );
+  serviceLocator.registerSingleton<SharedPreferences>(
+    await SharedPreferences.getInstance(),
+  );
   serviceLocator.registerFactory<InternetConnection>(
     () => InternetConnection(),
   );
@@ -57,6 +62,11 @@ Future<void> setupServiceLocator() async {
   // Global State
   serviceLocator.registerLazySingleton<AccessTokenCubit>(
     () => AccessTokenCubit(),
+  );
+  serviceLocator.registerLazySingleton<ThemeCubit>(
+    () => ThemeCubit(
+      serviceLocator(),
+    ),
   );
 
   // VK Login Page
@@ -147,8 +157,8 @@ Future<void> setupServiceLocator() async {
     ),
   );
 
-  serviceLocator.registerLazySingleton<SettingsPageBlocBloc>(
-    () => SettingsPageBlocBloc(
+  serviceLocator.registerLazySingleton<SettingsPageBloc>(
+    () => SettingsPageBloc(
       accessTokenCubit: serviceLocator<AccessTokenCubit>(),
     ),
   );
