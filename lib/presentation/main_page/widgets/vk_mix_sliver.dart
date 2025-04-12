@@ -10,9 +10,6 @@ class VkMixSliver extends StatelessWidget {
     return SliverToBoxAdapter(
       child: DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.symmetric(
-            horizontal: BorderSide(color: context.color.tertiaryText!),
-          ),
           color: context.color.primaryBackground,
         ),
         child: Padding(

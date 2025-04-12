@@ -62,11 +62,8 @@ class HorizontalScrollableAudioList extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: group
-                        .map(
-                          (audio) => AudioTile(audio: audio),
-                        )
-                        .toList(),
+                    children:
+                        group.map((audio) => AudioTile(audio: audio)).toList(),
                   ),
                 );
               },

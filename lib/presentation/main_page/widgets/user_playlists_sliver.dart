@@ -22,50 +22,43 @@ class UserPlaylistsSliver extends StatelessWidget {
         }
 
         return SliverToBoxAdapter(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: context.color.tertiaryText!),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        context.l10n.myPlaylists,
-                        style: context.text.mediumTitle,
-                      ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      context.l10n.myPlaylists,
+                      style: context.text.mediumTitle,
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        context.l10n.showAll,
-                        style: context.text.textButton,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 180,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: playlists.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: PlaylistTile(
-                          playlistEntity: playlists[index],
-                        ),
-                      );
-                    },
                   ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      context.l10n.showAll,
+                      style: context.text.textButton,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: playlists.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: PlaylistTile(
+                        playlistEntity: playlists[index],
+                      ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 8),
-              ],
-            ),
+              ),
+              const SizedBox(height: 8),
+            ],
           ),
         );
       },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/widgets/retry_button.dart';
+import 'package:merge_music/core/common/widgets/sliver_divider.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
 import 'package:merge_music/presentation/main_page/widgets/audio_list_sliver.dart';
@@ -44,11 +45,17 @@ class _MainPageState extends State<MainPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: CustomScrollView(
                 slivers: [
+                  SliverDivider(color: context.color.tertiaryText!),
                   VkMixSliver(),
+                  SliverDivider(color: context.color.tertiaryText!),
                   AudioListSliver(),
+                  SliverDivider(color: context.color.tertiaryText!),
                   UserAlbumsSliver(),
+                  SliverDivider(color: context.color.auxiliaryText!),
                   FollowedPlaylistsSliver(),
+                  SliverDivider(color: context.color.auxiliaryText!),
                   UserPlaylistsSliver(),
+                  SliverDivider(color: context.color.tertiaryText!),
                 ],
               ),
             );
