@@ -1,8 +1,16 @@
 {
-    "welcome": "Welcome to Merge Music",
-    "loginVk": "To start, you need to authorize in VK",
     "language": "English",
     "errorOccured" : "An unexpected error occurred",
+    "noInternet" : "No internet connection",
+
+    "welcome": "Welcome to Merge Music",
+    "loginVk": "To start, you need to authorize in VK",
+    "signIn": "Sign in",
+
+    "signInVk": "Sign in to VK",
+    "textFieldLoginLabel": "Enter phone number or email",
+    "textFieldPasswordLabel": "Enter password",
+    "continueLabel": "Continue",
 
     "mainPage": "Home",
     "searchPage": "Search",
@@ -16,8 +24,25 @@
     "myTracks": "My tracks",
     "showAll": "Show all",
 
-    "madeByAlgorithms": "Made by algorithms",
-    "setUpRecommendations": "Set up recommendations",
+    "myAlbums": "My albums",
+    "myPlaylists": "My playlists",
+    "myFollowedPlaylists": "Followed",
 
-    "madeByRedactors": "Made by redactors"
+    "search": "Search",
+    "queryHistory": "Query history",
+    "noHistory": "Your query history is empty",
+    "nothingFound": "Nothing found",
+    "inMyTracks": "In my tracks",
+    "allTracks": "All tracks",
+
+    "logout": "Are you sure you want to log out?",
+    "cancel": "Cancel",
+    "exit": "Exit",
+
+    "settings": "Settings",
+    "more_settings": "I'm going to make something up here",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System"
 }

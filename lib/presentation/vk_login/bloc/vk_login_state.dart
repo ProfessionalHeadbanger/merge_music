@@ -9,6 +9,8 @@ abstract class VkLoginState extends Equatable {
 
 class VkLoginInitial extends VkLoginState {}
 
+class VkLoginLoading extends VkLoginState {}
+
 class VkLoginSuccess extends VkLoginState {}
 
 class VkLoginFailure extends VkLoginState {}

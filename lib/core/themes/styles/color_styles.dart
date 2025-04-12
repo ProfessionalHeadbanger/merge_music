@@ -4,9 +4,11 @@ import 'package:merge_music/core/themes/style_extensions/color_style_extension.d
 class ColorStyles {
   static const lightColorStyle = ColorStyleExtension(
     primaryBackground: LightAppColors.primaryBackground,
+    secondaryBackground: LightAppColors.secondaryBackground,
     primaryText: LightAppColors.primaryText,
     secondaryText: LightAppColors.secondaryText,
     tertiaryText: LightAppColors.tertiaryText,
+    auxiliaryText: LightAppColors.auxiliaryText,
     textButton: LightAppColors.textButton,
     selectedNavBarItem: LightAppColors.selectedNavBarItem,
     unselectedNavBarItem: LightAppColors.unselectedNavBarItem,
@@ -17,9 +19,11 @@ class ColorStyles {
 
   static const darkColorStyle = ColorStyleExtension(
     primaryBackground: DarkAppColors.primaryBackground,
+    secondaryBackground: DarkAppColors.secondaryBackground,
     primaryText: DarkAppColors.primaryText,
     secondaryText: DarkAppColors.secondaryText,
     tertiaryText: DarkAppColors.tertiaryText,
+    auxiliaryText: DarkAppColors.auxiliaryText,
     textButton: DarkAppColors.textButton,
     selectedNavBarItem: DarkAppColors.selectedNavBarItem,
     unselectedNavBarItem: DarkAppColors.unselectedNavBarItem,

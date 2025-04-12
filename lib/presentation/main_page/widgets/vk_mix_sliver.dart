@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:merge_music/common/widgets/custom_button_with_icon.dart';
+import 'package:merge_music/core/common/widgets/custom_button_with_icon.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 
 class VkMixSliver extends StatelessWidget {
