@@ -13,4 +13,6 @@ class IconsConstants {
       '${basePath}list_delete_outline$format';
   static const String historyBackwardOutline =
       '${basePath}history_backward_outline$format';
+  static const String cancelCircleOutline =
+      '${basePath}cancel_circle_outline$format';
 }

@@ -46,3 +46,5 @@ class SearchPlaylistsEvent extends SearchPageEvent {
   @override
   List<Object> get props => [query];
 }
+
+class ClearSearchTextField extends SearchPageEvent {}

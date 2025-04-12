@@ -35,6 +35,7 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
     on<SearchTracksEvent>(_onSearchTracksEvent);
     on<SearchArtistsEvent>(_onSearchArtistsEvent);
     on<SearchPlaylistsEvent>(_onSearchPlaylistsEvent);
+    on<ClearSearchTextField>(_onClearSearchTextField);
 
     add(LoadSearchHistory());
   }
@@ -72,6 +73,16 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
     if (!(state is SearchPageTracksLoaded ||
         state is SearchPageArtistsLoaded ||
         state is SearchPagePlaylistsLoaded)) {
+      emit(SearchPageHistoryLoaded(history: history));
+    }
+  }
+
+  void _onClearSearchTextField(
+      ClearSearchTextField event, Emitter<SearchPageState> emit) {
+    final history = prefs.getStringList(CommonConstants.searchHistoryKey) ?? [];
+    if (history.isEmpty) {
+      emit(SearchPageEmptyHistory());
+    } else {
       emit(SearchPageHistoryLoaded(history: history));
     }
   }

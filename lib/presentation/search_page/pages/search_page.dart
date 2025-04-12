@@ -18,6 +18,17 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final _controller = TextEditingController();
+  bool _showClearButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      setState(() {
+        _showClearButton = _controller.text.isNotEmpty;
+      });
+    });
+  }
 
   @override
   void dispose() {
@@ -71,6 +82,20 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                 ),
+                if (_showClearButton)
+                  GestureDetector(
+                    onTap: () {
+                      _controller.clear();
+                      context
+                          .read<SearchPageBloc>()
+                          .add(ClearSearchTextField());
+                    },
+                    child: SvgPicture.asset(
+                      IconsConstants.cancelCircleOutline,
+                      colorFilter: ColorFilter.mode(
+                          context.color.unselectedNavBarItem!, BlendMode.srcIn),
+                    ),
+                  )
               ],
             ),
           ),
