@@ -7,8 +7,15 @@ import 'package:provider/provider.dart';
 
 class LoadedHistoryWidget extends StatelessWidget {
   final List<String> history;
+  final void Function(String query) onQueryTap;
+  final void Function(String text) setControllerText;
 
-  const LoadedHistoryWidget({super.key, required this.history});
+  const LoadedHistoryWidget({
+    super.key,
+    required this.history,
+    required this.onQueryTap,
+    required this.setControllerText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +59,10 @@ class LoadedHistoryWidget extends StatelessWidget {
                   history[index],
                   style: context.text.subtitle,
                 ),
+                onTap: () {
+                  setControllerText(history[index]);
+                  onQueryTap(history[index]);
+                },
               );
             },
           ),

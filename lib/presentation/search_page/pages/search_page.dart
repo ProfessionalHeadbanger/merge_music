@@ -36,6 +36,16 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
+  void _submitQuery(String query) {
+    final trimmed = query.trim();
+    if (trimmed.isNotEmpty) {
+      context.read<SearchPageBloc>().add(AddQueryToHistory(query: trimmed));
+      context.read<SearchPageBloc>().add(SearchTracksEvent(query: trimmed));
+    } else {
+      _controller.clear();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,19 +71,7 @@ class _SearchPageState extends State<SearchPage> {
                   child: TextField(
                     controller: _controller,
                     style: context.text.subtitle,
-                    onSubmitted: (query) {
-                      final trimmed = query.trim();
-                      if (trimmed.isNotEmpty) {
-                        context
-                            .read<SearchPageBloc>()
-                            .add(AddQueryToHistory(query: trimmed));
-                        context
-                            .read<SearchPageBloc>()
-                            .add(SearchTracksEvent(query: trimmed));
-                      } else {
-                        _controller.clear();
-                      }
-                    },
+                    onSubmitted: (query) => _submitQuery(query),
                     decoration: InputDecoration(
                       hintText: context.l10n.search,
                       hintStyle: context.text.subtitle,
@@ -107,7 +105,11 @@ class _SearchPageState extends State<SearchPage> {
             return EmptyHistoryWidget();
           }
           if (state is SearchPageHistoryLoaded) {
-            return LoadedHistoryWidget(history: state.history);
+            return LoadedHistoryWidget(
+              history: state.history,
+              onQueryTap: (query) => _submitQuery(query),
+              setControllerText: (text) => _controller.text = text,
+            );
           }
           if (state is SearchPageLoading) {
             return const Center(child: LoadingWidget());
