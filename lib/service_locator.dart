@@ -22,7 +22,11 @@ import 'package:merge_music/domain/usecases/get_user_albums.dart';
 import 'package:merge_music/domain/usecases/get_user_audios.dart';
 import 'package:merge_music/domain/usecases/get_user_info.dart';
 import 'package:merge_music/domain/usecases/get_user_playlists.dart';
+import 'package:merge_music/domain/usecases/search_artists.dart';
+import 'package:merge_music/domain/usecases/search_audio.dart';
+import 'package:merge_music/domain/usecases/search_playlists.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
+import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
 import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -157,6 +161,32 @@ Future<void> setupServiceLocator() async {
     ),
   );
 
+  // Search Page
+  serviceLocator.registerFactory(
+    () => SearchAudio(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => SearchArtists(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => SearchPlaylists(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerLazySingleton(
+    () => SearchPageBloc(
+      prefs: serviceLocator(),
+      searchAudio: serviceLocator(),
+      searchArtists: serviceLocator(),
+      searchPlaylists: serviceLocator(),
+    ),
+  );
+
+  // Settings Page
   serviceLocator.registerLazySingleton<SettingsPageBloc>(
     () => SettingsPageBloc(
       accessTokenCubit: serviceLocator<AccessTokenCubit>(),

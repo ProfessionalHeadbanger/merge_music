@@ -15,6 +15,7 @@ class AudioModel extends AudioEntity {
     required super.date,
     required super.noSearch,
     required super.isHq,
+    required super.like,
   });
 
   Map<String, dynamic> toJson() {
@@ -32,6 +33,7 @@ class AudioModel extends AudioEntity {
       'date': date,
       'no_search': noSearch,
       'is_hq': isHq,
+      'like': like,
     };
   }
 
@@ -50,6 +52,7 @@ class AudioModel extends AudioEntity {
       date: json['date'],
       noSearch: json['no_search'] ?? 0,
       isHq: json['is_hq'],
+      like: json['like'],
     );
   }
 
@@ -67,6 +70,7 @@ class AudioModel extends AudioEntity {
     int? date,
     int? noSearch,
     int? isHq,
+    bool? like,
   }) {
     return AudioModel(
       id: id ?? this.id,
@@ -82,6 +86,7 @@ class AudioModel extends AudioEntity {
       date: date ?? this.date,
       noSearch: noSearch ?? this.noSearch,
       isHq: isHq ?? this.isHq,
+      like: like ?? this.like,
     );
   }
 }

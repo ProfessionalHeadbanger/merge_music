@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
   final Color? primaryBackground;
+  final Color? secondaryBackground;
 
   final Color? primaryText;
   final Color? secondaryText;
@@ -18,6 +19,7 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
 
   const ColorStyleExtension({
     this.primaryBackground,
+    this.secondaryBackground,
     this.primaryText,
     this.secondaryText,
     this.tertiaryText,
@@ -33,6 +35,7 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
   @override
   ThemeExtension<ColorStyleExtension> copyWith({
     Color? primaryBackground,
+    Color? secondaryBackground,
     Color? primaryText,
     Color? secondaryText,
     Color? tertiaryText,
@@ -46,6 +49,7 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
   }) {
     return ColorStyleExtension(
       primaryBackground: primaryBackground ?? this.primaryBackground,
+      secondaryBackground: secondaryBackground ?? this.secondaryBackground,
       primaryText: primaryText ?? this.primaryText,
       secondaryText: secondaryText ?? this.secondaryText,
       tertiaryText: tertiaryText ?? this.tertiaryText,
@@ -69,6 +73,8 @@ class ColorStyleExtension extends ThemeExtension<ColorStyleExtension> {
     return ColorStyleExtension(
       primaryBackground:
           Color.lerp(primaryBackground, other.primaryBackground, t),
+      secondaryBackground:
+          Color.lerp(secondaryBackground, other.secondaryBackground, t),
       primaryText: Color.lerp(primaryText, other.primaryText, t),
       secondaryText: Color.lerp(secondaryText, other.secondaryText, t),
       tertiaryText: Color.lerp(tertiaryText, other.tertiaryText, t),

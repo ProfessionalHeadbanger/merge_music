@@ -49,3 +49,63 @@ class PlaylistListParams {
     required this.v,
   });
 }
+
+class AudioSearchParams {
+  final String q;
+  final int? count;
+  final int? offset;
+  final bool? performerOnly;
+  final bool? autoComplete;
+  final String accessToken;
+  final String v;
+
+  AudioSearchParams({
+    required this.q,
+    this.count,
+    this.offset,
+    this.performerOnly,
+    this.autoComplete,
+    required this.accessToken,
+    required this.v,
+  });
+}
+
+class AudioSearchPartialParams {
+  final String q;
+
+  AudioSearchPartialParams({required this.q});
+}
+
+class AudioSearchPlaylistsParams {
+  final String q;
+  final int? count;
+  final int? offset;
+  final String? filters;
+  final String accessToken;
+  final String v;
+
+  AudioSearchPlaylistsParams({
+    required this.q,
+    this.count,
+    this.offset,
+    this.filters,
+    required this.accessToken,
+    required this.v,
+  });
+}
+
+class AudioSearchArtistsParams {
+  final String q;
+  final int? count;
+  final int? offset;
+  final String accessToken;
+  final String v;
+
+  AudioSearchArtistsParams({
+    required this.q,
+    this.count,
+    this.offset,
+    required this.accessToken,
+    required this.v,
+  });
+}

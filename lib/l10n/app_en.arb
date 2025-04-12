@@ -28,6 +28,13 @@
     "myPlaylists": "My playlists",
     "myFollowedPlaylists": "Followed",
 
+    "search": "Search",
+    "queryHistory": "Query history",
+    "noHistory": "Your query history is empty",
+    "nothingFound": "Nothing found",
+    "inMyTracks": "In my tracks",
+    "allTracks": "All tracks",
+
     "logout": "Are you sure you want to log out?",
     "cancel": "Cancel",
     "exit": "Exit",

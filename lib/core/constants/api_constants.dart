@@ -21,4 +21,8 @@ class ApiConstants {
   static const String ownedfilter = 'owned';
   static const String followedfilter = 'followed';
   static const String albumsfilter = 'albums';
+
+  static const String search = 'audio.search';
+  static const String searchPlaylists = 'audio.searchPlaylists';
+  static const String searchArtists = 'audio.searchArtists';
 }

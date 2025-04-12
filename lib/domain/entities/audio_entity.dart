@@ -12,6 +12,7 @@ class AudioEntity {
   final int date;
   final int noSearch;
   final int? isHq;
+  final bool? like;
 
   AudioEntity({
     required this.id,
@@ -27,5 +28,6 @@ class AudioEntity {
     required this.date,
     required this.noSearch,
     required this.isHq,
+    required this.like,
   });
 }
