@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:merge_music/core/constants/common_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'theme_state.dart';
@@ -12,7 +13,7 @@ class ThemeCubit extends Cubit<ThemeState> {
       : super(ThemeState(themeMode: _getThemeFromPrefs(_prefs)));
 
   static ThemeMode _getThemeFromPrefs(SharedPreferences prefs) {
-    final themeMode = prefs.getString('theme_mode');
+    final themeMode = prefs.getString(CommonConstants.themeModeKey);
     switch (themeMode) {
       case 'dark':
         return ThemeMode.dark;
@@ -29,7 +30,8 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   void setThemeMode(ThemeMode themeMode) async {
-    await _prefs.setString('theme_mode', _modeToString(themeMode));
+    await _prefs.setString(
+        CommonConstants.themeModeKey, _modeToString(themeMode));
     emit(ThemeState(themeMode: themeMode));
   }
 
