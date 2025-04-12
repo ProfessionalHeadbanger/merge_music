@@ -8,13 +8,26 @@ class HorizontalScrollableAudioList extends StatelessWidget {
   final List<AudioEntity> audios;
   final String title;
 
-  const HorizontalScrollableAudioList(
-      {super.key, required this.audios, required this.title});
+  const HorizontalScrollableAudioList({
+    super.key,
+    required this.audios,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (audios.isEmpty) {
-      return const SliverToBoxAdapter();
+    if (audios.isEmpty) return const SliverToBoxAdapter();
+
+    if (audios.length <= 3) {
+      return SliverList.list(
+        children: [
+          Text(title, style: context.text.mediumTitle),
+          const SizedBox(height: 8),
+          ...audios.map(
+            (audio) => AudioTile(audio: audio),
+          ),
+        ],
+      );
     }
 
     final List<List<AudioEntity>> groupedAudios = [];
@@ -28,32 +41,31 @@ class HorizontalScrollableAudioList extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: context.text.mediumTitle,
-                ),
-              ),
+              Expanded(child: Text(title, style: context.text.mediumTitle)),
               TextButton(
-                onPressed: () {},
-                child: Text(
-                  context.l10n.showAll,
-                  style: context.text.textButton,
-                ),
+                onPressed: () {
+                  // TODO: обработка "Показать все"
+                },
+                child:
+                    Text(context.l10n.showAll, style: context.text.textButton),
               ),
             ],
           ),
           SizedBox(
-            height: SizeConstants.audioListSliverHeight,
+            height: SizeConstants.audioTileHeight * 3 + 16,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: groupedAudios.length,
               itemBuilder: (context, index) {
+                final group = groupedAudios[index];
                 return Padding(
-                  padding: const EdgeInsets.only(right: 4),
+                  padding: const EdgeInsets.only(right: 8),
                   child: Column(
-                    children: groupedAudios[index]
-                        .map((audio) => AudioTile(audio: audio))
+                    mainAxisSize: MainAxisSize.min,
+                    children: group
+                        .map(
+                          (audio) => AudioTile(audio: audio),
+                        )
                         .toList(),
                   ),
                 );

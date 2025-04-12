@@ -99,26 +99,29 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
-      body: BlocBuilder<SearchPageBloc, SearchPageState>(
-        builder: (context, state) {
-          if (state is SearchPageEmptyHistory) {
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: BlocBuilder<SearchPageBloc, SearchPageState>(
+          builder: (context, state) {
+            if (state is SearchPageEmptyHistory) {
+              return EmptyHistoryWidget();
+            }
+            if (state is SearchPageHistoryLoaded) {
+              return LoadedHistoryWidget(
+                history: state.history,
+                onQueryTap: (query) => _submitQuery(query),
+                setControllerText: (text) => _controller.text = text,
+              );
+            }
+            if (state is SearchPageLoading) {
+              return const Center(child: LoadingWidget());
+            }
+            if (state is SearchPageTracksLoaded) {
+              return SearchedTracksWidget(tracks: state.tracks);
+            }
             return EmptyHistoryWidget();
-          }
-          if (state is SearchPageHistoryLoaded) {
-            return LoadedHistoryWidget(
-              history: state.history,
-              onQueryTap: (query) => _submitQuery(query),
-              setControllerText: (text) => _controller.text = text,
-            );
-          }
-          if (state is SearchPageLoading) {
-            return const Center(child: LoadingWidget());
-          }
-          if (state is SearchPageTracksLoaded) {
-            return SearchedTracksWidget(tracks: state.tracks);
-          }
-          return EmptyHistoryWidget();
-        },
+          },
+        ),
       ),
     );
   }
