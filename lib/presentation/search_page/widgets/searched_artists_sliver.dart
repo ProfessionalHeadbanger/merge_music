@@ -16,35 +16,29 @@ class SearchedArtistsSliver extends StatelessWidget {
   Widget build(BuildContext context) {
     final displayedArtists =
         artists.take(CommonConstants.numberOfArtistsInSliver).toList();
-    final shouldShowAll =
-        artists.length > CommonConstants.numberOfArtistsInSliver;
 
     return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    context.l10n.allArtists,
-                    style: context.text.mediumTitle,
-                  ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  context.l10n.allArtists,
+                  style: context.text.mediumTitle,
                 ),
-                if (shouldShowAll)
-                  TextButton(
-                    onPressed: () {
-                      // TODO: обработка "Показать все"
-                    },
-                    child: Text(
-                      context.l10n.showAll,
-                      style: context.text.textButton,
-                    ),
-                  ),
-              ],
-            ),
+              ),
+              TextButton(
+                onPressed: () {
+                  // TODO: обработка "Показать все"
+                },
+                child: Text(
+                  context.l10n.showAll,
+                  style: context.text.textButton,
+                ),
+              ),
+            ],
           ),
           ...displayedArtists.map(
             (artist) => ArtistTile(artist: artist),
