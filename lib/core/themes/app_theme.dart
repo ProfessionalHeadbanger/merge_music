@@ -11,6 +11,7 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       backgroundColor: ColorStyles.lightColorStyle.primaryBackground,
       titleTextStyle: TextStyles.lightTextStyle.largeTitle,
+      scrolledUnderElevation: 0,
     ),
     extensions: [
       TextStyles.lightTextStyle,
@@ -24,6 +25,7 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       backgroundColor: ColorStyles.darkColorStyle.primaryBackground,
       titleTextStyle: TextStyles.darkTextStyle.largeTitle,
+      scrolledUnderElevation: 0,
     ),
     extensions: [
       TextStyles.darkTextStyle,
