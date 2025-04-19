@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/global_state/user_playlists/user_playlists_cubit.dart';
-import 'package:merge_music/core/common/widgets/playlist_tile.dart';
+import 'package:merge_music/core/common/widgets/horizontal_scrollable_playlist_list.dart';
+import 'package:merge_music/core/constants/common_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 
 class UserPlaylistsSliver extends StatelessWidget {
@@ -15,51 +16,13 @@ class UserPlaylistsSliver extends StatelessWidget {
           return const SliverToBoxAdapter();
         }
 
-        final playlists = state.playlists.take(10).toList();
+        final playlists = state.playlists
+            .take(CommonConstants.numberOfPlaylistsInHorizontalList)
+            .toList();
 
-        if (playlists.isEmpty) {
-          return const SliverToBoxAdapter();
-        }
-
-        return SliverToBoxAdapter(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      context.l10n.myPlaylists,
-                      style: context.text.mediumTitle,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      context.l10n.showAll,
-                      style: context.text.textButton,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 180,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: playlists.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: PlaylistTile(
-                        playlistEntity: playlists[index],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 8),
-            ],
-          ),
+        return HorizontalScrollablePlaylistList(
+          playlists: playlists,
+          title: context.l10n.myPlaylists,
         );
       },
     );

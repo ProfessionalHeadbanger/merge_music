@@ -21,11 +21,15 @@ class HorizontalScrollableAudioList extends StatelessWidget {
     if (audios.length <= 3) {
       return SliverList.list(
         children: [
-          Text(title, style: context.text.mediumTitle),
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(title, style: context.text.mediumTitle),
+          ),
           const SizedBox(height: 8),
           ...audios.map(
             (audio) => AudioTile(audio: audio),
           ),
+          const SizedBox(height: 8),
         ],
       );
     }
@@ -41,7 +45,12 @@ class HorizontalScrollableAudioList extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: Text(title, style: context.text.mediumTitle)),
+              Expanded(
+                child: Text(
+                  title,
+                  style: context.text.mediumTitle,
+                ),
+              ),
               TextButton(
                 onPressed: () {
                   // TODO: обработка "Показать все"
@@ -59,7 +68,7 @@ class HorizontalScrollableAudioList extends StatelessWidget {
               itemBuilder: (context, index) {
                 final group = groupedAudios[index];
                 return Padding(
-                  padding: const EdgeInsets.only(right: 8),
+                  padding: const EdgeInsets.only(right: 16),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children:

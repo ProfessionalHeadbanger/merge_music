@@ -129,6 +129,7 @@ class AudioRepositoryImpl implements AudioRepository {
         final audios = await audioRemoteDataSource.searchAudio(
           params: AudioSearchParams(
             q: params.q,
+            autoComplete: true,
             accessToken: tokenState.token,
             v: ApiConstants.v,
           ),
@@ -175,6 +176,28 @@ class AudioRepositoryImpl implements AudioRepository {
             q: params.q,
             accessToken: tokenState.token,
             filters: ApiConstants.allFilter,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(playlists);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PlaylistEntity>>> searchAlbums(
+      AudioSearchPartialParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final playlists = await audioRemoteDataSource.searchAlbums(
+          params: AudioSearchAlbumsParams(
+            q: params.q,
+            accessToken: tokenState.token,
             v: ApiConstants.v,
           ),
         );

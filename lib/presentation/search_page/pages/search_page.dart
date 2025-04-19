@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
 import 'package:merge_music/core/common/widgets/loading_widget.dart';
+import 'package:merge_music/core/common/widgets/retry_button.dart';
+import 'package:merge_music/core/common/widgets/sliver_divider.dart';
 import 'package:merge_music/core/constants/icons_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
 import 'package:merge_music/presentation/search_page/widgets/empty_history_widget.dart';
+import 'package:merge_music/presentation/search_page/widgets/searched_artists_sliver.dart';
+import 'package:merge_music/presentation/search_page/widgets/searched_playlists_sliver.dart';
+import 'package:merge_music/presentation/search_page/widgets/searched_tracks_sliver.dart';
 import 'package:merge_music/presentation/search_page/widgets/loaded_history_widget.dart';
-import 'package:merge_music/presentation/search_page/widgets/searched_tracks_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -19,6 +24,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _controller = TextEditingController();
   bool _showClearButton = false;
+  String _lastQuery = '';
 
   @override
   void initState() {
@@ -40,7 +46,8 @@ class _SearchPageState extends State<SearchPage> {
     final trimmed = query.trim();
     if (trimmed.isNotEmpty) {
       context.read<SearchPageBloc>().add(AddQueryToHistory(query: trimmed));
-      context.read<SearchPageBloc>().add(SearchTracksEvent(query: trimmed));
+      context.read<SearchPageBloc>().add(SearchByQuery(query: trimmed));
+      _lastQuery = trimmed;
     } else {
       _controller.clear();
     }
@@ -113,11 +120,82 @@ class _SearchPageState extends State<SearchPage> {
                 setControllerText: (text) => _controller.text = text,
               );
             }
+            if (state is SearchPageError) {
+              return Center(
+                child: RetryButton(
+                  onPressed: () {
+                    context
+                        .read<SearchPageBloc>()
+                        .add(SearchByQuery(query: _lastQuery));
+                  },
+                ),
+              );
+            }
             if (state is SearchPageLoading) {
               return const Center(child: LoadingWidget());
             }
-            if (state is SearchPageTracksLoaded) {
-              return SearchedTracksWidget(tracks: state.tracks);
+            if (state is SearchPageLoaded) {
+              final likedTracks =
+                  state.tracks.where((track) => track.like ?? false).toList();
+              final notLikedTracks =
+                  state.tracks.where((track) => track.like == null).toList();
+
+              final userState = context.read<UserCubit>().state as UserLoggedIn;
+              final inMyPlaylists = state.playlists
+                  .where((playlist) =>
+                      (playlist.ownerId == userState.user.id ||
+                          playlist.isFollowing) &&
+                      playlist.type == 0)
+                  .toList();
+              final allPlaylists = state.playlists
+                  .where((playlist) =>
+                      (playlist.ownerId != userState.user.id &&
+                          !playlist.isFollowing) &&
+                      playlist.type == 0)
+                  .toList();
+
+              final likedAlbums =
+                  state.albums.where((album) => album.isFollowing).toList();
+              final notLikedAlbums =
+                  state.albums.where((album) => !album.isFollowing).toList();
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverDivider(color: context.color.tertiaryText!),
+                    SearchedTracksSliver(
+                      tracks: likedTracks,
+                      title: context.l10n.inMyTracks,
+                    ),
+                    SliverDivider(color: context.color.auxiliaryText!),
+                    SearchedTracksSliver(
+                      tracks: notLikedTracks,
+                      title: context.l10n.allTracks,
+                    ),
+                    SliverDivider(color: context.color.tertiaryText!),
+                    SearchedPlaylistsSliver(
+                      playlists: inMyPlaylists,
+                      title: context.l10n.inMyPlaylists,
+                    ),
+                    SliverDivider(color: context.color.auxiliaryText!),
+                    SearchedPlaylistsSliver(
+                      playlists: allPlaylists,
+                      title: context.l10n.allPlaylists,
+                    ),
+                    SliverDivider(color: context.color.auxiliaryText!),
+                    SearchedPlaylistsSliver(
+                        playlists: likedAlbums, title: context.l10n.inMyAlbums),
+                    SliverDivider(color: context.color.auxiliaryText!),
+                    SearchedPlaylistsSliver(
+                        playlists: notLikedAlbums,
+                        title: context.l10n.allAlbums),
+                    SliverDivider(color: context.color.tertiaryText!),
+                    SearchedArtistsSliver(artists: state.artists),
+                    SliverDivider(color: context.color.tertiaryText!),
+                  ],
+                ),
+              );
             }
             return EmptyHistoryWidget();
           },

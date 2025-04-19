@@ -20,28 +20,10 @@ class AddQueryToHistory extends SearchPageEvent {
   List<Object> get props => [query];
 }
 
-class SearchTracksEvent extends SearchPageEvent {
+class SearchByQuery extends SearchPageEvent {
   final String query;
 
-  const SearchTracksEvent({required this.query});
-
-  @override
-  List<Object> get props => [query];
-}
-
-class SearchArtistsEvent extends SearchPageEvent {
-  final String query;
-
-  const SearchArtistsEvent({required this.query});
-
-  @override
-  List<Object> get props => [query];
-}
-
-class SearchPlaylistsEvent extends SearchPageEvent {
-  final String query;
-
-  const SearchPlaylistsEvent({required this.query});
+  const SearchByQuery({required this.query});
 
   @override
   List<Object> get props => [query];

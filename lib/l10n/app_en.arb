@@ -34,6 +34,11 @@
     "nothingFound": "Nothing found",
     "inMyTracks": "In my tracks",
     "allTracks": "All tracks",
+    "inMyPlaylists": "In my playlists",
+    "allPlaylists": "All playlists",
+    "inMyAlbums": "In my albums",
+    "allAlbums": "All albums",
+    "allArtists": "Artists",
 
     "logout": "Are you sure you want to log out?",
     "cancel": "Cancel",

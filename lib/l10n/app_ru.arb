@@ -34,6 +34,11 @@
     "nothingFound": "Ничего не найдено",
     "inMyTracks": "В моих треках",
     "allTracks": "Все треки",
+    "inMyPlaylists": "В моих плейлистах",
+    "allPlaylists": "Все плейлисты",
+    "inMyAlbums": "В моих альбомах",
+    "allAlbums": "Все альбомы",
+    "allArtists": "Исполнители",
 
     "logout": "Вы уверены, что хотите выйти из аккаунта?",
     "cancel": "Отмена",

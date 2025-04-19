@@ -31,29 +31,19 @@ final class SearchPageHistoryLoaded extends SearchPageState {
 
 final class SearchPageEmptyHistory extends SearchPageState {}
 
-final class SearchPageTracksLoaded extends SearchPageState {
+final class SearchPageLoaded extends SearchPageState {
   final List<AudioEntity> tracks;
-
-  const SearchPageTracksLoaded({required this.tracks});
-
-  @override
-  List<Object> get props => [tracks];
-}
-
-final class SearchPageArtistsLoaded extends SearchPageState {
   final List<ArtistEntity> artists;
-
-  const SearchPageArtistsLoaded({required this.artists});
-
-  @override
-  List<Object> get props => [artists];
-}
-
-final class SearchPagePlaylistsLoaded extends SearchPageState {
   final List<PlaylistEntity> playlists;
+  final List<PlaylistEntity> albums;
 
-  const SearchPagePlaylistsLoaded({required this.playlists});
+  const SearchPageLoaded({
+    required this.tracks,
+    required this.artists,
+    required this.playlists,
+    required this.albums,
+  });
 
   @override
-  List<Object> get props => [playlists];
+  List<Object> get props => [tracks, artists, playlists, albums];
 }

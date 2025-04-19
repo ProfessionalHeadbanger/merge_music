@@ -94,6 +94,22 @@ class AudioSearchPlaylistsParams {
   });
 }
 
+class AudioSearchAlbumsParams {
+  final String q;
+  final int? count;
+  final int? offset;
+  final String accessToken;
+  final String v;
+
+  AudioSearchAlbumsParams({
+    required this.q,
+    this.count,
+    this.offset,
+    required this.accessToken,
+    required this.v,
+  });
+}
+
 class AudioSearchArtistsParams {
   final String q;
   final int? count;

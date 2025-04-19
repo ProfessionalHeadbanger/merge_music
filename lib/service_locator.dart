@@ -22,6 +22,7 @@ import 'package:merge_music/domain/usecases/get_user_albums.dart';
 import 'package:merge_music/domain/usecases/get_user_audios.dart';
 import 'package:merge_music/domain/usecases/get_user_info.dart';
 import 'package:merge_music/domain/usecases/get_user_playlists.dart';
+import 'package:merge_music/domain/usecases/search_albums.dart';
 import 'package:merge_music/domain/usecases/search_artists.dart';
 import 'package:merge_music/domain/usecases/search_audio.dart';
 import 'package:merge_music/domain/usecases/search_playlists.dart';
@@ -177,12 +178,18 @@ Future<void> setupServiceLocator() async {
       serviceLocator(),
     ),
   );
+  serviceLocator.registerFactory(
+    () => SearchAlbums(
+      serviceLocator(),
+    ),
+  );
   serviceLocator.registerLazySingleton(
     () => SearchPageBloc(
       prefs: serviceLocator(),
       searchAudio: serviceLocator(),
       searchArtists: serviceLocator(),
       searchPlaylists: serviceLocator(),
+      searchAlbums: serviceLocator(),
     ),
   );
 

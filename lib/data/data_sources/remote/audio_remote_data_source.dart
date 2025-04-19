@@ -16,6 +16,8 @@ abstract interface class AudioRemoteDataSource {
       {required AudioSearchPlaylistsParams params});
   Future<List<ArtistModel>> searchArtists(
       {required AudioSearchArtistsParams params});
+  Future<List<PlaylistModel>> searchAlbums(
+      {required AudioSearchAlbumsParams params});
 }
 
 class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
@@ -78,10 +80,7 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
         ApiConstants.baseUrl + ApiConstants.search,
         queryParameters: {
           'q': params.q,
-          //'count': params.count,
-          //'offset': params.offset,
-          //'performer_only': params.performerOnly,
-          //'auto_complete': params.autoComplete,
+          'auto_complete': params.autoComplete,
           'access_token': params.accessToken,
           'v': params.v,
         },
@@ -104,8 +103,6 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
         ApiConstants.baseUrl + ApiConstants.searchArtists,
         queryParameters: {
           'q': params.q,
-          'count': params.count,
-          'offset': params.offset,
           'access_token': params.accessToken,
           'v': params.v,
         },
@@ -125,11 +122,9 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
       {required AudioSearchPlaylistsParams params}) async {
     try {
       final response = await dio.get(
-        ApiConstants.baseUrl + ApiConstants.searchArtists,
+        ApiConstants.baseUrl + ApiConstants.searchPlaylists,
         queryParameters: {
           'q': params.q,
-          'count': params.count,
-          'offset': params.offset,
           'filters': params.filters,
           'access_token': params.accessToken,
           'v': params.v,
@@ -138,6 +133,28 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
 
       final List<dynamic> playlistsJson = response.data['response']['items'];
       return playlistsJson.map((json) => PlaylistModel.fromJson(json)).toList();
+    } on DioException catch (e) {
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<List<PlaylistModel>> searchAlbums(
+      {required AudioSearchAlbumsParams params}) async {
+    try {
+      final response = await dio.get(
+        ApiConstants.baseUrl + ApiConstants.searchAlbums,
+        queryParameters: {
+          'q': params.q,
+          'access_token': params.accessToken,
+          'v': params.v,
+        },
+      );
+
+      final List<dynamic> albumsJson = response.data['response']['items'];
+      return albumsJson.map((json) => PlaylistModel.fromJson(json)).toList();
     } on DioException catch (e) {
       throw ServerException(e.message);
     } catch (e) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/widgets/horizontal_scrollable_audio_list.dart';
+import 'package:merge_music/core/constants/common_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
 
@@ -15,7 +16,9 @@ class AudioListSliver extends StatelessWidget {
           return const SliverToBoxAdapter();
         }
 
-        final audios = state.audios.take(15).toList();
+        final audios = state.audios
+            .take(CommonConstants.numberOfTracksInHorizontalList)
+            .toList();
 
         return HorizontalScrollableAudioList(
           audios: audios,
