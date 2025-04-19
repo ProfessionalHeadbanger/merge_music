@@ -17,6 +17,8 @@ class SearchedArtistsSliver extends StatelessWidget {
     final displayedArtists =
         artists.take(CommonConstants.numberOfArtistsInSliver).toList();
 
+    if (artists.isEmpty) return const SliverToBoxAdapter();
+
     return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
