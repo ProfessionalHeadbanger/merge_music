@@ -10,3 +10,16 @@ abstract class MainPageEvent extends Equatable {
 class LoadMainPageData extends MainPageEvent {}
 
 class CheckMainPageState extends MainPageEvent {}
+
+class OpenShowAllTracksPage extends MainPageEvent {
+  final String title;
+  final List<AudioEntity> audios;
+
+  const OpenShowAllTracksPage({
+    required this.title,
+    required this.audios,
+  });
+
+  @override
+  List<Object> get props => [title, audios];
+}

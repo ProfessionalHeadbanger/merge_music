@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/common/navigation/navigation_args.dart';
 import 'package:merge_music/presentation/library_page/pages/library_page.dart';
 import 'package:merge_music/presentation/main_page/pages/main_page.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/presentation/root_page/root_page.dart';
 import 'package:merge_music/presentation/search_page/pages/search_page.dart';
 import 'package:merge_music/presentation/settings_page/pages/settings_page.dart';
+import 'package:merge_music/presentation/show_all_tracks_page/show_all_tracks_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_input_login_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_welcome_page.dart';
 import 'package:go_router/go_router.dart';
@@ -24,6 +26,18 @@ final router = GoRouter(
             GoRoute(
               path: Routes.mainPage,
               builder: (_, __) => const MainPage(),
+              routes: [
+                GoRoute(
+                  path: Routes.showAllTracksPage,
+                  builder: (context, state) {
+                    final args = state.extra as ShowAllTracksPageArgs;
+                    return ShowAllTracksPage(
+                      title: args.title,
+                      audios: args.audios,
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),
@@ -32,6 +46,18 @@ final router = GoRouter(
             GoRoute(
               path: Routes.searchPage,
               builder: (_, __) => const SearchPage(),
+              routes: [
+                GoRoute(
+                  path: Routes.showAllTracksPage,
+                  builder: (context, state) {
+                    final args = state.extra as ShowAllTracksPageArgs;
+                    return ShowAllTracksPage(
+                      title: args.title,
+                      audios: args.audios,
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

@@ -7,11 +7,13 @@ import 'package:merge_music/domain/entities/audio_entity.dart';
 class HorizontalScrollableAudioList extends StatelessWidget {
   final List<AudioEntity> audios;
   final String title;
+  final VoidCallback? onShowAllPressed;
 
   const HorizontalScrollableAudioList({
     super.key,
     required this.audios,
     required this.title,
+    this.onShowAllPressed,
   });
 
   @override
@@ -52,9 +54,7 @@ class HorizontalScrollableAudioList extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  // TODO: обработка "Показать все"
-                },
+                onPressed: onShowAllPressed,
                 child:
                     Text(context.l10n.showAll, style: context.text.textButton),
               ),

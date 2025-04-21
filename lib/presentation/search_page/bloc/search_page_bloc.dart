@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:merge_music/core/common/navigation/navigation_args.dart';
+import 'package:merge_music/core/common/navigation/router.dart';
+import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/core/constants/common_constants.dart';
 import 'package:merge_music/core/params/params.dart';
 import 'package:merge_music/domain/entities/artist_entity.dart';
@@ -38,6 +41,7 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
     on<AddQueryToHistory>(_onAddQueryToHistory);
     on<SearchByQuery>(_onSearchByQuery);
     on<ClearSearchTextField>(_onClearSearchTextField);
+    on<OpenShowAllTracksPage>(_onShowAllTracksPage);
 
     add(LoadSearchHistory());
   }
@@ -140,5 +144,13 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
             albums: albums!),
       );
     }
+  }
+
+  void _onShowAllTracksPage(
+      OpenShowAllTracksPage event, Emitter<SearchPageState> emit) {
+    router.push(
+      '${Routes.searchPage}/${Routes.showAllTracksPage}',
+      extra: ShowAllTracksPageArgs(title: event.title, audios: event.audios),
+    );
   }
 }

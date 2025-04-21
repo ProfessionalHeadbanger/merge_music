@@ -30,3 +30,16 @@ class SearchByQuery extends SearchPageEvent {
 }
 
 class ClearSearchTextField extends SearchPageEvent {}
+
+class OpenShowAllTracksPage extends SearchPageEvent {
+  final String title;
+  final List<AudioEntity> audios;
+
+  const OpenShowAllTracksPage({
+    required this.title,
+    required this.audios,
+  });
+
+  @override
+  List<Object> get props => [title, audios];
+}

@@ -7,6 +7,10 @@ import 'package:merge_music/core/common/global_state/followed_playlists/followed
 import 'package:merge_music/core/common/global_state/user_albums/user_albums_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_playlists/user_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
+import 'package:merge_music/core/common/navigation/navigation_args.dart';
+import 'package:merge_music/core/common/navigation/router.dart';
+import 'package:merge_music/core/common/navigation/routes.dart';
+import 'package:merge_music/domain/entities/audio_entity.dart';
 
 part 'main_page_event.dart';
 part 'main_page_state.dart';
@@ -33,6 +37,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   }) : super(MainPageInitial()) {
     on<CheckMainPageState>(_onCheckMainPageState);
     on<LoadMainPageData>(_onLoadMainPageData);
+    on<OpenShowAllTracksPage>(_onShowAllTracksPage);
 
     accessTokenSubscription = accessTokenCubit.stream.listen(
       (state) {
@@ -98,6 +103,14 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
         state is FollowedPlaylistsLoaded)) {
       emit(MainPageLoaded());
     }
+  }
+
+  void _onShowAllTracksPage(
+      OpenShowAllTracksPage event, Emitter<MainPageState> emit) {
+    router.push(
+      '${Routes.mainPage}/${Routes.showAllTracksPage}',
+      extra: ShowAllTracksPageArgs(title: event.title, audios: event.audios),
+    );
   }
 
   @override

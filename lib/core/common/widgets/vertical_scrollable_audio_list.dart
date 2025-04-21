@@ -5,9 +5,9 @@ import 'package:merge_music/domain/entities/audio_entity.dart';
 
 class VerticalScrollableAudioList extends StatelessWidget {
   final List<AudioEntity> audios;
-  final String title;
+  final String? title;
   const VerticalScrollableAudioList(
-      {super.key, required this.audios, required this.title});
+      {super.key, required this.audios, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class VerticalScrollableAudioList extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Text(title, style: context.text.mediumTitle),
+          child: Text(title ?? '', style: context.text.mediumTitle),
         ),
         ...audios.map(
           (audio) => AudioTile(audio: audio),
