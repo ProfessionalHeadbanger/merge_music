@@ -6,11 +6,13 @@ import 'package:merge_music/domain/entities/playlist_entity.dart';
 class HorizontalScrollablePlaylistList extends StatelessWidget {
   final List<PlaylistEntity> playlists;
   final String title;
+  final VoidCallback? onShowAllPressed;
 
   const HorizontalScrollablePlaylistList({
     super.key,
     required this.playlists,
     required this.title,
+    this.onShowAllPressed,
   });
 
   @override
@@ -30,7 +32,7 @@ class HorizontalScrollablePlaylistList extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: onShowAllPressed,
                 child: Text(
                   context.l10n.showAll,
                   style: context.text.textButton,

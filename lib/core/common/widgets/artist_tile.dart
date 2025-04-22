@@ -30,7 +30,7 @@ class ArtistTile extends StatelessWidget {
               Expanded(
                 child: Text(
                   artist.name,
-                  style: context.text.smallTitle,
+                  style: context.text.trackName!.copyWith(fontSize: 16),
                 ),
               ),
             ],

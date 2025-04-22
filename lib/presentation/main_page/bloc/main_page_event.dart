@@ -23,3 +23,16 @@ class OpenShowAllTracksPage extends MainPageEvent {
   @override
   List<Object> get props => [title, audios];
 }
+
+class OpenShowAllPlaylistsPage extends MainPageEvent {
+  final String title;
+  final List<PlaylistEntity> playlists;
+
+  const OpenShowAllPlaylistsPage({
+    required this.title,
+    required this.playlists,
+  });
+
+  @override
+  List<Object> get props => [title, playlists];
+}

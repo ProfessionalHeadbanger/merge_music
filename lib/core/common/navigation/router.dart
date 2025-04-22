@@ -6,6 +6,8 @@ import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/presentation/root_page/root_page.dart';
 import 'package:merge_music/presentation/search_page/pages/search_page.dart';
 import 'package:merge_music/presentation/settings_page/pages/settings_page.dart';
+import 'package:merge_music/presentation/show_all_artists_page/show_all_artists_page.dart';
+import 'package:merge_music/presentation/show_all_playlists_page/show_all_playlists_page.dart';
 import 'package:merge_music/presentation/show_all_tracks_page/show_all_tracks_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_input_login_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_welcome_page.dart';
@@ -37,6 +39,16 @@ final router = GoRouter(
                     );
                   },
                 ),
+                GoRoute(
+                  path: Routes.showAllPlaylistsPage,
+                  builder: (context, state) {
+                    final args = state.extra as ShowAllPlaylistsPageArgs;
+                    return ShowAllPlaylistsPage(
+                      title: args.title,
+                      playlists: args.playlists,
+                    );
+                  },
+                ),
               ],
             ),
           ],
@@ -54,6 +66,26 @@ final router = GoRouter(
                     return ShowAllTracksPage(
                       title: args.title,
                       audios: args.audios,
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: Routes.showAllPlaylistsPage,
+                  builder: (context, state) {
+                    final args = state.extra as ShowAllPlaylistsPageArgs;
+                    return ShowAllPlaylistsPage(
+                      title: args.title,
+                      playlists: args.playlists,
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: Routes.showAllArtistsPage,
+                  builder: (context, state) {
+                    final args = state.extra as ShowAllArtistsPageArgs;
+                    return ShowAllArtistsPage(
+                      title: args.title,
+                      artists: args.artists,
                     );
                   },
                 ),

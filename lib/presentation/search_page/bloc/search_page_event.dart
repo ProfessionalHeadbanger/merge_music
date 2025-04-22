@@ -43,3 +43,29 @@ class OpenShowAllTracksPage extends SearchPageEvent {
   @override
   List<Object> get props => [title, audios];
 }
+
+class OpenShowAllPlaylistsPage extends SearchPageEvent {
+  final String title;
+  final List<PlaylistEntity> playlists;
+
+  const OpenShowAllPlaylistsPage({
+    required this.title,
+    required this.playlists,
+  });
+
+  @override
+  List<Object> get props => [title, playlists];
+}
+
+class OpenShowAllArtistsPage extends SearchPageEvent {
+  final String title;
+  final List<ArtistEntity> artists;
+
+  const OpenShowAllArtistsPage({
+    required this.title,
+    required this.artists,
+  });
+
+  @override
+  List<Object> get props => [title, artists];
+}

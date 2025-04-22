@@ -11,6 +11,7 @@ import 'package:merge_music/core/common/navigation/navigation_args.dart';
 import 'package:merge_music/core/common/navigation/router.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/domain/entities/audio_entity.dart';
+import 'package:merge_music/domain/entities/playlist_entity.dart';
 
 part 'main_page_event.dart';
 part 'main_page_state.dart';
@@ -38,6 +39,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     on<CheckMainPageState>(_onCheckMainPageState);
     on<LoadMainPageData>(_onLoadMainPageData);
     on<OpenShowAllTracksPage>(_onShowAllTracksPage);
+    on<OpenShowAllPlaylistsPage>(_onShowAllPlaylistsPage);
 
     accessTokenSubscription = accessTokenCubit.stream.listen(
       (state) {
@@ -110,6 +112,15 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     router.push(
       '${Routes.mainPage}/${Routes.showAllTracksPage}',
       extra: ShowAllTracksPageArgs(title: event.title, audios: event.audios),
+    );
+  }
+
+  void _onShowAllPlaylistsPage(
+      OpenShowAllPlaylistsPage event, Emitter<MainPageState> emit) {
+    router.push(
+      '${Routes.mainPage}/${Routes.showAllPlaylistsPage}',
+      extra: ShowAllPlaylistsPageArgs(
+          title: event.title, playlists: event.playlists),
     );
   }
 

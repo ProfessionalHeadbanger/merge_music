@@ -3,6 +3,8 @@ import 'package:merge_music/core/common/widgets/artist_tile.dart';
 import 'package:merge_music/core/constants/common_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/artist_entity.dart';
+import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
+import 'package:provider/provider.dart';
 
 class SearchedArtistsSliver extends StatelessWidget {
   final List<ArtistEntity> artists;
@@ -33,7 +35,12 @@ class SearchedArtistsSliver extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  // TODO: обработка "Показать все"
+                  context.read<SearchPageBloc>().add(
+                        OpenShowAllArtistsPage(
+                          title: context.l10n.allArtists,
+                          artists: artists,
+                        ),
+                      );
                 },
                 child: Text(
                   context.l10n.showAll,
