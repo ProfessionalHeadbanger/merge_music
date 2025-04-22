@@ -6,7 +6,11 @@ class PlaylistTile extends StatelessWidget {
   final PlaylistEntity playlistEntity;
   final VoidCallback? onTap;
 
-  const PlaylistTile({super.key, required this.playlistEntity, this.onTap});
+  const PlaylistTile({
+    super.key,
+    required this.playlistEntity,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

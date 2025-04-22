@@ -8,7 +8,11 @@ import 'package:merge_music/domain/entities/audio_entity.dart';
 class AudioTile extends StatelessWidget {
   final AudioEntity audio;
   final VoidCallback? onTap;
-  const AudioTile({super.key, required this.audio, this.onTap});
+  const AudioTile({
+    super.key,
+    required this.audio,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

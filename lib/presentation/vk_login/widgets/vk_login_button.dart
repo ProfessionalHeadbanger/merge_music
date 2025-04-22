@@ -5,7 +5,11 @@ class VkLoginButton extends StatelessWidget {
   final VoidCallback onTap;
   final Widget content;
 
-  const VkLoginButton({super.key, required this.onTap, required this.content});
+  const VkLoginButton({
+    super.key,
+    required this.onTap,
+    required this.content,
+  });
 
   @override
   Widget build(BuildContext context) {

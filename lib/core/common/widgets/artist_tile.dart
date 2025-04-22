@@ -6,7 +6,11 @@ class ArtistTile extends StatelessWidget {
   final ArtistEntity artist;
   final VoidCallback? onTap;
 
-  const ArtistTile({super.key, required this.artist, this.onTap});
+  const ArtistTile({
+    super.key,
+    required this.artist,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

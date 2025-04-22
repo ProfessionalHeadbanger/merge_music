@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 
 Future<void> logoutDialogBuilder(
-    BuildContext context, VoidCallback? onCancel, VoidCallback? onExit) {
+  BuildContext context,
+  VoidCallback? onCancel,
+  VoidCallback? onExit,
+) {
   return showDialog(
     context: context,
     builder: (BuildContext context) {
