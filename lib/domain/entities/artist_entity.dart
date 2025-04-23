@@ -1,7 +1,7 @@
 class ArtistEntity {
   final String id;
   final String name;
-  final String photo;
+  final String? photo;
 
   ArtistEntity({
     required this.id,

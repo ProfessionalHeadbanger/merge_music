@@ -39,13 +39,36 @@ class MiniPlaylistTile extends StatelessWidget {
                 width: 16,
               ),
               Expanded(
-                child: OverflowTextAnimated(
-                  text: playlistEntity.title,
-                  style: context.text.trackName!.copyWith(fontSize: 16),
-                  curve: Curves.easeInOut,
-                  animation: OverFlowTextAnimations.scrollOpposite,
-                  animateDuration: const Duration(milliseconds: 3000),
-                  delay: const Duration(milliseconds: 1000),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    OverflowTextAnimated(
+                      text: playlistEntity.title,
+                      style: context.text.trackName!.copyWith(fontSize: 16),
+                      curve: Curves.easeInOut,
+                      animation: OverFlowTextAnimations.scrollOpposite,
+                      animateDuration: const Duration(milliseconds: 3000),
+                      delay: const Duration(milliseconds: 1000),
+                    ),
+                    if (playlistEntity.mainArtists != null &&
+                        playlistEntity.mainArtists!.isNotEmpty)
+                      OverflowTextAnimated(
+                        text: playlistEntity.mainArtists!
+                            .map((artist) => artist.name)
+                            .join(', '),
+                        style: context.text.artistName!.copyWith(fontSize: 16),
+                        curve: Curves.easeInOut,
+                        animation: OverFlowTextAnimations.scrollOpposite,
+                        animateDuration: const Duration(milliseconds: 3000),
+                        delay: const Duration(milliseconds: 1000),
+                      ),
+                    if (playlistEntity.year != null)
+                      Text(
+                        playlistEntity.year.toString(),
+                        style: context.text.artistName!.copyWith(fontSize: 16),
+                      ),
+                  ],
                 ),
               ),
             ],

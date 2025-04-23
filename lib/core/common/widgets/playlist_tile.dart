@@ -19,7 +19,6 @@ class PlaylistTile extends StatelessWidget {
       onTap: onTap,
       child: SizedBox(
         width: 140,
-        height: 180,
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: context.color.primaryBackground,
@@ -46,6 +45,18 @@ class PlaylistTile extends StatelessWidget {
                 animateDuration: const Duration(milliseconds: 3000),
                 delay: const Duration(milliseconds: 1000),
               ),
+              if (playlistEntity.mainArtists != null &&
+                  playlistEntity.mainArtists!.isNotEmpty)
+                OverflowTextAnimated(
+                  text: playlistEntity.mainArtists!
+                      .map((artist) => artist.name)
+                      .join(', '),
+                  style: context.text.artistName,
+                  curve: Curves.easeInOut,
+                  animation: OverFlowTextAnimations.scrollOpposite,
+                  animateDuration: const Duration(milliseconds: 3000),
+                  delay: const Duration(milliseconds: 1000),
+                ),
             ],
           ),
         ),

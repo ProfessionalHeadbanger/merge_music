@@ -29,7 +29,7 @@ class ArtistTile extends StatelessWidget {
               CircleAvatar(
                 radius: 36,
                 backgroundColor: Colors.transparent,
-                backgroundImage: NetworkImage(artist.photo),
+                backgroundImage: NetworkImage(artist.photo!),
               ),
               const SizedBox(width: 16),
               Expanded(

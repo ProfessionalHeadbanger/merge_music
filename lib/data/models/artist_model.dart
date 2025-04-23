@@ -16,11 +16,11 @@ class ArtistModel extends ArtistEntity {
   }
 
   factory ArtistModel.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> photos = json['photo'];
+    final List<dynamic>? photos = json['photo'];
     return ArtistModel(
       id: json['id'].toString(),
       name: json['name'],
-      photo: photos.last['url'],
+      photo: photos?.last['url'],
     );
   }
 
