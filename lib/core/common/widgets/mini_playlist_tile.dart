@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/playlist_entity.dart';
+import 'package:overflow_text_animated/overflow_text_animated.dart';
 
 class MiniPlaylistTile extends StatelessWidget {
   final PlaylistEntity playlistEntity;
@@ -38,11 +39,13 @@ class MiniPlaylistTile extends StatelessWidget {
                 width: 16,
               ),
               Expanded(
-                child: Text(
-                  playlistEntity.title,
+                child: OverflowTextAnimated(
+                  text: playlistEntity.title,
                   style: context.text.trackName!.copyWith(fontSize: 16),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  curve: Curves.easeInOut,
+                  animation: OverFlowTextAnimations.scrollOpposite,
+                  animateDuration: const Duration(milliseconds: 3000),
+                  delay: const Duration(milliseconds: 1000),
                 ),
               ),
             ],

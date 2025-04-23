@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/playlist_entity.dart';
+import 'package:overflow_text_animated/overflow_text_animated.dart';
 
 class PlaylistTile extends StatelessWidget {
   final PlaylistEntity playlistEntity;
@@ -37,11 +38,13 @@ class PlaylistTile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              Text(
-                playlistEntity.title,
+              OverflowTextAnimated(
+                text: playlistEntity.title,
                 style: context.text.trackName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                curve: Curves.easeInOut,
+                animation: OverFlowTextAnimations.scrollOpposite,
+                animateDuration: const Duration(milliseconds: 3000),
+                delay: const Duration(milliseconds: 1000),
               ),
             ],
           ),
