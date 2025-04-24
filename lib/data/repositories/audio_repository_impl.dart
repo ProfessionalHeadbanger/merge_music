@@ -209,4 +209,26 @@ class AudioRepositoryImpl implements AudioRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, List<AudioEntity>>> getPlaylistAudios(
+      GetPlaylistAudiosParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final audios = await audioRemoteDataSource.getAudio(
+          params: AudioListParams(
+            albumId: params.albumId,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(audios);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
 }

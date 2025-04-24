@@ -6,10 +6,12 @@ import 'package:merge_music/domain/entities/audio_entity.dart';
 class VerticalScrollableAudioList extends StatelessWidget {
   final List<AudioEntity> audios;
   final String? title;
+  final bool isAlbum;
   const VerticalScrollableAudioList({
     super.key,
     required this.audios,
     this.title,
+    this.isAlbum = false,
   });
 
   @override
@@ -20,12 +22,16 @@ class VerticalScrollableAudioList extends StatelessWidget {
 
     return SliverList.list(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Text(title ?? '', style: context.text.mediumTitle),
-        ),
+        if (title != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(title!, style: context.text.mediumTitle),
+          ),
         ...audios.map(
-          (audio) => AudioTile(audio: audio),
+          (audio) => AudioTile(
+            audio: audio,
+            needCover: !isAlbum,
+          ),
         ),
       ],
     );

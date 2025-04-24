@@ -15,4 +15,12 @@ class IconsConstants {
       '${basePath}history_backward_outline$format';
   static const String cancelCircleOutline =
       '${basePath}cancel_circle_outline$format';
+  static const String addOutline = '${basePath}add_outline$format';
+  static const String deleteOutlineAndroid =
+      '${basePath}delete_outline_android$format';
+  static const String playNextOutline = '${basePath}play_next_outline$format';
+  static const String playOutline = '${basePath}play_outline$format';
+  static const String play = '${basePath}play$format';
+  static const String shareOutline = '${basePath}share_outline$format';
+  static const String shuffleOutline = '${basePath}shuffle_outline$format';
 }

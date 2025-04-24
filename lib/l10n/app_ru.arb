@@ -1,33 +1,26 @@
 {
     "language": "Русский",
-    "errorOccured" : "Произошла непредвиденная ошибка",
-    "noInternet" : "Нет подключения к интернету",
-
+    "errorOccured": "Произошла непредвиденная ошибка",
+    "noInternet": "Нет подключения к интернету",
     "welcome": "Добро пожаловать в\nMerge Music",
     "loginVk": "Для начала необходимо\nавторизоваться в VK",
     "signIn": "Войти",
-
     "signInVk": "Войти в VK",
     "textFieldLoginLabel": "Введите номер телефона или email",
     "textFieldPasswordLabel": "Введите пароль",
     "continueLabel": "Продолжить",
-
     "mainPage": "Главная",
     "searchPage": "Поиск",
     "libraryPage": "Библиотека",
     "settingsPage": "Настройки",
-
     "listenVKMix": "Слушать VK Mix",
     "recsForYou": "Музыкальные рекомендации для Вас",
     "listen": "Слушать",
-
     "myTracks": "Мои треки",
     "showAll": "Показать все",
-
     "myAlbums": "Мои альбомы",
     "myPlaylists": "Мои плейлисты",
     "myFollowedPlaylists": "Отслеживаемое",
-
     "search": "Поиск",
     "queryHistory": "История запросов",
     "noHistory": "Ваша история запросов пуста",
@@ -39,11 +32,48 @@
     "inMyAlbums": "В моих альбомах",
     "allAlbums": "Все альбомы",
     "allArtists": "Исполнители",
-
+    "add": "Добавить",
+    "added": "Добавлено",
+    "addToQueue": "В очередь",
+    "share": "Поделиться",
+    "shuffle": "Перемешать",
+    "tracksCount": "{count, plural, =0{Нет треков} one{{count} трек} few{{count} трека} many{{count} треков} other{{count} трека}}",
+    "@tracksCount": {
+        "description": "Количество треков в альбоме/плейлисте",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "3"
+            }
+        }
+    },
+    "durationHoursMinutes": "{hours, plural, =0{} other{{hours, plural, one{{hours} час} few{{hours} часа} many{{hours} часов} other{{hours} часа}} }}{minutes, plural, =0{} other{{minutes, plural, one{{minutes} минута} few{{minutes} минуты} many{{minutes} минут} other{{minutes} минуты}}}}",
+    "@durationHoursMinutes": {
+        "description": "Продолжительность альбома/плейлиста в часах и минутах с правильным падежом",
+        "placeholders": {
+            "hours": {
+                "type": "int",
+                "example": "2"
+            },
+            "minutes": {
+                "type": "int",
+                "example": "15"
+            }
+        }
+    },
+    "listens": "{count, plural, =0{Нет прослушиваний} one{{count} прослушивание} few{{count} прослушивания} many{{count} прослушиваний} other{{count} прослушивания}}",
+    "@listens": {
+        "description": "Количество прослушиваний альбома/плейлиста",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "123"
+            }
+        }
+    },
     "logout": "Вы уверены, что хотите выйти из аккаунта?",
     "cancel": "Отмена",
     "exit": "Выйти",
-
     "settings": "Настройки",
     "more_settings": "Я обязательно придумаю, что еще здесь нужно",
     "theme": "Тема",

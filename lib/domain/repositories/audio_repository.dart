@@ -18,4 +18,6 @@ abstract interface class AudioRepository {
       AudioSearchPartialParams params);
   Future<Either<Failure, List<PlaylistEntity>>> searchAlbums(
       AudioSearchPartialParams params);
+  Future<Either<Failure, List<AudioEntity>>> getPlaylistAudios(
+      GetPlaylistAudiosParams params);
 }

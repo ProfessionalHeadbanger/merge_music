@@ -31,3 +31,11 @@ class ShowAllArtistsPageArgs {
     required this.artists,
   });
 }
+
+class AlbumPageArgs {
+  final PlaylistEntity album;
+
+  AlbumPageArgs({
+    required this.album,
+  });
+}

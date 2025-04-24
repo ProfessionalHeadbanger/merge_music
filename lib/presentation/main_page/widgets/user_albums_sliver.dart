@@ -32,6 +32,11 @@ class UserAlbumsSliver extends StatelessWidget {
                   ),
                 );
           },
+          onTileTapped: (album) {
+            context.read<MainPageBloc>().add(
+                  OpenAlbumPage(album: album),
+                );
+          },
         );
       },
     );

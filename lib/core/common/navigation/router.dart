@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merge_music/core/common/navigation/navigation_args.dart';
+import 'package:merge_music/presentation/album_page/pages/album_page.dart';
 import 'package:merge_music/presentation/library_page/pages/library_page.dart';
 import 'package:merge_music/presentation/main_page/pages/main_page.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
@@ -48,6 +49,22 @@ final router = GoRouter(
                       playlists: args.playlists,
                     );
                   },
+                  routes: [
+                    GoRoute(
+                      path: Routes.albumPage,
+                      builder: (context, state) {
+                        final args = state.extra as AlbumPageArgs;
+                        return AlbumPage(album: args.album);
+                      },
+                    ),
+                  ],
+                ),
+                GoRoute(
+                  path: Routes.albumPage,
+                  builder: (context, state) {
+                    final args = state.extra as AlbumPageArgs;
+                    return AlbumPage(album: args.album);
+                  },
                 ),
               ],
             ),
@@ -78,6 +95,15 @@ final router = GoRouter(
                       playlists: args.playlists,
                     );
                   },
+                  routes: [
+                    GoRoute(
+                      path: Routes.albumPage,
+                      builder: (context, state) {
+                        final args = state.extra as AlbumPageArgs;
+                        return AlbumPage(album: args.album);
+                      },
+                    ),
+                  ],
                 ),
                 GoRoute(
                   path: Routes.showAllArtistsPage,
@@ -87,6 +113,13 @@ final router = GoRouter(
                       title: args.title,
                       artists: args.artists,
                     );
+                  },
+                ),
+                GoRoute(
+                  path: Routes.albumPage,
+                  builder: (context, state) {
+                    final args = state.extra as AlbumPageArgs;
+                    return AlbumPage(album: args.album);
                   },
                 ),
               ],

@@ -12,6 +12,7 @@ import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/core/themes/app_theme.dart';
 import 'package:merge_music/core/common/navigation/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:merge_music/presentation/album_page/bloc/album_page_bloc.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
 import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
 import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc.dart';
@@ -60,6 +61,9 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<SettingsPageBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<AlbumPageBloc>(),
         ),
       ],
       child: const MainApp(),

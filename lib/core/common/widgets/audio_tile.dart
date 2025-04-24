@@ -8,10 +8,12 @@ import 'package:merge_music/domain/entities/audio_entity.dart';
 class AudioTile extends StatelessWidget {
   final AudioEntity audio;
   final VoidCallback? onTap;
+  final bool needCover;
   const AudioTile({
     super.key,
     required this.audio,
     this.onTap,
+    this.needCover = true,
   });
 
   @override
@@ -27,16 +29,17 @@ class AudioTile extends StatelessWidget {
           ),
           child: Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  ImagesConstants.defaultCover,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
+              if (needCover)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    ImagesConstants.defaultCover,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
+              if (needCover) const SizedBox(width: 8),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

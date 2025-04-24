@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merge_music/core/common/widgets/custom_button_with_icon.dart';
+import 'package:merge_music/core/constants/icons_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 
 class VkMixSliver extends StatelessWidget {
@@ -23,7 +24,7 @@ class VkMixSliver extends StatelessWidget {
               CustomButtonWithIcon(
                 onPressed: () {},
                 text: context.l10n.listen,
-                icon: Icon(Icons.play_arrow),
+                iconPath: IconsConstants.play,
               ),
             ],
           ),

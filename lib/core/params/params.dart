@@ -23,7 +23,7 @@ class AudioListParams {
 
   AudioListParams({
     this.albumId,
-    required this.count,
+    this.count,
     this.offset,
     required this.accessToken,
     required this.v,
@@ -124,4 +124,10 @@ class AudioSearchArtistsParams {
     required this.accessToken,
     required this.v,
   });
+}
+
+class GetPlaylistAudiosParams {
+  final int? albumId;
+
+  GetPlaylistAudiosParams({this.albumId});
 }

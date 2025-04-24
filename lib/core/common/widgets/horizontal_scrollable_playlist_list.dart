@@ -7,12 +7,14 @@ class HorizontalScrollablePlaylistList extends StatelessWidget {
   final List<PlaylistEntity> playlists;
   final String title;
   final VoidCallback? onShowAllPressed;
+  final void Function(PlaylistEntity)? onTileTapped;
 
   const HorizontalScrollablePlaylistList({
     super.key,
     required this.playlists,
     required this.title,
     this.onShowAllPressed,
+    this.onTileTapped,
   });
 
   @override
@@ -50,6 +52,7 @@ class HorizontalScrollablePlaylistList extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8),
                   child: PlaylistTile(
                     playlistEntity: playlists[index],
+                    onTap: () => onTileTapped?.call(playlists[index]),
                   ),
                 );
               },

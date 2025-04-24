@@ -36,3 +36,14 @@ class OpenShowAllPlaylistsPage extends MainPageEvent {
   @override
   List<Object> get props => [title, playlists];
 }
+
+class OpenAlbumPage extends MainPageEvent {
+  final PlaylistEntity album;
+
+  const OpenAlbumPage({
+    required this.album,
+  });
+
+  @override
+  List<Object> get props => [album];
+}
