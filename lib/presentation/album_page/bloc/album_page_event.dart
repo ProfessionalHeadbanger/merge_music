@@ -9,8 +9,14 @@ sealed class AlbumPageEvent extends Equatable {
 
 class LoadPlaylistAudios extends AlbumPageEvent {
   final int albumId;
+  final int ownerId;
+  final String? accessKey;
 
-  const LoadPlaylistAudios({required this.albumId});
+  const LoadPlaylistAudios({
+    required this.albumId,
+    required this.ownerId,
+    this.accessKey,
+  });
 
   @override
   List<Object> get props => [albumId];

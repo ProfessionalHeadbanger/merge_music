@@ -44,6 +44,7 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
     on<OpenShowAllTracksPage>(_onShowAllTracksPage);
     on<OpenShowAllPlaylistsPage>(_onShowAllPlaylistsPage);
     on<OpenShowAllArtistsPage>(_onShowAllArtistsPage);
+    on<OpenAlbumPage>(_onOpenAlbumPage);
 
     add(LoadSearchHistory());
   }
@@ -170,6 +171,13 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
     router.push(
       '${Routes.searchPage}/${Routes.showAllArtistsPage}',
       extra: ShowAllArtistsPageArgs(title: event.title, artists: event.artists),
+    );
+  }
+
+  void _onOpenAlbumPage(OpenAlbumPage event, Emitter<SearchPageState> emit) {
+    router.push(
+      '${Routes.searchPage}/${Routes.albumPage}',
+      extra: AlbumPageArgs(album: event.album),
     );
   }
 }

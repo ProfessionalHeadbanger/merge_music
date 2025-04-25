@@ -16,15 +16,19 @@ class UserParams {
 
 class AudioListParams {
   final int? albumId;
+  final int? ownerId;
   final int? count;
   final int? offset;
+  final String? accessKey;
   final String accessToken;
   final String v;
 
   AudioListParams({
     this.albumId,
+    this.ownerId,
     this.count,
     this.offset,
+    this.accessKey,
     required this.accessToken,
     required this.v,
   });
@@ -128,6 +132,12 @@ class AudioSearchArtistsParams {
 
 class GetPlaylistAudiosParams {
   final int? albumId;
+  final int? ownerId;
+  final String? accessKey;
 
-  GetPlaylistAudiosParams({this.albumId});
+  GetPlaylistAudiosParams({
+    this.albumId,
+    this.ownerId,
+    this.accessKey,
+  });
 }

@@ -26,15 +26,19 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
   @override
   Future<List<AudioModel>> getAudio({required AudioListParams params}) async {
     try {
+      final queryParameters = <String, dynamic>{
+        if (params.albumId != null) 'album_id': params.albumId,
+        if (params.ownerId != null) 'owner_id': params.ownerId,
+        if (params.accessKey != null) 'access_key': params.accessKey,
+        'count': params.count,
+        'offset': params.offset,
+        'access_token': params.accessToken,
+        'v': params.v,
+      };
+
       final response = await dio.get(
         ApiConstants.baseUrl + ApiConstants.audioGet,
-        queryParameters: {
-          'album_id': params.albumId,
-          'count': params.count,
-          'offset': params.offset,
-          'access_token': params.accessToken,
-          'v': params.v,
-        },
+        queryParameters: queryParameters,
       );
 
       final List<dynamic> audiosJson = response.data['response']['items'];

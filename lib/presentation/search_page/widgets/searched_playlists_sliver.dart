@@ -32,6 +32,11 @@ class SearchedPlaylistsSliver extends StatelessWidget {
               ),
             );
       },
+      onTileTapped: (album) {
+        context.read<SearchPageBloc>().add(
+              OpenAlbumPage(album: album),
+            );
+      },
     );
   }
 }

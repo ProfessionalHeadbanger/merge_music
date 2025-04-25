@@ -219,7 +219,9 @@ class AudioRepositoryImpl implements AudioRepository {
         final audios = await audioRemoteDataSource.getAudio(
           params: AudioListParams(
             albumId: params.albumId,
+            ownerId: params.ownerId,
             accessToken: tokenState.token,
+            accessKey: params.accessKey,
             v: ApiConstants.v,
           ),
         );

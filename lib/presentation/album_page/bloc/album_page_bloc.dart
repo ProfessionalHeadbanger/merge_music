@@ -21,7 +21,12 @@ class AlbumPageBloc extends Bloc<AlbumPageEvent, AlbumPageState> {
     emit(AlbumPageLoading());
 
     final result = await _getPlaylistAudios(
-        GetPlaylistAudiosParams(albumId: event.albumId));
+      GetPlaylistAudiosParams(
+        albumId: event.albumId,
+        accessKey: event.accessKey,
+        ownerId: event.ownerId,
+      ),
+    );
     result.fold(
       (failure) =>
           emit(AlbumPageError(message: failure.message ?? 'Error occured')),

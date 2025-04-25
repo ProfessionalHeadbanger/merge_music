@@ -69,3 +69,14 @@ class OpenShowAllArtistsPage extends SearchPageEvent {
   @override
   List<Object> get props => [title, artists];
 }
+
+class OpenAlbumPage extends SearchPageEvent {
+  final PlaylistEntity album;
+
+  const OpenAlbumPage({
+    required this.album,
+  });
+
+  @override
+  List<Object> get props => [album];
+}

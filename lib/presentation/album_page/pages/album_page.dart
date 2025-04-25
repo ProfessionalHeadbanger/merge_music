@@ -30,9 +30,13 @@ class _AlbumPageState extends State<AlbumPage> {
     super.initState();
     Future.microtask(() {
       if (mounted) {
-        context
-            .read<AlbumPageBloc>()
-            .add(LoadPlaylistAudios(albumId: widget.album.id));
+        context.read<AlbumPageBloc>().add(
+              LoadPlaylistAudios(
+                albumId: widget.album.id,
+                accessKey: widget.album.accessKey,
+                ownerId: widget.album.ownerId,
+              ),
+            );
       }
     });
   }
@@ -68,9 +72,13 @@ class _AlbumPageState extends State<AlbumPage> {
             return Center(
               child: RetryButton(
                 onPressed: () {
-                  context
-                      .read<AlbumPageBloc>()
-                      .add(LoadPlaylistAudios(albumId: widget.album.id));
+                  context.read<AlbumPageBloc>().add(
+                        LoadPlaylistAudios(
+                          albumId: widget.album.id,
+                          accessKey: widget.album.accessKey,
+                          ownerId: widget.album.ownerId,
+                        ),
+                      );
                 },
               ),
             );
