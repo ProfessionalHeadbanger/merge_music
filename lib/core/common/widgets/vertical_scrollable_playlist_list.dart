@@ -4,10 +4,12 @@ import 'package:merge_music/domain/entities/playlist_entity.dart';
 
 class VerticalScrollablePlaylistList extends StatelessWidget {
   final List<PlaylistEntity> playlists;
+  final void Function(PlaylistEntity)? onTileTapped;
 
   const VerticalScrollablePlaylistList({
     super.key,
     required this.playlists,
+    this.onTileTapped,
   });
 
   @override
@@ -19,7 +21,10 @@ class VerticalScrollablePlaylistList extends StatelessWidget {
     return SliverList.list(
       children: [
         ...playlists.map(
-          (playlist) => MiniPlaylistTile(playlistEntity: playlist),
+          (playlist) => MiniPlaylistTile(
+            playlistEntity: playlist,
+            onTap: () => onTileTapped?.call(playlist),
+          ),
         ),
       ],
     );

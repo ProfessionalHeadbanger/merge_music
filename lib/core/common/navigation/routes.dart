@@ -13,5 +13,5 @@ class Routes {
   static const showAllPlaylistsPage = 'show_all_playlists_page';
   static const showAllArtistsPage = 'show_all_artists_page';
 
-  static const albumPage = 'album_page';
+  static const albumPage = '/album_page';
 }

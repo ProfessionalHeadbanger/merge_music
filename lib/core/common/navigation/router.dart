@@ -8,7 +8,7 @@ import 'package:merge_music/presentation/root_page/root_page.dart';
 import 'package:merge_music/presentation/search_page/pages/search_page.dart';
 import 'package:merge_music/presentation/settings_page/pages/settings_page.dart';
 import 'package:merge_music/presentation/show_all_artists_page/show_all_artists_page.dart';
-import 'package:merge_music/presentation/show_all_playlists_page/show_all_playlists_page.dart';
+import 'package:merge_music/presentation/show_all_playlists_page/pages/show_all_playlists_page.dart';
 import 'package:merge_music/presentation/show_all_tracks_page/show_all_tracks_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_input_login_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_welcome_page.dart';
@@ -49,22 +49,6 @@ final router = GoRouter(
                       playlists: args.playlists,
                     );
                   },
-                  routes: [
-                    GoRoute(
-                      path: Routes.albumPage,
-                      builder: (context, state) {
-                        final args = state.extra as AlbumPageArgs;
-                        return AlbumPage(album: args.album);
-                      },
-                    ),
-                  ],
-                ),
-                GoRoute(
-                  path: Routes.albumPage,
-                  builder: (context, state) {
-                    final args = state.extra as AlbumPageArgs;
-                    return AlbumPage(album: args.album);
-                  },
                 ),
               ],
             ),
@@ -95,15 +79,6 @@ final router = GoRouter(
                       playlists: args.playlists,
                     );
                   },
-                  routes: [
-                    GoRoute(
-                      path: Routes.albumPage,
-                      builder: (context, state) {
-                        final args = state.extra as AlbumPageArgs;
-                        return AlbumPage(album: args.album);
-                      },
-                    ),
-                  ],
                 ),
                 GoRoute(
                   path: Routes.showAllArtistsPage,
@@ -113,13 +88,6 @@ final router = GoRouter(
                       title: args.title,
                       artists: args.artists,
                     );
-                  },
-                ),
-                GoRoute(
-                  path: Routes.albumPage,
-                  builder: (context, state) {
-                    final args = state.extra as AlbumPageArgs;
-                    return AlbumPage(album: args.album);
                   },
                 ),
               ],
@@ -153,6 +121,15 @@ final router = GoRouter(
           builder: (_, __) => const VkLoginInputLoginPage(),
         ),
       ],
+    ),
+    GoRoute(
+      path: Routes.albumPage,
+      name: Routes.albumPage,
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final args = state.extra as AlbumPageArgs;
+        return AlbumPage(album: args.album);
+      },
     ),
   ],
 );

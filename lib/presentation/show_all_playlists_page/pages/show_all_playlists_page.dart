@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/widgets/vertical_scrollable_playlist_list.dart';
 import 'package:merge_music/domain/entities/playlist_entity.dart';
+import 'package:merge_music/presentation/show_all_playlists_page/bloc/show_all_playlists_page_bloc.dart';
 
 class ShowAllPlaylistsPage extends StatelessWidget {
   final String title;
@@ -26,6 +28,11 @@ class ShowAllPlaylistsPage extends StatelessWidget {
           slivers: [
             VerticalScrollablePlaylistList(
               playlists: playlists,
+              onTileTapped: (album) {
+                context.read<ShowAllPlaylistsPageBloc>().add(
+                      OpenAlbumPage(album: album),
+                    );
+              },
             ),
           ],
         ),

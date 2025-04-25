@@ -175,8 +175,8 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
   }
 
   void _onOpenAlbumPage(OpenAlbumPage event, Emitter<SearchPageState> emit) {
-    router.push(
-      '${Routes.searchPage}/${Routes.albumPage}',
+    router.pushNamed(
+      Routes.albumPage,
       extra: AlbumPageArgs(album: event.album),
     );
   }

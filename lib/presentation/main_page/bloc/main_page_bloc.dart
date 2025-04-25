@@ -126,8 +126,8 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   }
 
   void _onOpenAlbumPage(OpenAlbumPage event, Emitter<MainPageState> emit) {
-    router.push(
-      '${Routes.mainPage}/${Routes.albumPage}',
+    router.pushNamed(
+      Routes.albumPage,
       extra: AlbumPageArgs(album: event.album),
     );
   }
