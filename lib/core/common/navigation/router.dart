@@ -29,28 +29,6 @@ final router = GoRouter(
             GoRoute(
               path: Routes.mainPage,
               builder: (_, __) => const MainPage(),
-              routes: [
-                GoRoute(
-                  path: Routes.showAllTracksPage,
-                  builder: (context, state) {
-                    final args = state.extra as ShowAllTracksPageArgs;
-                    return ShowAllTracksPage(
-                      title: args.title,
-                      audios: args.audios,
-                    );
-                  },
-                ),
-                GoRoute(
-                  path: Routes.showAllPlaylistsPage,
-                  builder: (context, state) {
-                    final args = state.extra as ShowAllPlaylistsPageArgs;
-                    return ShowAllPlaylistsPage(
-                      title: args.title,
-                      playlists: args.playlists,
-                    );
-                  },
-                ),
-              ],
             ),
           ],
         ),
@@ -59,38 +37,6 @@ final router = GoRouter(
             GoRoute(
               path: Routes.searchPage,
               builder: (_, __) => const SearchPage(),
-              routes: [
-                GoRoute(
-                  path: Routes.showAllTracksPage,
-                  builder: (context, state) {
-                    final args = state.extra as ShowAllTracksPageArgs;
-                    return ShowAllTracksPage(
-                      title: args.title,
-                      audios: args.audios,
-                    );
-                  },
-                ),
-                GoRoute(
-                  path: Routes.showAllPlaylistsPage,
-                  builder: (context, state) {
-                    final args = state.extra as ShowAllPlaylistsPageArgs;
-                    return ShowAllPlaylistsPage(
-                      title: args.title,
-                      playlists: args.playlists,
-                    );
-                  },
-                ),
-                GoRoute(
-                  path: Routes.showAllArtistsPage,
-                  builder: (context, state) {
-                    final args = state.extra as ShowAllArtistsPageArgs;
-                    return ShowAllArtistsPage(
-                      title: args.title,
-                      artists: args.artists,
-                    );
-                  },
-                ),
-              ],
             ),
           ],
         ),
@@ -129,6 +75,42 @@ final router = GoRouter(
       builder: (context, state) {
         final args = state.extra as AlbumPageArgs;
         return AlbumPage(album: args.album);
+      },
+    ),
+    GoRoute(
+      path: Routes.showAllTracksPage,
+      name: Routes.showAllTracksPage,
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final args = state.extra as ShowAllTracksPageArgs;
+        return ShowAllTracksPage(
+          title: args.title,
+          audios: args.audios,
+        );
+      },
+    ),
+    GoRoute(
+      path: Routes.showAllPlaylistsPage,
+      name: Routes.showAllPlaylistsPage,
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final args = state.extra as ShowAllPlaylistsPageArgs;
+        return ShowAllPlaylistsPage(
+          title: args.title,
+          playlists: args.playlists,
+        );
+      },
+    ),
+    GoRoute(
+      path: Routes.showAllArtistsPage,
+      name: Routes.showAllArtistsPage,
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final args = state.extra as ShowAllArtistsPageArgs;
+        return ShowAllArtistsPage(
+          title: args.title,
+          artists: args.artists,
+        );
       },
     ),
   ],

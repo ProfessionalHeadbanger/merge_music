@@ -151,16 +151,16 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
 
   void _onShowAllTracksPage(
       OpenShowAllTracksPage event, Emitter<SearchPageState> emit) {
-    router.push(
-      '${Routes.searchPage}/${Routes.showAllTracksPage}',
+    router.pushNamed(
+      Routes.showAllTracksPage,
       extra: ShowAllTracksPageArgs(title: event.title, audios: event.audios),
     );
   }
 
   void _onShowAllPlaylistsPage(
       OpenShowAllPlaylistsPage event, Emitter<SearchPageState> emit) {
-    router.push(
-      '${Routes.searchPage}/${Routes.showAllPlaylistsPage}',
+    router.pushNamed(
+      Routes.showAllPlaylistsPage,
       extra: ShowAllPlaylistsPageArgs(
           title: event.title, playlists: event.playlists),
     );
@@ -168,8 +168,8 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
 
   void _onShowAllArtistsPage(
       OpenShowAllArtistsPage event, Emitter<SearchPageState> emit) {
-    router.push(
-      '${Routes.searchPage}/${Routes.showAllArtistsPage}',
+    router.pushNamed(
+      Routes.showAllArtistsPage,
       extra: ShowAllArtistsPageArgs(title: event.title, artists: event.artists),
     );
   }

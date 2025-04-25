@@ -9,9 +9,9 @@ class Routes {
   static const settingsPage = '/settings_page';
 
   // Пути для show all pages
-  static const showAllTracksPage = 'show_all_tracks_page';
-  static const showAllPlaylistsPage = 'show_all_playlists_page';
-  static const showAllArtistsPage = 'show_all_artists_page';
+  static const showAllTracksPage = '/show_all_tracks_page';
+  static const showAllPlaylistsPage = '/show_all_playlists_page';
+  static const showAllArtistsPage = '/show_all_artists_page';
 
   static const albumPage = '/album_page';
 }

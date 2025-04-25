@@ -110,16 +110,16 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
 
   void _onShowAllTracksPage(
       OpenShowAllTracksPage event, Emitter<MainPageState> emit) {
-    router.push(
-      '${Routes.mainPage}/${Routes.showAllTracksPage}',
+    router.pushNamed(
+      Routes.showAllTracksPage,
       extra: ShowAllTracksPageArgs(title: event.title, audios: event.audios),
     );
   }
 
   void _onShowAllPlaylistsPage(
       OpenShowAllPlaylistsPage event, Emitter<MainPageState> emit) {
-    router.push(
-      '${Routes.mainPage}/${Routes.showAllPlaylistsPage}',
+    router.pushNamed(
+      Routes.showAllPlaylistsPage,
       extra: ShowAllPlaylistsPageArgs(
           title: event.title, playlists: event.playlists),
     );
