@@ -40,7 +40,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     on<LoadMainPageData>(_onLoadMainPageData);
     on<OpenShowAllTracksPage>(_onShowAllTracksPage);
     on<OpenShowAllPlaylistsPage>(_onShowAllPlaylistsPage);
-    on<OpenAlbumPage>(_onOpenAlbumPage);
+    on<OpenPlaylistPage>(_onOpenAlbumPage);
 
     accessTokenSubscription = accessTokenCubit.stream.listen(
       (state) {
@@ -125,7 +125,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     );
   }
 
-  void _onOpenAlbumPage(OpenAlbumPage event, Emitter<MainPageState> emit) {
+  void _onOpenAlbumPage(OpenPlaylistPage event, Emitter<MainPageState> emit) {
     router.pushNamed(
       Routes.albumPage,
       extra: AlbumPageArgs(album: event.album),

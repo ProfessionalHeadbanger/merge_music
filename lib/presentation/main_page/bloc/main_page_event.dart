@@ -37,10 +37,10 @@ class OpenShowAllPlaylistsPage extends MainPageEvent {
   List<Object> get props => [title, playlists];
 }
 
-class OpenAlbumPage extends MainPageEvent {
+class OpenPlaylistPage extends MainPageEvent {
   final PlaylistEntity album;
 
-  const OpenAlbumPage({
+  const OpenPlaylistPage({
     required this.album,
   });
 
