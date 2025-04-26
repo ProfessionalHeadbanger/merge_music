@@ -44,7 +44,7 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
     on<OpenShowAllTracksPage>(_onShowAllTracksPage);
     on<OpenShowAllPlaylistsPage>(_onShowAllPlaylistsPage);
     on<OpenShowAllArtistsPage>(_onShowAllArtistsPage);
-    on<OpenAlbumPage>(_onOpenAlbumPage);
+    on<OpenPlaylistPage>(_onOpenPlaylistPage);
 
     add(LoadSearchHistory());
   }
@@ -174,10 +174,18 @@ class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
     );
   }
 
-  void _onOpenAlbumPage(OpenAlbumPage event, Emitter<SearchPageState> emit) {
-    router.pushNamed(
-      Routes.albumPage,
-      extra: AlbumPageArgs(album: event.album),
-    );
+  void _onOpenPlaylistPage(
+      OpenPlaylistPage event, Emitter<SearchPageState> emit) {
+    if (event.playlist.type == 0) {
+      router.pushNamed(
+        Routes.playlistPage,
+        extra: PlaylistPageArgs(playlist: event.playlist),
+      );
+    } else {
+      router.pushNamed(
+        Routes.albumPage,
+        extra: AlbumPageArgs(album: event.playlist),
+      );
+    }
   }
 }
