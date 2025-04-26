@@ -1,13 +1,13 @@
-part of 'album_page_bloc.dart';
+part of 'playlist_page_bloc.dart';
 
-sealed class AlbumPageEvent extends Equatable {
-  const AlbumPageEvent();
+sealed class PlaylistPageEvent extends Equatable {
+  const PlaylistPageEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class LoadPlaylistAudios extends AlbumPageEvent {
+class LoadPlaylistAudios extends PlaylistPageEvent {
   final int albumId;
   final int ownerId;
   final String? accessKey;

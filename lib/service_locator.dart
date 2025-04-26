@@ -29,6 +29,7 @@ import 'package:merge_music/domain/usecases/search_audio.dart';
 import 'package:merge_music/domain/usecases/search_playlists.dart';
 import 'package:merge_music/presentation/album_page/bloc/album_page_bloc.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
+import 'package:merge_music/presentation/playlist_page/bloc/playlist_page_bloc.dart';
 import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
 import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc.dart';
 import 'package:merge_music/presentation/show_all_playlists_page/bloc/show_all_playlists_page_bloc.dart';
@@ -216,6 +217,13 @@ Future<void> setupServiceLocator() async {
   );
   serviceLocator.registerLazySingleton<AlbumPageBloc>(
     () => AlbumPageBloc(
+      getPlaylistAudios: serviceLocator(),
+    ),
+  );
+
+  // Playlist page
+  serviceLocator.registerLazySingleton<PlaylistPageBloc>(
+    () => PlaylistPageBloc(
       getPlaylistAudios: serviceLocator(),
     ),
   );

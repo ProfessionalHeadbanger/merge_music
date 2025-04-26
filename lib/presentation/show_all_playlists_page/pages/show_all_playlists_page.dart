@@ -30,7 +30,7 @@ class ShowAllPlaylistsPage extends StatelessWidget {
               playlists: playlists,
               onTileTapped: (album) {
                 context.read<ShowAllPlaylistsPageBloc>().add(
-                      OpenAlbumPage(album: album),
+                      OpenPlaylistPage(playlist: album),
                     );
               },
             ),

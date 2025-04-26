@@ -15,6 +15,7 @@ class ApiConstants {
   static const String audioGet = 'audio.get';
   static const int batchCount = 6000;
   static const int mainPageBatchCount = 16;
+  static const int playlistAudiosBatchCount = 1000;
 
   static const String playlistsGet = 'audio.getPlaylists';
   static const String allFilter = 'all';

@@ -7,13 +7,13 @@ sealed class ShowAllPlaylistsPageEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OpenAlbumPage extends ShowAllPlaylistsPageEvent {
-  final PlaylistEntity album;
+class OpenPlaylistPage extends ShowAllPlaylistsPageEvent {
+  final PlaylistEntity playlist;
 
-  const OpenAlbumPage({
-    required this.album,
+  const OpenPlaylistPage({
+    required this.playlist,
   });
 
   @override
-  List<Object> get props => [album];
+  List<Object> get props => [playlist];
 }

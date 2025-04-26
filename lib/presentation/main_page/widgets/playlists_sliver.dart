@@ -29,7 +29,7 @@ class PlaylistsSliver extends StatelessWidget {
       },
       onTileTapped: (album) {
         context.read<MainPageBloc>().add(
-              OpenPlaylistPage(album: album),
+              OpenPlaylistPage(playlist: album),
             );
       },
     );

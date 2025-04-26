@@ -39,3 +39,11 @@ class AlbumPageArgs {
     required this.album,
   });
 }
+
+class PlaylistPageArgs {
+  final PlaylistEntity playlist;
+
+  PlaylistPageArgs({
+    required this.playlist,
+  });
+}

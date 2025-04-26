@@ -14,4 +14,5 @@ class Routes {
   static const showAllArtistsPage = '/show_all_artists_page';
 
   static const albumPage = '/album_page';
+  static const playlistPage = '/playlist_page';
 }

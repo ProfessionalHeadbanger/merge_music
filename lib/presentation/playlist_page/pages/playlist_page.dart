@@ -9,33 +9,33 @@ import 'package:merge_music/core/common/widgets/vertical_scrollable_audio_list.d
 import 'package:merge_music/core/constants/icons_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/playlist_entity.dart';
-import 'package:merge_music/presentation/album_page/bloc/album_page_bloc.dart';
+import 'package:merge_music/presentation/playlist_page/bloc/playlist_page_bloc.dart';
 import 'package:overflow_text_animated/overflow_text_animated.dart';
 
-class AlbumPage extends StatefulWidget {
-  final PlaylistEntity album;
+class PlaylistPage extends StatefulWidget {
+  final PlaylistEntity playlist;
 
-  const AlbumPage({
+  const PlaylistPage({
     super.key,
-    required this.album,
+    required this.playlist,
   });
 
   @override
-  State<AlbumPage> createState() => _AlbumPageState();
+  State<PlaylistPage> createState() => _PlaylistPageState();
 }
 
-class _AlbumPageState extends State<AlbumPage> {
+class _PlaylistPageState extends State<PlaylistPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(
       () {
         if (mounted) {
-          context.read<AlbumPageBloc>().add(
+          context.read<PlaylistPageBloc>().add(
                 LoadPlaylistAudios(
-                  albumId: widget.album.id,
-                  accessKey: widget.album.accessKey,
-                  ownerId: widget.album.ownerId,
+                  albumId: widget.playlist.id,
+                  accessKey: widget.playlist.accessKey,
+                  ownerId: widget.playlist.ownerId,
                 ),
               );
         }
@@ -48,7 +48,7 @@ class _AlbumPageState extends State<AlbumPage> {
     return Scaffold(
       appBar: AppBar(
         title: OverflowTextAnimated(
-          text: widget.album.title,
+          text: widget.playlist.title,
           style: context.text.largeTitle,
           curve: Curves.easeInOut,
           animation: OverFlowTextAnimations.scrollOpposite,
@@ -63,29 +63,29 @@ class _AlbumPageState extends State<AlbumPage> {
           ),
         ],
       ),
-      body: BlocBuilder<AlbumPageBloc, AlbumPageState>(
+      body: BlocBuilder<PlaylistPageBloc, PlaylistPageState>(
         builder: (context, state) {
-          if (state is AlbumPageLoading) {
+          if (state is PlaylistPageLoading) {
             return const Center(
               child: LoadingWidget(),
             );
           }
-          if (state is AlbumPageError) {
+          if (state is PlaylistPageError) {
             return Center(
               child: RetryButton(
                 onPressed: () {
-                  context.read<AlbumPageBloc>().add(
+                  context.read<PlaylistPageBloc>().add(
                         LoadPlaylistAudios(
-                          albumId: widget.album.id,
-                          accessKey: widget.album.accessKey,
-                          ownerId: widget.album.ownerId,
+                          albumId: widget.playlist.id,
+                          accessKey: widget.playlist.accessKey,
+                          ownerId: widget.playlist.ownerId,
                         ),
                       );
                 },
               ),
             );
           }
-          if (state is AlbumPageLoaded) {
+          if (state is PlaylistPageLoaded) {
             final totalDurationInSeconds =
                 state.audios.map((a) => a.duration).fold(0, (a, b) => a + b);
             final totalMinutes = totalDurationInSeconds ~/ 60;
@@ -104,23 +104,13 @@ class _AlbumPageState extends State<AlbumPage> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.network(
-                              widget.album.photo1200,
+                              widget.playlist.photo1200,
                               fit: BoxFit.cover,
                               width: 200,
                               height: 200,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                            widget.album.mainArtists!.first.name,
-                            style:
-                                context.text.artistName!.copyWith(fontSize: 16),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            '${widget.album.genres!.join(', ')} \u2981 ${widget.album.year}',
-                            style: context.text.artistName,
-                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             child: Row(
@@ -174,7 +164,6 @@ class _AlbumPageState extends State<AlbumPage> {
                   ),
                   VerticalScrollableAudioList(
                     audios: state.audios,
-                    isAlbum: true,
                   ),
                   SliverDivider(color: context.color.tertiaryText!),
                   SliverToBoxAdapter(
@@ -184,7 +173,7 @@ class _AlbumPageState extends State<AlbumPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            context.l10n.tracksCount(widget.album.count!),
+                            context.l10n.tracksCount(widget.playlist.count!),
                             style: context.text.artistName,
                           ),
                           Text(
@@ -192,7 +181,7 @@ class _AlbumPageState extends State<AlbumPage> {
                             style: context.text.artistName,
                           ),
                           Text(
-                            context.l10n.listens(widget.album.plays!),
+                            context.l10n.listens(widget.playlist.plays!),
                             style: context.text.artistName,
                           ),
                         ],

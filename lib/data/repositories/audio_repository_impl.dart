@@ -220,6 +220,7 @@ class AudioRepositoryImpl implements AudioRepository {
           params: AudioListParams(
             albumId: params.albumId,
             ownerId: params.ownerId,
+            count: ApiConstants.playlistAudiosBatchCount,
             accessToken: tokenState.token,
             accessKey: params.accessKey,
             v: ApiConstants.v,

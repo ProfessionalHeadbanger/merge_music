@@ -11,14 +11,21 @@ part 'show_all_playlists_page_state.dart';
 class ShowAllPlaylistsPageBloc
     extends Bloc<ShowAllPlaylistsPageEvent, ShowAllPlaylistsPageState> {
   ShowAllPlaylistsPageBloc() : super(ShowAllPlaylistsPageInitial()) {
-    on<OpenAlbumPage>(_onOpenAlbumPage);
+    on<OpenPlaylistPage>(_onOpenAlbumPage);
   }
 
   void _onOpenAlbumPage(
-      OpenAlbumPage event, Emitter<ShowAllPlaylistsPageState> emit) {
-    router.pushNamed(
-      Routes.albumPage,
-      extra: AlbumPageArgs(album: event.album),
-    );
+      OpenPlaylistPage event, Emitter<ShowAllPlaylistsPageState> emit) {
+    if (event.playlist.type == 0) {
+      router.pushNamed(
+        Routes.playlistPage,
+        extra: PlaylistPageArgs(playlist: event.playlist),
+      );
+    } else {
+      router.pushNamed(
+        Routes.albumPage,
+        extra: AlbumPageArgs(album: event.playlist),
+      );
+    }
   }
 }

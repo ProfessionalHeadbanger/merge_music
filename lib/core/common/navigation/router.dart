@@ -4,6 +4,7 @@ import 'package:merge_music/presentation/album_page/pages/album_page.dart';
 import 'package:merge_music/presentation/library_page/pages/library_page.dart';
 import 'package:merge_music/presentation/main_page/pages/main_page.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
+import 'package:merge_music/presentation/playlist_page/pages/playlist_page.dart';
 import 'package:merge_music/presentation/root_page/root_page.dart';
 import 'package:merge_music/presentation/search_page/pages/search_page.dart';
 import 'package:merge_music/presentation/settings_page/pages/settings_page.dart';
@@ -75,6 +76,15 @@ final router = GoRouter(
       builder: (context, state) {
         final args = state.extra as AlbumPageArgs;
         return AlbumPage(album: args.album);
+      },
+    ),
+    GoRoute(
+      path: Routes.playlistPage,
+      name: Routes.playlistPage,
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) {
+        final args = state.extra as PlaylistPageArgs;
+        return PlaylistPage(playlist: args.playlist);
       },
     ),
     GoRoute(

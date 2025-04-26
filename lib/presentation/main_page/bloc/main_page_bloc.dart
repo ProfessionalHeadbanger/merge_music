@@ -40,7 +40,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     on<LoadMainPageData>(_onLoadMainPageData);
     on<OpenShowAllTracksPage>(_onShowAllTracksPage);
     on<OpenShowAllPlaylistsPage>(_onShowAllPlaylistsPage);
-    on<OpenPlaylistPage>(_onOpenAlbumPage);
+    on<OpenPlaylistPage>(_onOpenPlaylistPage);
 
     accessTokenSubscription = accessTokenCubit.stream.listen(
       (state) {
@@ -125,11 +125,19 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     );
   }
 
-  void _onOpenAlbumPage(OpenPlaylistPage event, Emitter<MainPageState> emit) {
-    router.pushNamed(
-      Routes.albumPage,
-      extra: AlbumPageArgs(album: event.album),
-    );
+  void _onOpenPlaylistPage(
+      OpenPlaylistPage event, Emitter<MainPageState> emit) {
+    if (event.playlist.type == 0) {
+      router.pushNamed(
+        Routes.playlistPage,
+        extra: PlaylistPageArgs(playlist: event.playlist),
+      );
+    } else {
+      router.pushNamed(
+        Routes.albumPage,
+        extra: AlbumPageArgs(album: event.playlist),
+      );
+    }
   }
 
   @override
