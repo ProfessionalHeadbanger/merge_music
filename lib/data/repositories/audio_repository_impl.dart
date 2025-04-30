@@ -234,4 +234,71 @@ class AudioRepositoryImpl implements AudioRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, ArtistEntity>> getArtistById(
+      GetArtistByIdParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final artist = await audioRemoteDataSource.getArtistById(
+          params: GetArtistParams(
+            artistId: params.artistId,
+            extended: 1,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(artist);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PlaylistEntity>>> getAlbumsByArtist(
+      GetArtistByIdParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final playlists = await audioRemoteDataSource.getAlbumsByArtist(
+          params: GetArtistParams(
+            artistId: params.artistId,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(playlists);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AudioEntity>>> getAudiosByArtist(
+      GetArtistByIdParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final audios = await audioRemoteDataSource.getAudiosByArtist(
+          params: GetArtistParams(
+            artistId: params.artistId,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(audios);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
 }

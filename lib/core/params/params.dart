@@ -141,3 +141,23 @@ class GetPlaylistAudiosParams {
     this.accessKey,
   });
 }
+
+class GetArtistParams {
+  final String artistId;
+  final int? extended;
+  final String accessToken;
+  final String v;
+
+  GetArtistParams({
+    required this.artistId,
+    this.extended,
+    required this.accessToken,
+    required this.v,
+  });
+}
+
+class GetArtistByIdParams {
+  final String artistId;
+
+  GetArtistByIdParams({required this.artistId});
+}

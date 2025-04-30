@@ -47,3 +47,11 @@ class PlaylistPageArgs {
     required this.playlist,
   });
 }
+
+class ArtistPageArgs {
+  final ArtistEntity artist;
+
+  ArtistPageArgs({
+    required this.artist,
+  });
+}

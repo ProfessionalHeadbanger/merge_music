@@ -17,6 +17,8 @@ import 'package:merge_music/data/repositories/audio_repository_impl.dart';
 import 'package:merge_music/data/repositories/vk_login_repository_impl.dart';
 import 'package:merge_music/domain/repositories/audio_repository.dart';
 import 'package:merge_music/domain/repositories/vk_login_repository.dart';
+import 'package:merge_music/domain/usecases/get_albums_by_artist.dart';
+import 'package:merge_music/domain/usecases/get_audios_by_artist.dart';
 import 'package:merge_music/domain/usecases/get_followed_playlists.dart';
 import 'package:merge_music/domain/usecases/get_playlist_audios.dart';
 import 'package:merge_music/domain/usecases/get_user_albums.dart';
@@ -28,6 +30,7 @@ import 'package:merge_music/domain/usecases/search_artists.dart';
 import 'package:merge_music/domain/usecases/search_audio.dart';
 import 'package:merge_music/domain/usecases/search_playlists.dart';
 import 'package:merge_music/presentation/album_page/bloc/album_page_bloc.dart';
+import 'package:merge_music/presentation/artist_page/bloc/artist_page_bloc.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
 import 'package:merge_music/presentation/playlist_page/bloc/playlist_page_bloc.dart';
 import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
@@ -225,6 +228,29 @@ Future<void> setupServiceLocator() async {
   serviceLocator.registerLazySingleton<PlaylistPageBloc>(
     () => PlaylistPageBloc(
       getPlaylistAudios: serviceLocator(),
+    ),
+  );
+
+  // Artist page
+  // serviceLocator.registerFactory(
+  //   () => GetArtistById(
+  //     serviceLocator(),
+  //   ),
+  // );
+  serviceLocator.registerFactory(
+    () => GetAlbumsByArtist(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => GetAudiosByArtist(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerLazySingleton<ArtistPageBloc>(
+    () => ArtistPageBloc(
+      getAlbumsByArtist: serviceLocator(),
+      getAudiosByArtist: serviceLocator(),
     ),
   );
 }

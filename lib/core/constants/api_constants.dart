@@ -27,4 +27,8 @@ class ApiConstants {
   static const String searchPlaylists = 'audio.searchPlaylists';
   static const String searchAlbums = 'audio.searchAlbums';
   static const String searchArtists = 'audio.searchArtists';
+
+  static const String getArtistById = 'audio.getArtistById';
+  static const String getAlbumsByArtist = 'audio.getAlbumsByArtist';
+  static const String getAudiosByArtist = 'audio.getAudiosByArtist';
 }

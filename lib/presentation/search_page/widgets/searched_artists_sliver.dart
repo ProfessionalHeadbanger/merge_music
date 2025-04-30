@@ -50,7 +50,14 @@ class SearchedArtistsSliver extends StatelessWidget {
             ],
           ),
           ...displayedArtists.map(
-            (artist) => ArtistTile(artist: artist),
+            (artist) => ArtistTile(
+              artist: artist,
+              onTap: () {
+                context.read<SearchPageBloc>().add(
+                      OpenArtistPage(artist: artist),
+                    );
+              },
+            ),
           ),
           const SizedBox(height: 8),
         ],
