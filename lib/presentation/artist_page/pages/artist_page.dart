@@ -41,23 +41,6 @@ class _ArtistPageState extends State<ArtistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: OverflowTextAnimated(
-          text: widget.artist.name,
-          style: context.text.largeTitle,
-          curve: Curves.easeInOut,
-          animation: OverFlowTextAnimations.scrollOpposite,
-          animateDuration: const Duration(milliseconds: 3000),
-          delay: const Duration(milliseconds: 1000),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert_outlined),
-            onPressed: () {},
-          ),
-        ],
-      ),
       body: BlocBuilder<ArtistPageBloc, ArtistPageState>(
         builder: (context, state) {
           if (state is ArtistPageLoading) {
@@ -68,44 +51,79 @@ class _ArtistPageState extends State<ArtistPage> {
               child: RetryButton(
                 onPressed: () {
                   context.read<ArtistPageBloc>().add(
-                        LoadArtistPage(
-                          artistId: widget.artist.id,
-                        ),
+                        LoadArtistPage(artistId: widget.artist.id),
                       );
                 },
               ),
             );
           }
           if (state is ArtistPageLoaded) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            child: Image.network(
-                              widget.artist.photo!,
-                              fit: BoxFit.cover,
+            return CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  expandedHeight: 280,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          widget.artist.photo!,
+                          fit: BoxFit.cover,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.black.withOpacity(0.6),
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.6),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: OverflowTextAnimated(
+                              text: widget.artist.name,
+                              style: context.text.invertedLargeTitle,
+                              curve: Curves.easeInOut,
+                              animation: OverFlowTextAnimations.scrollOpposite,
+                              animateDuration:
+                                  const Duration(milliseconds: 3000),
+                              delay: const Duration(milliseconds: 1000),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  HorizontalScrollablePlaylistList(
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.more_vert_outlined),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  sliver: HorizontalScrollablePlaylistList(
                     playlists: state.albums,
                     title: context.l10n.albums,
                   ),
-                  VerticalScrollableAudioList(
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  sliver: VerticalScrollableAudioList(
                     audios: state.audios,
                     title: context.l10n.tracks,
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           }
           return const SizedBox.shrink();

@@ -19,9 +19,10 @@ abstract interface class AudioRemoteDataSource {
   Future<List<PlaylistModel>> searchAlbums(
       {required AudioSearchAlbumsParams params});
   Future<ArtistModel> getArtistById({required GetArtistParams params});
-  Future<List<AudioModel>> getAudiosByArtist({required GetArtistParams params});
+  Future<List<AudioModel>> getAudiosByArtist(
+      {required GetAudiosByArtistParams params});
   Future<List<PlaylistModel>> getAlbumsByArtist(
-      {required GetArtistParams params});
+      {required GetAudiosByArtistParams params});
 }
 
 class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
@@ -194,13 +195,15 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
 
   @override
   Future<List<PlaylistModel>> getAlbumsByArtist(
-      {required GetArtistParams params}) async {
+      {required GetAudiosByArtistParams params}) async {
     try {
       final response = await dio.get(
         ApiConstants.baseUrl + ApiConstants.getAlbumsByArtist,
         queryParameters: {
           'artist_id': params.artistId,
           'access_token': params.accessToken,
+          'count': params.count,
+          'offset': params.offset,
           'v': params.v,
         },
       );
@@ -216,13 +219,15 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
 
   @override
   Future<List<AudioModel>> getAudiosByArtist(
-      {required GetArtistParams params}) async {
+      {required GetAudiosByArtistParams params}) async {
     try {
       final response = await dio.get(
         ApiConstants.baseUrl + ApiConstants.getAudiosByArtist,
         queryParameters: {
           'artist_id': params.artistId,
           'access_token': params.accessToken,
+          'count': params.count,
+          'offset': params.offset,
           'v': params.v,
         },
       );

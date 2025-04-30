@@ -10,6 +10,12 @@ class TextStyles {
       color: LightAppColors.primaryText,
       fontFamily: 'VK Sans Display',
     ),
+    invertedLargeTitle: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      color: LightAppColors.invertedPrimaryText,
+      fontFamily: 'VK Sans Display',
+    ),
     mediumTitle: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w500,
@@ -59,6 +65,12 @@ class TextStyles {
       fontSize: 24,
       fontWeight: FontWeight.w600,
       color: DarkAppColors.primaryText,
+      fontFamily: 'VK Sans Display',
+    ),
+    invertedLargeTitle: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.w600,
+      color: DarkAppColors.invertedPrimaryText,
       fontFamily: 'VK Sans Display',
     ),
     mediumTitle: TextStyle(

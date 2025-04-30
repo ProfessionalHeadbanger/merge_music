@@ -156,6 +156,22 @@ class GetArtistParams {
   });
 }
 
+class GetAudiosByArtistParams {
+  final String artistId;
+  final int? count;
+  final int? offset;
+  final String accessToken;
+  final String v;
+
+  GetAudiosByArtistParams({
+    required this.artistId,
+    this.count,
+    this.offset,
+    required this.accessToken,
+    required this.v,
+  });
+}
+
 class GetArtistByIdParams {
   final String artistId;
 

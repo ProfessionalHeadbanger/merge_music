@@ -265,9 +265,10 @@ class AudioRepositoryImpl implements AudioRepository {
       final tokenState = serviceLocator.get<AccessTokenCubit>().state;
       if (tokenState is AccessTokenLoaded) {
         final playlists = await audioRemoteDataSource.getAlbumsByArtist(
-          params: GetArtistParams(
+          params: GetAudiosByArtistParams(
             artistId: params.artistId,
             accessToken: tokenState.token,
+            count: ApiConstants.playlistAudiosBatchCount,
             v: ApiConstants.v,
           ),
         );
@@ -287,9 +288,10 @@ class AudioRepositoryImpl implements AudioRepository {
       final tokenState = serviceLocator.get<AccessTokenCubit>().state;
       if (tokenState is AccessTokenLoaded) {
         final audios = await audioRemoteDataSource.getAudiosByArtist(
-          params: GetArtistParams(
+          params: GetAudiosByArtistParams(
             artistId: params.artistId,
             accessToken: tokenState.token,
+            count: ApiConstants.playlistAudiosBatchCount,
             v: ApiConstants.v,
           ),
         );

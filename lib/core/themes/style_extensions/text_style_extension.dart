@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   final TextStyle? largeTitle;
+  final TextStyle? invertedLargeTitle;
   final TextStyle? mediumTitle;
   final TextStyle? smallTitle;
   final TextStyle? subtitle;
@@ -12,6 +13,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
 
   const TextStyleExtension({
     this.largeTitle,
+    this.invertedLargeTitle,
     this.mediumTitle,
     this.smallTitle,
     this.subtitle,
@@ -24,6 +26,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   @override
   ThemeExtension<TextStyleExtension> copyWith({
     TextStyle? largeTitle,
+    TextStyle? invertedLargeTitle,
     TextStyle? mediumTitle,
     TextStyle? smallTitle,
     TextStyle? subtitle,
@@ -34,6 +37,7 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
   }) {
     return TextStyleExtension(
       largeTitle: largeTitle ?? this.largeTitle,
+      invertedLargeTitle: invertedLargeTitle ?? this.invertedLargeTitle,
       mediumTitle: mediumTitle ?? this.mediumTitle,
       smallTitle: smallTitle ?? this.smallTitle,
       subtitle: subtitle ?? this.subtitle,
@@ -52,6 +56,8 @@ class TextStyleExtension extends ThemeExtension<TextStyleExtension> {
     }
     return TextStyleExtension(
       largeTitle: TextStyle.lerp(largeTitle, other.largeTitle, t),
+      invertedLargeTitle:
+          TextStyle.lerp(invertedLargeTitle, other.invertedLargeTitle, t),
       mediumTitle: TextStyle.lerp(mediumTitle, other.mediumTitle, t),
       smallTitle: TextStyle.lerp(smallTitle, other.smallTitle, t),
       subtitle: TextStyle.lerp(subtitle, other.subtitle, t),
