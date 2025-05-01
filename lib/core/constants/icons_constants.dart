@@ -24,4 +24,6 @@ class IconsConstants {
   static const String shareOutline = '${basePath}share_outline$format';
   static const String shuffleOutline = '${basePath}shuffle_outline$format';
   static const String doneOutline = '${basePath}done_outline$format';
+  static const String playlistOutline = '${basePath}playlist_outline$format';
+  static const String vinylOutline = '${basePath}vinyl_outline$format';
 }

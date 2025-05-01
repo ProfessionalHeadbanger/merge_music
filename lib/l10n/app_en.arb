@@ -34,6 +34,8 @@
     "allArtists": "Artists",
     "albums": "Albums",
     "tracks": "Tracks",
+    "recent": "Recently listened",
+    "playlists": "Playlists",
     "add": "Add",
     "added": "Added",
     "addToQueue": "Add to queue",
