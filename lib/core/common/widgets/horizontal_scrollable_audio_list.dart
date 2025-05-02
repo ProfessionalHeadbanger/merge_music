@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/common/global_state/audio_player/audio_player_bloc.dart';
 import 'package:merge_music/core/common/widgets/audio_tile.dart';
 import 'package:merge_music/core/constants/size_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/audio_entity.dart';
+import 'package:provider/provider.dart';
 
 class HorizontalScrollableAudioList extends StatelessWidget {
   final List<AudioEntity> audios;
@@ -71,8 +73,16 @@ class HorizontalScrollableAudioList extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 16),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children:
-                        group.map((audio) => AudioTile(audio: audio)).toList(),
+                    children: group
+                        .map((audio) => AudioTile(
+                              audio: audio,
+                              onTap: () {
+                                final index = audios.indexOf(audio);
+                                context.read<AudioPlayerBloc>().add(
+                                    Play(queue: audios, startIndex: index));
+                              },
+                            ))
+                        .toList(),
                   ),
                 );
               },

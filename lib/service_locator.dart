@@ -1,9 +1,12 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:logger/logger.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/audio_handler/audio_handler.dart';
+import 'package:merge_music/core/common/global_state/audio_player/audio_player_bloc.dart';
 import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/theme/theme_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
@@ -251,6 +254,22 @@ Future<void> setupServiceLocator() async {
     () => ArtistPageBloc(
       getAlbumsByArtist: serviceLocator(),
       getAudiosByArtist: serviceLocator(),
+    ),
+  );
+
+  final audioHandler = await AudioService.init(
+      builder: () => AppAudioHandler(),
+      config: const AudioServiceConfig(
+        androidNotificationChannelId: 'com.merge_music.channel.audio',
+        androidNotificationChannelName: 'Music Playback',
+        androidNotificationOngoing: true,
+      ));
+
+  serviceLocator.registerSingleton<AudioHandler>(audioHandler);
+
+  serviceLocator.registerLazySingleton(
+    () => AudioPlayerBloc(
+      serviceLocator(),
     ),
   );
 }

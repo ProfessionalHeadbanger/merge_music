@@ -7,6 +7,7 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
+  audio_service: ^0.18.18
   dio: ^5.8.0+1
   equatable: ^2.0.7
   flutter:
@@ -23,6 +24,7 @@ dependencies:
   go_router: ^14.8.0
   internet_connection_checker_plus: ^2.7.1
   intl: ^0.19.0
+  just_audio: ^0.10.1
   logger: ^2.5.0
   overflow_text_animated: ^0.0.6
   provider: ^6.1.2
