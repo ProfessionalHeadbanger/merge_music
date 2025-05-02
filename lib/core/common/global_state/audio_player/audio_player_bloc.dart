@@ -17,11 +17,34 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     on<SkipToNext>((_, emit) => _audioHandler.skipToNext());
     on<SkipToPrevious>((_, emit) => _audioHandler.skipToPrevious());
     on<Seek>((event, emit) => _audioHandler.seek(event.position));
+    on<_UpdateIndex>((event, emit) {
+      emit(state.copyWith(currentIndex: event.index));
+    });
+
+    on<_UpdateIsPlaying>((event, emit) {
+      emit(state.copyWith(isPlaying: event.isPlaying));
+    });
+
+    _audioHandler.mediaItem.listen((item) {
+      final index = state.queue.indexWhere((a) => a.url == item?.id);
+      if (index != -1) {
+        add(_UpdateIndex(index));
+      }
+    });
+
+    _audioHandler.playbackState.listen((playback) {
+      add(_UpdateIsPlaying(playback.playing));
+    });
   }
 
   Future<void> _onPlay(Play event, Emitter<AudioPlayerState> emit) async {
     final items = event.queue.map((audio) {
-      return MediaItem(id: audio.url, title: audio.title);
+      return MediaItem(
+        id: audio.url,
+        title: audio.title,
+        artist: audio.artist,
+        duration: Duration(seconds: audio.duration),
+      );
     }).toList();
 
     await _audioHandler.stop();

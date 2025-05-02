@@ -6,11 +6,17 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   AppAudioHandler() {
     _player.playbackEventStream.listen(_broadcastState);
+
+    _player.currentIndexStream.listen((index) {
+      if (index != null && index < queue.value.length) {
+        mediaItem.add(queue.value[index]);
+      }
+    });
   }
 
   void _broadcastState(PlaybackEvent event) {
     playbackState.add(
-      playbackState.value.copyWith(
+      PlaybackState(
         controls: [
           MediaControl.skipToPrevious,
           _player.playing ? MediaControl.pause : MediaControl.play,
@@ -34,6 +40,7 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
         bufferedPosition: _player.bufferedPosition,
         speed: _player.speed,
         updatePosition: _player.position,
+        queueIndex: _player.currentIndex,
       ),
     );
   }
@@ -59,11 +66,22 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   }
 
   @override
+  Future<void> updateQueue(List<MediaItem> newQueue) async {
+    queue.add(newQueue);
+
+    final audioSources = newQueue.map(
+      (item) => AudioSource.uri(Uri.parse(item.id), tag: item),
+    );
+
+    await _player.setAudioSource(
+      ConcatenatingAudioSource(children: audioSources.toList()),
+      initialIndex: 0,
+    );
+  }
+
+  @override
   Future<void> skipToQueueItem(int index) async {
     if (index < 0 || index >= queue.value.length) return;
-
-    final item = queue.value[index];
-    mediaItem.add(item);
-    await _player.setUrl(item.id);
+    await _player.seek(Duration.zero, index: index);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_albums/user_albums_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_playlists/user_playlists_cubit.dart';
+import 'package:merge_music/core/common/widgets/mini_player.dart';
 import 'package:merge_music/core/common/widgets/retry_button.dart';
 import 'package:merge_music/core/common/widgets/sliver_divider.dart';
 import 'package:merge_music/core/constants/common_constants.dart';
@@ -107,6 +108,7 @@ class _MainPageState extends State<MainPage> {
           return const SizedBox.shrink();
         },
       ),
+      bottomSheet: const MiniPlayer(),
     );
   }
 }

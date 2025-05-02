@@ -38,3 +38,13 @@ class Seek extends AudioPlayerEvent {
   @override
   List<Object> get props => [position];
 }
+
+class _UpdateIndex extends AudioPlayerEvent {
+  final int index;
+  const _UpdateIndex(this.index);
+}
+
+class _UpdateIsPlaying extends AudioPlayerEvent {
+  final bool isPlaying;
+  const _UpdateIsPlaying(this.isPlaying);
+}
