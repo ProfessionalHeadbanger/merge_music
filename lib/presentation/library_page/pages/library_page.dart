@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
+import 'package:merge_music/core/common/widgets/mini_player.dart';
 import 'package:merge_music/core/common/widgets/sliver_divider.dart';
 import 'package:merge_music/core/common/widgets/vertical_scrollable_audio_list.dart';
 import 'package:merge_music/core/constants/icons_constants.dart';
@@ -66,6 +67,7 @@ class LibraryPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const MiniPlayer(),
     );
   }
 }

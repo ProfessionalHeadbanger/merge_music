@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/common/widgets/mini_player.dart';
 import 'package:merge_music/core/common/widgets/vertical_scrollable_artist_list.dart';
 import 'package:merge_music/domain/entities/artist_entity.dart';
 
@@ -29,6 +30,7 @@ class ShowAllArtistsPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const MiniPlayer(),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
 import 'package:merge_music/core/common/widgets/loading_widget.dart';
+import 'package:merge_music/core/common/widgets/mini_player.dart';
 import 'package:merge_music/core/common/widgets/retry_button.dart';
 import 'package:merge_music/core/common/widgets/sliver_divider.dart';
 import 'package:merge_music/core/constants/icons_constants.dart';
@@ -201,6 +202,7 @@ class _SearchPageState extends State<SearchPage> {
           },
         ),
       ),
+      bottomNavigationBar: const MiniPlayer(),
     );
   }
 }

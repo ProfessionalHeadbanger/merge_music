@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/widgets/custom_button_with_icon.dart';
 import 'package:merge_music/core/common/widgets/icon_text_button.dart';
 import 'package:merge_music/core/common/widgets/loading_widget.dart';
+import 'package:merge_music/core/common/widgets/mini_player.dart';
 import 'package:merge_music/core/common/widgets/retry_button.dart';
 import 'package:merge_music/core/common/widgets/sliver_divider.dart';
 import 'package:merge_music/core/common/widgets/vertical_scrollable_audio_list.dart';
@@ -195,6 +196,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
           return const SizedBox.shrink();
         },
       ),
+      bottomNavigationBar: const MiniPlayer(),
     );
   }
 }

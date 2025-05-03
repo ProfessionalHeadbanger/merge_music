@@ -1,5 +1,6 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/common/global_state/audio_handler/audio_handler.dart';
 import 'package:merge_music/core/common/widgets/audio_tile.dart';
 import 'package:merge_music/core/constants/size_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
@@ -78,19 +79,12 @@ class HorizontalScrollableAudioList extends StatelessWidget {
                               audio: audio,
                               onTap: () async {
                                 final index = audios.indexOf(audio);
-                                final items = audios.map((audio) {
-                                  return MediaItem(
-                                    id: audio.url,
-                                    title: audio.title,
-                                    artist: audio.artist,
-                                    duration: Duration(seconds: audio.duration),
-                                  );
-                                }).toList();
-                                final audioHandler =
-                                    serviceLocator.get<AudioHandler>();
-                                await audioHandler.stop();
-                                await audioHandler.updateQueue(items);
-                                await audioHandler.skipToQueueItem(index);
+                                final items = audios
+                                    .map((audio) => audio.toMediaItem())
+                                    .toList();
+                                final audioHandler = serviceLocator
+                                    .get<AudioHandler>() as AppAudioHandler;
+                                audioHandler.playMediaItemList(items, index);
                               },
                             ))
                         .toList(),

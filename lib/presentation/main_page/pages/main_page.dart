@@ -100,7 +100,10 @@ class _MainPageState extends State<MainPage> {
                       );
                     },
                   ),
-                  SliverDivider(color: context.color.tertiaryText!),
+                  SliverPadding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    sliver: SliverDivider(color: context.color.tertiaryText!),
+                  ),
                 ],
               ),
             );
@@ -108,7 +111,7 @@ class _MainPageState extends State<MainPage> {
           return const SizedBox.shrink();
         },
       ),
-      bottomSheet: const MiniPlayer(),
+      bottomNavigationBar: const MiniPlayer(),
     );
   }
 }

@@ -5,7 +5,6 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   final _player = AudioPlayer();
 
   AppAudioHandler() {
-    // Подписки на изменения
     _player.playbackEventStream.listen(_broadcastState);
 
     _player.currentIndexStream.listen((index) {
@@ -14,12 +13,10 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       }
     });
 
-    // Обновлять прогресс при изменении позиции
     _player.positionStream.listen((_) {
       _broadcastState(_player.playbackEvent);
     });
 
-    // Обновлять состояние при изменении playing
     _player.playerStateStream.listen((_) {
       _broadcastState(_player.playbackEvent);
     });
@@ -62,21 +59,10 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   }
 
   @override
-  Future<void> play() async {
-    await _player.play();
-    // небольшой delay, чтобы дождаться обновления состояния
-    Future.delayed(Duration(milliseconds: 50), () {
-      _broadcastState(_player.playbackEvent);
-    });
-  }
+  Future<void> play() async => _player.play();
 
   @override
-  Future<void> pause() async {
-    await _player.pause();
-    Future.delayed(Duration(milliseconds: 50), () {
-      _broadcastState(_player.playbackEvent);
-    });
-  }
+  Future<void> pause() async => _player.pause();
 
   @override
   Future<void> seek(Duration position) => _player.seek(position);
@@ -125,5 +111,27 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       ConcatenatingAudioSource(children: audioSources.toList()),
       initialIndex: 0,
     );
+  }
+
+  Future<void> playMediaItemList(List<MediaItem> items, int indexToPlay) async {
+    final currentQueue = queue.value;
+    final currentMediaItem = mediaItem.value;
+
+    final isSameQueue = currentQueue.length == items.length &&
+        List.generate(items.length, (i) => items[i].id == currentQueue[i].id)
+            .every((e) => e);
+
+    final isSameItem = currentMediaItem?.id == items[indexToPlay].id;
+
+    if (isSameQueue) {
+      if (!isSameItem) {
+        await skipToQueueItem(indexToPlay);
+      }
+      return;
+    }
+
+    await stop();
+    await updateQueue(items);
+    await skipToQueueItem(indexToPlay);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/common/widgets/mini_player.dart';
 import 'package:merge_music/core/common/widgets/vertical_scrollable_audio_list.dart';
 import 'package:merge_music/domain/entities/audio_entity.dart';
 
@@ -30,6 +31,7 @@ class ShowAllTracksPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const MiniPlayer(),
     );
   }
 }

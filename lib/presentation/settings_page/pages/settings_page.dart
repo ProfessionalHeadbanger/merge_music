@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
 import 'package:merge_music/core/common/navigation/router.dart';
+import 'package:merge_music/core/common/widgets/mini_player.dart';
 import 'package:merge_music/core/constants/icons_constants.dart';
 import 'package:merge_music/core/constants/size_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
@@ -18,42 +19,48 @@ class SettingsPage extends StatelessWidget {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         if (state is UserLoggedIn) {
-          return Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Scaffold(
-              appBar: AppBar(
-                leading: CircleAvatar(
-                  radius: 24,
-                  backgroundImage: NetworkImage(state.user.photo100),
-                  backgroundColor: Colors.transparent,
-                ),
-                title: Text(
-                  '${state.user.firstName} ${state.user.lastName}',
-                  style: context.text.mediumTitle,
-                ),
-                actions: [
-                  IconButton(
-                    onPressed: () => logoutDialogBuilder(
-                      context,
-                      () {
-                        router.pop();
-                      },
-                      () {
-                        context.read<SettingsPageBloc>().add(LogoutEvent());
-                      },
+          return Scaffold(
+            appBar: AppBar(
+              title: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundImage: NetworkImage(state.user.photo100),
+                      backgroundColor: Colors.transparent,
                     ),
-                    icon: SvgPicture.asset(
-                      IconsConstants.doorArrowRightOutline,
-                      width: SizeConstants.navBarIconSize,
-                      height: SizeConstants.navBarIconSize,
-                      colorFilter: ColorFilter.mode(
-                          context.color.primaryText!, BlendMode.srcIn),
-                    ),
+                  ),
+                  Text(
+                    '${state.user.firstName} ${state.user.lastName}',
+                    style: context.text.mediumTitle,
                   ),
                 ],
               ),
-              body: CustomScrollView(
+              actions: [
+                IconButton(
+                  onPressed: () => logoutDialogBuilder(
+                    context,
+                    () {
+                      router.pop();
+                    },
+                    () {
+                      context.read<SettingsPageBloc>().add(LogoutEvent());
+                    },
+                  ),
+                  icon: SvgPicture.asset(
+                    IconsConstants.doorArrowRightOutline,
+                    width: SizeConstants.navBarIconSize,
+                    height: SizeConstants.navBarIconSize,
+                    colorFilter: ColorFilter.mode(
+                        context.color.primaryText!, BlendMode.srcIn),
+                  ),
+                ),
+              ],
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
                     child: Padding(
@@ -77,6 +84,7 @@ class SettingsPage extends StatelessWidget {
                 ],
               ),
             ),
+            bottomNavigationBar: const MiniPlayer(),
           );
         }
         return Scaffold();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/widgets/horizontal_scrollable_playlist_list.dart';
 import 'package:merge_music/core/common/widgets/loading_widget.dart';
+import 'package:merge_music/core/common/widgets/mini_player.dart';
 import 'package:merge_music/core/common/widgets/retry_button.dart';
 import 'package:merge_music/core/common/widgets/vertical_scrollable_audio_list.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
@@ -129,6 +130,7 @@ class _ArtistPageState extends State<ArtistPage> {
           return const SizedBox.shrink();
         },
       ),
+      bottomNavigationBar: const MiniPlayer(),
     );
   }
 }
