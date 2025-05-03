@@ -1,10 +1,10 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
-import 'package:merge_music/core/common/global_state/audio_player/audio_player_bloc.dart';
 import 'package:merge_music/core/common/widgets/audio_tile.dart';
 import 'package:merge_music/core/constants/size_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/audio_entity.dart';
-import 'package:provider/provider.dart';
+import 'package:merge_music/service_locator.dart';
 
 class HorizontalScrollableAudioList extends StatelessWidget {
   final List<AudioEntity> audios;
@@ -76,10 +76,21 @@ class HorizontalScrollableAudioList extends StatelessWidget {
                     children: group
                         .map((audio) => AudioTile(
                               audio: audio,
-                              onTap: () {
+                              onTap: () async {
                                 final index = audios.indexOf(audio);
-                                context.read<AudioPlayerBloc>().add(
-                                    Play(queue: audios, startIndex: index));
+                                final items = audios.map((audio) {
+                                  return MediaItem(
+                                    id: audio.url,
+                                    title: audio.title,
+                                    artist: audio.artist,
+                                    duration: Duration(seconds: audio.duration),
+                                  );
+                                }).toList();
+                                final audioHandler =
+                                    serviceLocator.get<AudioHandler>();
+                                await audioHandler.stop();
+                                await audioHandler.updateQueue(items);
+                                await audioHandler.skipToQueueItem(index);
                               },
                             ))
                         .toList(),

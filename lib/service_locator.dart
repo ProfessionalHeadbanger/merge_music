@@ -6,7 +6,6 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:logger/logger.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/common/global_state/audio_handler/audio_handler.dart';
-import 'package:merge_music/core/common/global_state/audio_player/audio_player_bloc.dart';
 import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/theme/theme_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
@@ -266,10 +265,4 @@ Future<void> setupServiceLocator() async {
       ));
 
   serviceLocator.registerSingleton<AudioHandler>(audioHandler);
-
-  serviceLocator.registerLazySingleton(
-    () => AudioPlayerBloc(
-      serviceLocator(),
-    ),
-  );
 }
