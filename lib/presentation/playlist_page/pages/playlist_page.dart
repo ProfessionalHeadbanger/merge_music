@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:merge_music/core/common/widgets/animated_overflowed_text.dart';
 import 'package:merge_music/core/common/widgets/custom_button_with_icon.dart';
 import 'package:merge_music/core/common/widgets/icon_text_button.dart';
 import 'package:merge_music/core/common/widgets/loading_widget.dart';
@@ -11,7 +12,6 @@ import 'package:merge_music/core/constants/icons_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/playlist_entity.dart';
 import 'package:merge_music/presentation/playlist_page/bloc/playlist_page_bloc.dart';
-import 'package:overflow_text_animated/overflow_text_animated.dart';
 
 class PlaylistPage extends StatefulWidget {
   final PlaylistEntity playlist;
@@ -48,13 +48,9 @@ class _PlaylistPageState extends State<PlaylistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: OverflowTextAnimated(
+        title: AnimatedOverflowedText(
           text: widget.playlist.title,
-          style: context.text.largeTitle,
-          curve: Curves.easeInOut,
-          animation: OverFlowTextAnimations.scrollOpposite,
-          animateDuration: const Duration(milliseconds: 3000),
-          delay: const Duration(milliseconds: 1000),
+          style: context.text.largeTitle!,
         ),
         centerTitle: true,
         actions: [

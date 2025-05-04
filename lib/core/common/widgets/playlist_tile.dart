@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/common/widgets/animated_overflowed_text.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/playlist_entity.dart';
-import 'package:overflow_text_animated/overflow_text_animated.dart';
 
 class PlaylistTile extends StatelessWidget {
   final PlaylistEntity playlistEntity;
@@ -37,25 +37,17 @@ class PlaylistTile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              OverflowTextAnimated(
+              AnimatedOverflowedText(
                 text: playlistEntity.title,
-                style: context.text.trackName,
-                curve: Curves.easeInOut,
-                animation: OverFlowTextAnimations.scrollOpposite,
-                animateDuration: const Duration(milliseconds: 3000),
-                delay: const Duration(milliseconds: 1000),
+                style: context.text.trackName!,
               ),
               if (playlistEntity.mainArtists != null &&
                   playlistEntity.mainArtists!.isNotEmpty)
-                OverflowTextAnimated(
+                AnimatedOverflowedText(
                   text: playlistEntity.mainArtists!
                       .map((artist) => artist.name)
                       .join(', '),
-                  style: context.text.artistName,
-                  curve: Curves.easeInOut,
-                  animation: OverFlowTextAnimations.scrollOpposite,
-                  animateDuration: const Duration(milliseconds: 3000),
-                  delay: const Duration(milliseconds: 1000),
+                  style: context.text.artistName!,
                 ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:merge_music/core/common/widgets/animated_overflowed_text.dart';
 import 'package:merge_music/core/constants/images_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/service_locator.dart';
@@ -80,13 +81,13 @@ class MiniPlayer extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        mediaItem.title,
-                                        style: context.text.trackName,
+                                      AnimatedOverflowedText(
+                                        text: mediaItem.title,
+                                        style: context.text.trackName!,
                                       ),
-                                      Text(
-                                        mediaItem.artist ?? '',
-                                        style: context.text.artistName,
+                                      AnimatedOverflowedText(
+                                        text: mediaItem.artist ?? '',
+                                        style: context.text.artistName!,
                                       ),
                                     ],
                                   ),

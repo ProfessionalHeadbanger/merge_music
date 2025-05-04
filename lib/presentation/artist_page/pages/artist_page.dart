@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:merge_music/core/common/widgets/animated_overflowed_text.dart';
 import 'package:merge_music/core/common/widgets/horizontal_scrollable_playlist_list.dart';
 import 'package:merge_music/core/common/widgets/loading_widget.dart';
 import 'package:merge_music/core/common/widgets/mini_player.dart';
@@ -8,7 +9,6 @@ import 'package:merge_music/core/common/widgets/vertical_scrollable_audio_list.d
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/domain/entities/artist_entity.dart';
 import 'package:merge_music/presentation/artist_page/bloc/artist_page_bloc.dart';
-import 'package:overflow_text_animated/src.dart';
 
 class ArtistPage extends StatefulWidget {
   final ArtistEntity artist;
@@ -89,14 +89,9 @@ class _ArtistPageState extends State<ArtistPage> {
                           alignment: Alignment.bottomLeft,
                           child: Padding(
                             padding: const EdgeInsets.all(16),
-                            child: OverflowTextAnimated(
+                            child: AnimatedOverflowedText(
                               text: widget.artist.name,
-                              style: context.text.invertedLargeTitle,
-                              curve: Curves.easeInOut,
-                              animation: OverFlowTextAnimations.scrollOpposite,
-                              animateDuration:
-                                  const Duration(milliseconds: 3000),
-                              delay: const Duration(milliseconds: 1000),
+                              style: context.text.invertedLargeTitle!,
                             ),
                           ),
                         ),
