@@ -91,6 +91,16 @@ class MiniPlayer extends StatelessWidget {
                                     ],
                                   ),
                                 ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.close_rounded,
+                                    color: context.color.primaryText,
+                                    size: 30,
+                                  ),
+                                  onPressed: () {
+                                    audioHandler.stop();
+                                  },
+                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 16),
                                   child: IconButton(

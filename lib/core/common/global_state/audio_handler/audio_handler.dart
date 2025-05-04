@@ -70,6 +70,8 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   @override
   Future<void> stop() async {
     await _player.stop();
+    mediaItem.add(null);
+    queue.add([]);
     _broadcastState(_player.playbackEvent);
   }
 
