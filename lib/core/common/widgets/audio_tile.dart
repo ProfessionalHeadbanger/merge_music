@@ -62,7 +62,7 @@ class AudioTile extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                Utils.formatDuration(audio.duration),
+                Utils.formatDurationFromInt(audio.duration),
                 style: context.text.artistName,
               ),
             ],

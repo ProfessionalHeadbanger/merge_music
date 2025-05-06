@@ -1,16 +1,15 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:merge_music/core/common/navigation/routes.dart';
 import 'package:merge_music/core/common/widgets/animated_overflowed_text.dart';
 import 'package:merge_music/core/constants/images_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/service_locator.dart';
 
 class MiniPlayer extends StatelessWidget {
-  final VoidCallback? onTap;
-
   const MiniPlayer({
     super.key,
-    this.onTap,
   });
 
   @override
@@ -47,7 +46,9 @@ class MiniPlayer extends StatelessWidget {
                   ),
                   Expanded(
                     child: InkWell(
-                      onTap: onTap,
+                      onTap: () {
+                        context.pushNamed(Routes.playerPage);
+                      },
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           color: context.color.primaryBackground,

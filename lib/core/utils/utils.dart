@@ -22,9 +22,15 @@ class Utils {
     return params['user_id'];
   }
 
-  static String formatDuration(int duration) {
+  static String formatDurationFromInt(int duration) {
     final minutes = duration ~/ 60;
     final seconds = duration % 60;
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
+  }
+
+  static String formatDuration(Duration duration) {
+    final minutes = duration.inMinutes.remainder(60);
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
   }
 }

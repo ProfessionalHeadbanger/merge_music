@@ -5,6 +5,7 @@ import 'package:merge_music/presentation/artist_page/pages/artist_page.dart';
 import 'package:merge_music/presentation/library_page/pages/library_page.dart';
 import 'package:merge_music/presentation/main_page/pages/main_page.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
+import 'package:merge_music/presentation/player_page/pages/player_page.dart';
 import 'package:merge_music/presentation/playlist_page/pages/playlist_page.dart';
 import 'package:merge_music/presentation/root_page/root_page.dart';
 import 'package:merge_music/presentation/search_page/pages/search_page.dart';
@@ -132,6 +133,12 @@ final router = GoRouter(
           artists: args.artists,
         );
       },
+    ),
+    GoRoute(
+      path: Routes.playerPage,
+      name: Routes.playerPage,
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (_, __) => const PlayerPage(),
     ),
   ],
 );

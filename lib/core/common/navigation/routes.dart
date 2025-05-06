@@ -16,4 +16,6 @@ class Routes {
   static const albumPage = '/album_page';
   static const playlistPage = '/playlist_page';
   static const artistPage = '/artist_page';
+
+  static const playerPage = '/player_page';
 }
