@@ -13,6 +13,16 @@ class AppTheme {
       titleTextStyle: TextStyles.lightTextStyle.largeTitle,
       scrolledUnderElevation: 0,
     ),
+    sliderTheme: SliderThemeData(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+      thumbColor: ColorStyles.lightColorStyle.primaryText,
+      overlayColor: ColorStyles.lightColorStyle.primaryText!.withOpacity(0.2),
+      overlayShape: const RoundSliderOverlayShape(overlayRadius: 12),
+      activeTrackColor: ColorStyles.lightColorStyle.primaryText,
+      inactiveTrackColor:
+          ColorStyles.lightColorStyle.primaryText!.withOpacity(0.2),
+    ),
     extensions: [
       TextStyles.lightTextStyle,
       ColorStyles.lightColorStyle,
@@ -26,6 +36,16 @@ class AppTheme {
       backgroundColor: ColorStyles.darkColorStyle.primaryBackground,
       titleTextStyle: TextStyles.darkTextStyle.largeTitle,
       scrolledUnderElevation: 0,
+    ),
+    sliderTheme: SliderThemeData(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+      thumbColor: ColorStyles.darkColorStyle.primaryText,
+      overlayColor: ColorStyles.darkColorStyle.primaryText!.withOpacity(0.2),
+      overlayShape: const RoundSliderOverlayShape(overlayRadius: 12),
+      activeTrackColor: ColorStyles.darkColorStyle.primaryText,
+      inactiveTrackColor:
+          ColorStyles.darkColorStyle.primaryText!.withOpacity(0.2),
     ),
     extensions: [
       TextStyles.darkTextStyle,

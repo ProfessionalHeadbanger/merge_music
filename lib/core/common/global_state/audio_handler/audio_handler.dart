@@ -32,6 +32,26 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       ProcessingState.completed: AudioProcessingState.completed,
     }[_player.processingState]!;
 
+    final repeatMode = () {
+      switch (_player.loopMode) {
+        case LoopMode.off:
+          return AudioServiceRepeatMode.none;
+        case LoopMode.one:
+          return AudioServiceRepeatMode.one;
+        case LoopMode.all:
+          return AudioServiceRepeatMode.all;
+      }
+    }();
+
+    final shuffleMode = () {
+      switch (_player.shuffleModeEnabled) {
+        case false:
+          return AudioServiceShuffleMode.none;
+        case true:
+          return AudioServiceShuffleMode.all;
+      }
+    }();
+
     playbackState.add(
       PlaybackState(
         controls: [
@@ -50,6 +70,8 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
         androidCompactActionIndices: const [0, 1, 2],
         processingState: processingState,
         playing: playing,
+        repeatMode: repeatMode,
+        shuffleMode: shuffleMode,
         updatePosition: _player.position,
         bufferedPosition: _player.bufferedPosition,
         speed: _player.speed,
@@ -135,5 +157,38 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     await stop();
     await updateQueue(items);
     await skipToQueueItem(indexToPlay);
+  }
+
+  @override
+  Future<void> setRepeatMode(AudioServiceRepeatMode repeatMode) async {
+    switch (repeatMode) {
+      case AudioServiceRepeatMode.none:
+        await _player.setLoopMode(LoopMode.off);
+        break;
+      case AudioServiceRepeatMode.all:
+        await _player.setLoopMode(LoopMode.all);
+        break;
+      case AudioServiceRepeatMode.one:
+        await _player.setLoopMode(LoopMode.one);
+        break;
+      default:
+        throw Exception('Unknown repeat mode: $repeatMode');
+    }
+    playbackState.add(playbackState.value.copyWith(repeatMode: repeatMode));
+  }
+
+  @override
+  Future<void> setShuffleMode(AudioServiceShuffleMode shuffleMode) async {
+    switch (shuffleMode) {
+      case AudioServiceShuffleMode.none:
+        await _player.setShuffleModeEnabled(false);
+        break;
+      case AudioServiceShuffleMode.all:
+        await _player.setShuffleModeEnabled(true);
+        break;
+      default:
+        throw Exception('Unknown shuffle mode: $shuffleMode');
+    }
+    playbackState.add(playbackState.value.copyWith(shuffleMode: shuffleMode));
   }
 }

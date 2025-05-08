@@ -27,6 +27,6 @@ class IconsConstants {
   static const String playlistOutline = '${basePath}playlist_outline$format';
   static const String vinylOutline = '${basePath}vinyl_outline$format';
   static const String repeatOutline = '${basePath}repeat_outline$format';
-  static const String skipNext = '${basePath}skip_next$format';
+  static const String skipForward = '${basePath}skip_forward$format';
   static const String skipBack = '${basePath}skip_back$format';
 }
