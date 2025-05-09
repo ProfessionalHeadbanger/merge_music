@@ -26,4 +26,5 @@ abstract interface class AudioRepository {
       GetArtistByIdParams params);
   Future<Either<Failure, List<PlaylistEntity>>> getAlbumsByArtist(
       GetArtistByIdParams params);
+  Future<Either<Failure, List<AudioEntity>>> getRecommendationsForUser();
 }

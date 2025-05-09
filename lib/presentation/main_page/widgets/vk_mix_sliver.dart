@@ -4,7 +4,12 @@ import 'package:merge_music/core/constants/icons_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 
 class VkMixSliver extends StatelessWidget {
-  const VkMixSliver({super.key});
+  final VoidCallback? onPressed;
+
+  const VkMixSliver({
+    super.key,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class VkMixSliver extends StatelessWidget {
               Text(context.l10n.recsForYou, style: context.text.subtitle),
               const SizedBox(height: 12),
               CustomButtonWithIcon(
-                onPressed: () {},
+                onPressed: onPressed,
                 text: context.l10n.listen,
                 iconPath: IconsConstants.play,
               ),

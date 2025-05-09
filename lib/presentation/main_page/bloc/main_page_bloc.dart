@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:audio_service/audio_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/audio_handler/audio_handler.dart';
 import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_albums/user_albums_cubit.dart';
 import 'package:merge_music/core/common/global_state/user_playlists/user_playlists_cubit.dart';
@@ -10,8 +12,12 @@ import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cub
 import 'package:merge_music/core/common/navigation/navigation_args.dart';
 import 'package:merge_music/core/common/navigation/router.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
+import 'package:merge_music/core/extensions/extensions.dart';
+import 'package:merge_music/core/params/params.dart';
 import 'package:merge_music/domain/entities/audio_entity.dart';
 import 'package:merge_music/domain/entities/playlist_entity.dart';
+import 'package:merge_music/domain/usecases/get_recommendations_for_user.dart';
+import 'package:merge_music/service_locator.dart';
 
 part 'main_page_event.dart';
 part 'main_page_state.dart';
@@ -22,6 +28,8 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   final UserPlaylistsCubit userPlaylistsCubit;
   final FollowedPlaylistsCubit followedPlaylistsCubit;
   final AccessTokenCubit accessTokenCubit;
+
+  final GetRecommendationsForUser _getRecommendationsForUser;
 
   late final StreamSubscription userTracksSubscription;
   late final StreamSubscription userAlbumsSubscription;
@@ -35,12 +43,15 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     required this.userPlaylistsCubit,
     required this.followedPlaylistsCubit,
     required this.accessTokenCubit,
-  }) : super(MainPageInitial()) {
+    required GetRecommendationsForUser getRecommendationsForUser,
+  })  : _getRecommendationsForUser = getRecommendationsForUser,
+        super(MainPageInitial()) {
     on<CheckMainPageState>(_onCheckMainPageState);
     on<LoadMainPageData>(_onLoadMainPageData);
     on<OpenShowAllTracksPage>(_onShowAllTracksPage);
     on<OpenShowAllPlaylistsPage>(_onShowAllPlaylistsPage);
     on<OpenPlaylistPage>(_onOpenPlaylistPage);
+    on<PlayRecommendations>(_onPlayRecommendations);
 
     accessTokenSubscription = accessTokenCubit.stream.listen(
       (state) {
@@ -138,6 +149,20 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
         extra: AlbumPageArgs(album: event.playlist),
       );
     }
+  }
+
+  void _onPlayRecommendations(
+      PlayRecommendations event, Emitter<MainPageState> emit) async {
+    final result = await _getRecommendationsForUser(NoParams());
+    result.fold(
+      (failure) => {},
+      (success) {
+        final mediaItems = success.map((audio) => audio.toMediaItem()).toList();
+        final audioHandler =
+            serviceLocator.get<AudioHandler>() as AppAudioHandler;
+        audioHandler.playMediaItemList(mediaItems, 0);
+      },
+    );
   }
 
   @override

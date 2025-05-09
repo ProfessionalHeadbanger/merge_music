@@ -23,6 +23,7 @@ import 'package:merge_music/domain/usecases/get_albums_by_artist.dart';
 import 'package:merge_music/domain/usecases/get_audios_by_artist.dart';
 import 'package:merge_music/domain/usecases/get_followed_playlists.dart';
 import 'package:merge_music/domain/usecases/get_playlist_audios.dart';
+import 'package:merge_music/domain/usecases/get_recommendations_for_user.dart';
 import 'package:merge_music/domain/usecases/get_user_albums.dart';
 import 'package:merge_music/domain/usecases/get_user_audios.dart';
 import 'package:merge_music/domain/usecases/get_user_info.dart';
@@ -138,6 +139,11 @@ Future<void> setupServiceLocator() async {
       serviceLocator(),
     ),
   );
+  serviceLocator.registerFactory(
+    () => GetRecommendationsForUser(
+      serviceLocator(),
+    ),
+  );
   serviceLocator.registerLazySingleton<UserTracksCubit>(
     () => UserTracksCubit(
       serviceLocator(),
@@ -168,6 +174,7 @@ Future<void> setupServiceLocator() async {
       userPlaylistsCubit: serviceLocator(),
       followedPlaylistsCubit: serviceLocator(),
       accessTokenCubit: serviceLocator<AccessTokenCubit>(),
+      getRecommendationsForUser: serviceLocator(),
     ),
   );
 
@@ -234,11 +241,6 @@ Future<void> setupServiceLocator() async {
   );
 
   // Artist page
-  // serviceLocator.registerFactory(
-  //   () => GetArtistById(
-  //     serviceLocator(),
-  //   ),
-  // );
   serviceLocator.registerFactory(
     () => GetAlbumsByArtist(
       serviceLocator(),

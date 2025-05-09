@@ -49,7 +49,11 @@ class _MainPageState extends State<MainPage> {
               child: CustomScrollView(
                 slivers: [
                   SliverDivider(color: context.color.tertiaryText!),
-                  VkMixSliver(),
+                  VkMixSliver(
+                    onPressed: () {
+                      context.read<MainPageBloc>().add(PlayRecommendations());
+                    },
+                  ),
                   SliverDivider(color: context.color.tertiaryText!),
                   AudioListSliver(),
                   SliverDivider(color: context.color.tertiaryText!),

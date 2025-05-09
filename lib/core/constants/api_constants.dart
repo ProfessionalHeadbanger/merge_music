@@ -31,4 +31,6 @@ class ApiConstants {
   static const String getArtistById = 'audio.getArtistById';
   static const String getAlbumsByArtist = 'audio.getAlbumsByArtist';
   static const String getAudiosByArtist = 'audio.getAudiosByArtist';
+
+  static const String getRecommendations = 'audio.getRecommendations';
 }

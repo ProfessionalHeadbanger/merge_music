@@ -47,3 +47,5 @@ class OpenPlaylistPage extends MainPageEvent {
   @override
   List<Object> get props => [playlist];
 }
+
+class PlayRecommendations extends MainPageEvent {}

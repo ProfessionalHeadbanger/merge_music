@@ -303,4 +303,26 @@ class AudioRepositoryImpl implements AudioRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, List<AudioEntity>>> getRecommendationsForUser() async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      final userState = serviceLocator.get<UserCubit>().state;
+      if (tokenState is AccessTokenLoaded && userState is UserLoggedIn) {
+        final audios = await audioRemoteDataSource.getRecommendations(
+          params: GetRecommendationsParams(
+            userId: userState.user.id,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(audios);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
 }

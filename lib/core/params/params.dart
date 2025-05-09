@@ -177,3 +177,21 @@ class GetArtistByIdParams {
 
   GetArtistByIdParams({required this.artistId});
 }
+
+class GetRecommendationsParams {
+  final int? userId;
+  final String? targetAudio; // format: ownerId_trackId
+  final int? count;
+  final int? offset;
+  final String accessToken;
+  final String v;
+
+  GetRecommendationsParams({
+    this.userId,
+    this.targetAudio,
+    this.count,
+    this.offset,
+    required this.accessToken,
+    required this.v,
+  });
+}
