@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:logger/logger.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
+import 'package:merge_music/core/common/global_state/audio_cover/audio_cover_cubit.dart';
 import 'package:merge_music/core/common/global_state/audio_handler/audio_handler.dart';
 import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/theme/theme_cubit.dart';
@@ -14,12 +15,16 @@ import 'package:merge_music/core/common/global_state/user_playlists/user_playlis
 import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
 import 'package:merge_music/core/network/internet_connection_checker.dart';
 import 'package:merge_music/data/data_sources/remote/audio_remote_data_source.dart';
+import 'package:merge_music/data/data_sources/remote/itunes_remote_data_source.dart';
 import 'package:merge_music/data/data_sources/remote/vk_login_data_source.dart';
 import 'package:merge_music/data/repositories/audio_repository_impl.dart';
+import 'package:merge_music/data/repositories/itunes_repository_impl.dart';
 import 'package:merge_music/data/repositories/vk_login_repository_impl.dart';
 import 'package:merge_music/domain/repositories/audio_repository.dart';
+import 'package:merge_music/domain/repositories/itunes_repository.dart';
 import 'package:merge_music/domain/repositories/vk_login_repository.dart';
 import 'package:merge_music/domain/usecases/get_albums_by_artist.dart';
+import 'package:merge_music/domain/usecases/get_audio_cover.dart';
 import 'package:merge_music/domain/usecases/get_audios_by_artist.dart';
 import 'package:merge_music/domain/usecases/get_followed_playlists.dart';
 import 'package:merge_music/domain/usecases/get_playlist_audios.dart';
@@ -73,6 +78,15 @@ Future<void> setupServiceLocator() async {
       serviceLocator(),
     ),
   );
+  final audioHandler = await AudioService.init(
+      builder: () => AppAudioHandler(),
+      config: const AudioServiceConfig(
+        androidNotificationChannelId: 'com.merge_music.channel.audio',
+        androidNotificationChannelName: 'Music Playback',
+        androidNotificationOngoing: true,
+      ));
+
+  serviceLocator.registerSingleton<AudioHandler>(audioHandler);
 
   // Global State
   serviceLocator.registerLazySingleton<AccessTokenCubit>(
@@ -80,6 +94,25 @@ Future<void> setupServiceLocator() async {
   );
   serviceLocator.registerLazySingleton<ThemeCubit>(
     () => ThemeCubit(
+      serviceLocator(),
+    ),
+  );
+
+  serviceLocator.registerFactory<ITunesRemoteDataSource>(
+    () => ITunesRemoteDataSourceImpl(),
+  );
+  serviceLocator.registerFactory<ITunesRepository>(
+    () => ITunesRepositoryImpl(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => GetAudioCover(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerLazySingleton<AudioCoverCubit>(
+    () => AudioCoverCubit(
       serviceLocator(),
     ),
   );
@@ -257,14 +290,4 @@ Future<void> setupServiceLocator() async {
       getAudiosByArtist: serviceLocator(),
     ),
   );
-
-  final audioHandler = await AudioService.init(
-      builder: () => AppAudioHandler(),
-      config: const AudioServiceConfig(
-        androidNotificationChannelId: 'com.merge_music.channel.audio',
-        androidNotificationChannelName: 'Music Playback',
-        androidNotificationOngoing: true,
-      ));
-
-  serviceLocator.registerSingleton<AudioHandler>(audioHandler);
 }

@@ -14,6 +14,9 @@ class AudioEntity {
   final int? isHq;
   final bool? like;
 
+  final String? coverUrl100;
+  final String? coverUrl1000;
+
   AudioEntity({
     required this.id,
     required this.ownerId,
@@ -29,5 +32,31 @@ class AudioEntity {
     required this.noSearch,
     required this.isHq,
     required this.like,
+    this.coverUrl100,
+    this.coverUrl1000,
   });
+
+  AudioEntity copyWith({
+    String? coverUrl100,
+    String? coverUrl1000,
+  }) {
+    return AudioEntity(
+      id: id,
+      ownerId: ownerId,
+      artist: artist,
+      title: title,
+      duration: duration,
+      url: url,
+      hasLyrics: hasLyrics,
+      lyricsId: lyricsId,
+      albumId: albumId,
+      genreId: genreId,
+      date: date,
+      noSearch: noSearch,
+      isHq: isHq,
+      like: like,
+      coverUrl100: coverUrl100 ?? this.coverUrl100,
+      coverUrl1000: coverUrl1000 ?? this.coverUrl1000,
+    );
+  }
 }

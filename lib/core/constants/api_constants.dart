@@ -34,3 +34,9 @@ class ApiConstants {
 
   static const String getRecommendations = 'audio.getRecommendations';
 }
+
+class ITunesApiConstants {
+  static const String baseUrl = 'https://itunes.apple.com/';
+
+  static const String search = 'search';
+}

@@ -195,3 +195,15 @@ class GetRecommendationsParams {
     required this.v,
   });
 }
+
+class ITunesSearchParams {
+  final String artistName;
+  final String trackName;
+  final int? limit;
+
+  ITunesSearchParams({
+    required this.artistName,
+    required this.trackName,
+    this.limit,
+  });
+}

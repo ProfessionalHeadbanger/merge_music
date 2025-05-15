@@ -16,6 +16,8 @@ class AudioModel extends AudioEntity {
     required super.noSearch,
     required super.isHq,
     required super.like,
+    super.coverUrl100,
+    super.coverUrl1000,
   });
 
   Map<String, dynamic> toJson() {
@@ -56,6 +58,7 @@ class AudioModel extends AudioEntity {
     );
   }
 
+  @override
   AudioModel copyWith({
     int? id,
     int? ownerId,
@@ -71,6 +74,8 @@ class AudioModel extends AudioEntity {
     int? noSearch,
     int? isHq,
     bool? like,
+    String? coverUrl100,
+    String? coverUrl1000,
   }) {
     return AudioModel(
       id: id ?? this.id,
@@ -87,6 +92,8 @@ class AudioModel extends AudioEntity {
       noSearch: noSearch ?? this.noSearch,
       isHq: isHq ?? this.isHq,
       like: like ?? this.like,
+      coverUrl100: coverUrl100 ?? this.coverUrl100,
+      coverUrl1000: coverUrl1000 ?? this.coverUrl1000,
     );
   }
 }
