@@ -9,7 +9,7 @@ import 'package:merge_music/domain/entities/audio_entity.dart';
 
 class AudioTile extends StatefulWidget {
   final AudioEntity audio;
-  final VoidCallback? onTap;
+  final void Function(AudioEntity)? onTap;
   final bool needCover;
   const AudioTile({
     super.key,
@@ -28,7 +28,7 @@ class _AudioTileState extends State<AudioTile> {
     super.initState();
     if (widget.needCover) {
       final cubit = context.read<AudioCoverCubit>();
-      if (cubit.state[widget.audio.id]?.coverUrl100 == null) {
+      if (cubit.state[widget.audio.id]?.coverSmall == null) {
         cubit.fetchAudioCover(widget.audio);
       }
     }
@@ -38,13 +38,13 @@ class _AudioTileState extends State<AudioTile> {
   Widget build(BuildContext context) {
     return BlocBuilder<AudioCoverCubit, Map<int, AudioEntity>>(
       buildWhen: (previous, current) =>
-          previous[widget.audio.id]?.coverUrl100 !=
-          current[widget.audio.id]?.coverUrl100,
+          previous[widget.audio.id]?.coverSmall !=
+          current[widget.audio.id]?.coverSmall,
       builder: (context, state) {
         final updatedAudio = state[widget.audio.id] ?? widget.audio;
 
         return InkWell(
-          onTap: widget.onTap,
+          onTap: () => widget.onTap?.call(updatedAudio),
           child: SizedBox(
             width: SizeConstants.audioTileWidth,
             height: SizeConstants.audioTileHeight,
@@ -57,9 +57,9 @@ class _AudioTileState extends State<AudioTile> {
                   if (widget.needCover)
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: updatedAudio.coverUrl100?.isNotEmpty == true
+                      child: updatedAudio.coverSmall?.isNotEmpty == true
                           ? Image.network(
-                              updatedAudio.coverUrl100!,
+                              updatedAudio.coverSmall!,
                               width: 50,
                               height: 50,
                               fit: BoxFit.cover,

@@ -74,7 +74,8 @@ class _PlayerPageState extends State<PlayerPage> {
                       borderRadius: BorderRadius.circular(8),
                       child: AspectRatio(
                         aspectRatio: 1,
-                        child: mediaItem.artUri != null
+                        child: mediaItem.artUri != null &&
+                                mediaItem.artUri.toString().isNotEmpty
                             ? Image.network(
                                 mediaItem.artUri.toString(),
                                 fit: BoxFit.cover,

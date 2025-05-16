@@ -11,24 +11,23 @@ class AudioCoverCubit extends Cubit<Map<int, AudioEntity>> {
         super({});
 
   Future<void> fetchAudioCover(AudioEntity audio) async {
-    final params = ITunesSearchParams(
-      artistName: audio.artist,
-      trackName: audio.title,
+    final params = DeezerSearchParams(
+      artist: audio.artist,
+      track: audio.title,
       limit: 1,
+      order: 'RANKING',
+      strict: 'on',
     );
 
     final result = await _getAudioCover(params);
     result.fold(
       (failure) => null,
       (success) {
-        if (success != null) {
-          final artworkUrl1000 = success.replaceAll('100x100bb', '1000x1000bb');
-          final updatedAudio = audio.copyWith(
-            coverUrl100: success,
-            coverUrl1000: artworkUrl1000,
-          );
-          emit({...state, audio.id: updatedAudio});
-        }
+        final updatedAudio = audio.copyWith(
+          coverSmall: success.coverSmall,
+          coverXL: success.coverXL,
+        );
+        emit({...state, audio.id: updatedAudio});
       },
     );
   }

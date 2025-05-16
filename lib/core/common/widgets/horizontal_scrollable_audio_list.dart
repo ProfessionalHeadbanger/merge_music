@@ -1,5 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:merge_music/core/common/global_state/audio_cover/audio_cover_cubit.dart';
 import 'package:merge_music/core/common/global_state/audio_handler/audio_handler.dart';
 import 'package:merge_music/core/common/widgets/audio_tile.dart';
 import 'package:merge_music/core/constants/size_constants.dart';
@@ -77,11 +79,15 @@ class HorizontalScrollableAudioList extends StatelessWidget {
                     children: group
                         .map((audio) => AudioTile(
                               audio: audio,
-                              onTap: () async {
-                                final index = audios.indexOf(audio);
-                                final items = audios
-                                    .map((audio) => audio.toMediaItem())
-                                    .toList();
+                              onTap: (updatedAudio) async {
+                                final index = audios
+                                    .indexWhere((a) => a.id == updatedAudio.id);
+                                final audioCoverState =
+                                    context.read<AudioCoverCubit>().state;
+                                final items = audios.map((a) {
+                                  final aWithCover = audioCoverState[a.id] ?? a;
+                                  return aWithCover.toMediaItem();
+                                }).toList();
                                 final audioHandler = serviceLocator
                                     .get<AudioHandler>() as AppAudioHandler;
                                 audioHandler.playMediaItemList(items, index);

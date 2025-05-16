@@ -35,8 +35,8 @@ class ApiConstants {
   static const String getRecommendations = 'audio.getRecommendations';
 }
 
-class ITunesApiConstants {
-  static const String baseUrl = 'https://itunes.apple.com/';
+class DeezerApiConstants {
+  static const String baseUrl = 'https://api.deezer.com/';
 
   static const String search = 'search';
 }

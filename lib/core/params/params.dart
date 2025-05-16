@@ -196,14 +196,18 @@ class GetRecommendationsParams {
   });
 }
 
-class ITunesSearchParams {
-  final String artistName;
-  final String trackName;
+class DeezerSearchParams {
+  final String artist;
+  final String track;
   final int? limit;
+  final String? order;
+  final String? strict;
 
-  ITunesSearchParams({
-    required this.artistName,
-    required this.trackName,
+  DeezerSearchParams({
+    required this.artist,
+    required this.track,
     this.limit,
+    this.order,
+    this.strict,
   });
 }

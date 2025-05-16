@@ -22,6 +22,7 @@ extension AudioEntityMapper on AudioEntity {
       title: title,
       artist: artist,
       duration: Duration(seconds: duration),
+      artUri: Uri.parse(coverXL ?? ''),
     );
   }
 }

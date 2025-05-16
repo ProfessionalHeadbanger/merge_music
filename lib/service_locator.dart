@@ -15,13 +15,13 @@ import 'package:merge_music/core/common/global_state/user_playlists/user_playlis
 import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cubit.dart';
 import 'package:merge_music/core/network/internet_connection_checker.dart';
 import 'package:merge_music/data/data_sources/remote/audio_remote_data_source.dart';
-import 'package:merge_music/data/data_sources/remote/itunes_remote_data_source.dart';
+import 'package:merge_music/data/data_sources/remote/deezer_remote_data_source.dart';
 import 'package:merge_music/data/data_sources/remote/vk_login_data_source.dart';
 import 'package:merge_music/data/repositories/audio_repository_impl.dart';
-import 'package:merge_music/data/repositories/itunes_repository_impl.dart';
+import 'package:merge_music/data/repositories/deezer_repository_impl.dart';
 import 'package:merge_music/data/repositories/vk_login_repository_impl.dart';
 import 'package:merge_music/domain/repositories/audio_repository.dart';
-import 'package:merge_music/domain/repositories/itunes_repository.dart';
+import 'package:merge_music/domain/repositories/deezer_repository.dart';
 import 'package:merge_music/domain/repositories/vk_login_repository.dart';
 import 'package:merge_music/domain/usecases/get_albums_by_artist.dart';
 import 'package:merge_music/domain/usecases/get_audio_cover.dart';
@@ -98,11 +98,11 @@ Future<void> setupServiceLocator() async {
     ),
   );
 
-  serviceLocator.registerFactory<ITunesRemoteDataSource>(
-    () => ITunesRemoteDataSourceImpl(),
+  serviceLocator.registerFactory<DeezerRemoteDataSource>(
+    () => DeezerRemoteDataSourceImpl(),
   );
-  serviceLocator.registerFactory<ITunesRepository>(
-    () => ITunesRepositoryImpl(
+  serviceLocator.registerFactory<DeezerRepository>(
+    () => DeezerRepositoryImpl(
       serviceLocator(),
     ),
   );

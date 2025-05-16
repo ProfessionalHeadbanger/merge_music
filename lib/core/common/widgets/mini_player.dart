@@ -60,7 +60,8 @@ class MiniPlayer extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 16),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: mediaItem.artUri != null
+                                child: mediaItem.artUri != null &&
+                                        mediaItem.artUri.toString().isNotEmpty
                                     ? Image.network(
                                         mediaItem.artUri.toString(),
                                         width: 40,
