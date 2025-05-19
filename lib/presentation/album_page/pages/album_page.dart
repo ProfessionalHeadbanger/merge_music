@@ -26,9 +26,12 @@ class AlbumPage extends StatefulWidget {
 }
 
 class _AlbumPageState extends State<AlbumPage> {
+  late PlaylistEntity album;
+
   @override
   void initState() {
     super.initState();
+    album = widget.album;
     Future.microtask(
       () {
         if (mounted) {
@@ -125,24 +128,34 @@ class _AlbumPageState extends State<AlbumPage> {
                               children: [
                                 Expanded(
                                   child: IconTextButton(
-                                    iconPath: widget.album.isFollowing
+                                    iconPath: album.isFollowing
                                         ? IconsConstants.doneOutline
                                         : IconsConstants.addOutline,
-                                    label: widget.album.isFollowing
+                                    label: album.isFollowing
                                         ? context.l10n.added
                                         : context.l10n.add,
                                     onPressed: () {
                                       final bloc =
                                           context.read<AlbumPageBloc>();
 
-                                      if (widget.album.isFollowing) {
+                                      if (album.isFollowing) {
                                         bloc.add(
-                                          DeleteAlbumEvent(widget.album),
+                                          DeleteAlbumEvent(album),
                                         );
+                                        setState(() {
+                                          album = album.copyWith(
+                                            isFollowing: false,
+                                          );
+                                        });
                                       } else {
                                         bloc.add(
-                                          FollowAlbumEvent(widget.album),
+                                          FollowAlbumEvent(album),
                                         );
+                                        setState(() {
+                                          album = album.copyWith(
+                                            isFollowing: true,
+                                          );
+                                        });
                                       }
                                     },
                                   ),
