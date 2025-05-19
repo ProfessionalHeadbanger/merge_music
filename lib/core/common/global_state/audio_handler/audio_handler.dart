@@ -1,8 +1,14 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:merge_music/core/common/global_state/current_audio/current_audio_cubit.dart';
+import 'package:merge_music/core/extensions/extensions.dart';
+import 'package:merge_music/domain/entities/audio_entity.dart';
+import 'package:merge_music/service_locator.dart';
 
 class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   final _player = AudioPlayer();
+
+  List<AudioEntity> _currentEntities = [];
 
   AppAudioHandler() {
     _player.playbackEventStream.listen(_broadcastState);
@@ -10,6 +16,7 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     _player.currentIndexStream.listen((index) {
       if (index != null && index < queue.value.length) {
         mediaItem.add(queue.value[index]);
+        serviceLocator.get<CurrentAudioCubit>().set(_currentEntities[index]);
       }
     });
 
@@ -137,7 +144,16 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     );
   }
 
-  Future<void> playMediaItemList(List<MediaItem> items, int indexToPlay) async {
+  Future<void> playAudioEntityList(
+      List<AudioEntity> items, int indexToPlay) async {
+    _currentEntities = items;
+    final mediaItems = items.map((e) => e.toMediaItem()).toList();
+    await _playMediaItemList(mediaItems, indexToPlay);
+    serviceLocator.get<CurrentAudioCubit>().set(items[indexToPlay]);
+  }
+
+  Future<void> _playMediaItemList(
+      List<MediaItem> items, int indexToPlay) async {
     final currentQueue = queue.value;
     final currentMediaItem = mediaItem.value;
 

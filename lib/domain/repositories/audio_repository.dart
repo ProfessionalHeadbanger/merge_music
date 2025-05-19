@@ -27,4 +27,9 @@ abstract interface class AudioRepository {
   Future<Either<Failure, List<PlaylistEntity>>> getAlbumsByArtist(
       GetArtistByIdParams params);
   Future<Either<Failure, List<AudioEntity>>> getRecommendationsForUser();
+  Future<Either<Failure, int>> addAudio(AddAndDeletePartialParams params);
+  Future<Either<Failure, int>> deleteAudio(AddAndDeletePartialParams params);
+  Future<Either<Failure, int>> followPlaylist(AddAndDeletePartialParams params);
+  Future<Either<Failure, int>> deletePlaylist(AddAndDeletePartialParams params);
+  Future<Either<Failure, void>> restoreAudio(AddAndDeletePartialParams params);
 }

@@ -25,6 +25,11 @@ abstract interface class AudioRemoteDataSource {
       {required GetAudiosByArtistParams params});
   Future<List<AudioModel>> getRecommendations(
       {required GetRecommendationsParams params});
+  Future<int> addAudio({required AddAndDeleteParams params});
+  Future<int> deleteAudio({required AddAndDeleteParams params});
+  Future<int> followPlaylist({required AddAndDeleteParams params});
+  Future<int> deletePlaylist({required AddAndDeleteParams params});
+  Future<void> restoreAudio({required AddAndDeleteParams params});
 }
 
 class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
@@ -263,6 +268,109 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
 
       final List<dynamic> audiosJson = response.data['response']['items'];
       return audiosJson.map((json) => AudioModel.fromJson(json)).toList();
+    } on DioException catch (e) {
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<int> addAudio({required AddAndDeleteParams params}) async {
+    try {
+      final response = await dio.get(
+        ApiConstants.baseUrl + ApiConstants.add,
+        queryParameters: {
+          'owner_id': params.ownerId,
+          'audio_id': params.id,
+          'access_token': params.accessToken,
+          'v': params.v,
+        },
+      );
+
+      return response.data['response'] as int;
+    } on DioException catch (e) {
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<int> deleteAudio({required AddAndDeleteParams params}) async {
+    try {
+      final response = await dio.get(
+        ApiConstants.baseUrl + ApiConstants.delete,
+        queryParameters: {
+          'owner_id': params.ownerId,
+          'audio_id': params.id,
+          'access_token': params.accessToken,
+          'v': params.v,
+        },
+      );
+
+      return response.data['response'];
+    } on DioException catch (e) {
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<int> deletePlaylist({required AddAndDeleteParams params}) async {
+    try {
+      final response = await dio.get(
+        ApiConstants.baseUrl + ApiConstants.add,
+        queryParameters: {
+          'owner_id': params.ownerId,
+          'playlist_id': params.id,
+          'access_token': params.accessToken,
+          'v': params.v,
+        },
+      );
+
+      return response.data['response'];
+    } on DioException catch (e) {
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<int> followPlaylist({required AddAndDeleteParams params}) async {
+    try {
+      final response = await dio.get(
+        ApiConstants.baseUrl + ApiConstants.add,
+        queryParameters: {
+          'owner_id': params.ownerId,
+          'playlist_id': params.id,
+          'access_token': params.accessToken,
+          'v': params.v,
+        },
+      );
+
+      return response.data['response']['playlist_id'] as int;
+    } on DioException catch (e) {
+      throw ServerException(e.message);
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> restoreAudio({required AddAndDeleteParams params}) async {
+    try {
+      await dio.get(
+        ApiConstants.baseUrl + ApiConstants.restore,
+        queryParameters: {
+          'owner_id': params.ownerId,
+          'audio_id': params.id,
+          'access_token': params.accessToken,
+          'v': params.v,
+        },
+      );
     } on DioException catch (e) {
       throw ServerException(e.message);
     } catch (e) {

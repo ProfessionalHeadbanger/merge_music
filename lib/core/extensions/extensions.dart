@@ -23,6 +23,12 @@ extension AudioEntityMapper on AudioEntity {
       artist: artist,
       duration: Duration(seconds: duration),
       artUri: Uri.parse(coverXL ?? ''),
+      extras: {
+        'coverSmall': coverSmall,
+        'like': like,
+        'audioId': id,
+        'ownerId': ownerId,
+      },
     );
   }
 }

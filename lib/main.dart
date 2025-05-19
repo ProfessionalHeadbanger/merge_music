@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/common/global_state/audio_cover/audio_cover_cubit.dart';
+import 'package:merge_music/core/common/global_state/current_audio/current_audio_cubit.dart';
 import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/theme/theme_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:merge_music/presentation/album_page/bloc/album_page_bloc.dart';
 import 'package:merge_music/presentation/artist_page/bloc/artist_page_bloc.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
+import 'package:merge_music/presentation/player_page/bloc/player_page_bloc.dart';
 import 'package:merge_music/presentation/playlist_page/bloc/playlist_page_bloc.dart';
 import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
 import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc.dart';
@@ -64,6 +66,9 @@ void main() async {
           create: (_) => serviceLocator<AudioCoverCubit>(),
         ),
         BlocProvider(
+          create: (_) => serviceLocator<CurrentAudioCubit>(),
+        ),
+        BlocProvider(
           create: (_) => serviceLocator<SearchPageBloc>(),
         ),
         BlocProvider(
@@ -80,6 +85,9 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<ShowAllPlaylistsPageBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<PlayerPageBloc>(),
         ),
       ],
       child: const MainApp(),

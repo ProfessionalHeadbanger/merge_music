@@ -1,4 +1,6 @@
-class AudioEntity {
+import 'package:equatable/equatable.dart';
+
+class AudioEntity extends Equatable {
   final int id;
   final int ownerId;
   final String artist;
@@ -17,7 +19,7 @@ class AudioEntity {
   final String? coverSmall;
   final String? coverXL;
 
-  AudioEntity({
+  const AudioEntity({
     required this.id,
     required this.ownerId,
     required this.artist,
@@ -36,25 +38,59 @@ class AudioEntity {
     this.coverXL,
   });
 
+  @override
+  List<Object?> get props => [
+        id,
+        ownerId,
+        artist,
+        title,
+        duration,
+        url,
+        hasLyrics,
+        lyricsId,
+        albumId,
+        genreId,
+        date,
+        noSearch,
+        isHq,
+        like,
+        coverSmall,
+        coverXL,
+      ];
+
   AudioEntity copyWith({
+    int? id,
+    int? ownerId,
+    String? artist,
+    String? title,
+    int? duration,
+    String? url,
+    bool? hasLyrics,
+    int? lyricsId,
+    int? albumId,
+    int? genreId,
+    int? date,
+    int? noSearch,
+    int? isHq,
+    bool? like,
     String? coverSmall,
     String? coverXL,
   }) {
     return AudioEntity(
-      id: id,
-      ownerId: ownerId,
-      artist: artist,
-      title: title,
-      duration: duration,
-      url: url,
-      hasLyrics: hasLyrics,
-      lyricsId: lyricsId,
-      albumId: albumId,
-      genreId: genreId,
-      date: date,
-      noSearch: noSearch,
-      isHq: isHq,
-      like: like,
+      id: id ?? this.id,
+      ownerId: ownerId ?? this.ownerId,
+      artist: artist ?? this.artist,
+      title: title ?? this.title,
+      duration: duration ?? this.duration,
+      url: url ?? this.url,
+      hasLyrics: hasLyrics ?? this.hasLyrics,
+      lyricsId: lyricsId ?? this.lyricsId,
+      albumId: albumId ?? this.albumId,
+      genreId: genreId ?? this.genreId,
+      date: date ?? this.date,
+      noSearch: noSearch ?? this.noSearch,
+      isHq: isHq ?? this.isHq,
+      like: like ?? this.like,
       coverSmall: coverSmall ?? this.coverSmall,
       coverXL: coverXL ?? this.coverXL,
     );

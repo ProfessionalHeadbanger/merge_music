@@ -12,7 +12,6 @@ import 'package:merge_music/core/common/global_state/user_tracks/user_tracks_cub
 import 'package:merge_music/core/common/navigation/navigation_args.dart';
 import 'package:merge_music/core/common/navigation/router.dart';
 import 'package:merge_music/core/common/navigation/routes.dart';
-import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/core/params/params.dart';
 import 'package:merge_music/domain/entities/audio_entity.dart';
 import 'package:merge_music/domain/entities/playlist_entity.dart';
@@ -157,10 +156,9 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     result.fold(
       (failure) => {},
       (success) {
-        final mediaItems = success.map((audio) => audio.toMediaItem()).toList();
         final audioHandler =
             serviceLocator.get<AudioHandler>() as AppAudioHandler;
-        audioHandler.playMediaItemList(mediaItems, 0);
+        audioHandler.playAudioEntityList(success, 0);
       },
     );
   }

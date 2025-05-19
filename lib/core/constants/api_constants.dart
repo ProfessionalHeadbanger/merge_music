@@ -33,6 +33,12 @@ class ApiConstants {
   static const String getAudiosByArtist = 'audio.getAudiosByArtist';
 
   static const String getRecommendations = 'audio.getRecommendations';
+
+  static const String add = 'audio.add';
+  static const String delete = 'audio.delete';
+  static const String followPlaylist = 'audio.followPlaylist';
+  static const String deletePlaylist = 'audio.deletePlaylist';
+  static const String restore = 'audio.restore';
 }
 
 class DeezerApiConstants {

@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:merge_music/core/common/global_state/access_token/access_token_cubit.dart';
 import 'package:merge_music/core/common/global_state/audio_cover/audio_cover_cubit.dart';
 import 'package:merge_music/core/common/global_state/audio_handler/audio_handler.dart';
+import 'package:merge_music/core/common/global_state/current_audio/current_audio_cubit.dart';
 import 'package:merge_music/core/common/global_state/followed_playlists/followed_playlists_cubit.dart';
 import 'package:merge_music/core/common/global_state/theme/theme_cubit.dart';
 import 'package:merge_music/core/common/global_state/user/user_cubit.dart';
@@ -23,6 +24,8 @@ import 'package:merge_music/data/repositories/vk_login_repository_impl.dart';
 import 'package:merge_music/domain/repositories/audio_repository.dart';
 import 'package:merge_music/domain/repositories/deezer_repository.dart';
 import 'package:merge_music/domain/repositories/vk_login_repository.dart';
+import 'package:merge_music/domain/usecases/add_audio.dart';
+import 'package:merge_music/domain/usecases/delete_audio.dart';
 import 'package:merge_music/domain/usecases/get_albums_by_artist.dart';
 import 'package:merge_music/domain/usecases/get_audio_cover.dart';
 import 'package:merge_music/domain/usecases/get_audios_by_artist.dart';
@@ -33,6 +36,7 @@ import 'package:merge_music/domain/usecases/get_user_albums.dart';
 import 'package:merge_music/domain/usecases/get_user_audios.dart';
 import 'package:merge_music/domain/usecases/get_user_info.dart';
 import 'package:merge_music/domain/usecases/get_user_playlists.dart';
+import 'package:merge_music/domain/usecases/restore_audio.dart';
 import 'package:merge_music/domain/usecases/search_albums.dart';
 import 'package:merge_music/domain/usecases/search_artists.dart';
 import 'package:merge_music/domain/usecases/search_audio.dart';
@@ -40,6 +44,7 @@ import 'package:merge_music/domain/usecases/search_playlists.dart';
 import 'package:merge_music/presentation/album_page/bloc/album_page_bloc.dart';
 import 'package:merge_music/presentation/artist_page/bloc/artist_page_bloc.dart';
 import 'package:merge_music/presentation/main_page/bloc/main_page_bloc.dart';
+import 'package:merge_music/presentation/player_page/bloc/player_page_bloc.dart';
 import 'package:merge_music/presentation/playlist_page/bloc/playlist_page_bloc.dart';
 import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
 import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc.dart';
@@ -115,6 +120,9 @@ Future<void> setupServiceLocator() async {
     () => AudioCoverCubit(
       serviceLocator(),
     ),
+  );
+  serviceLocator.registerLazySingleton<CurrentAudioCubit>(
+    () => CurrentAudioCubit(),
   );
 
   // VK Login Page
@@ -288,6 +296,31 @@ Future<void> setupServiceLocator() async {
     () => ArtistPageBloc(
       getAlbumsByArtist: serviceLocator(),
       getAudiosByArtist: serviceLocator(),
+    ),
+  );
+
+  // Player Page
+  serviceLocator.registerFactory(
+    () => AddAudio(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => DeleteAudio(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => RestoreAudio(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerLazySingleton<PlayerPageBloc>(
+    () => PlayerPageBloc(
+      addAudio: serviceLocator(),
+      deleteAudio: serviceLocator(),
+      restoreAudio: serviceLocator(),
+      currentAudioCubit: serviceLocator(),
     ),
   );
 }

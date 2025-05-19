@@ -84,13 +84,13 @@ class HorizontalScrollableAudioList extends StatelessWidget {
                                     .indexWhere((a) => a.id == updatedAudio.id);
                                 final audioCoverState =
                                     context.read<AudioCoverCubit>().state;
-                                final items = audios.map((a) {
-                                  final aWithCover = audioCoverState[a.id] ?? a;
-                                  return aWithCover.toMediaItem();
+                                final updatedAudios = audios.map((a) {
+                                  return audioCoverState[a.id] ?? a;
                                 }).toList();
                                 final audioHandler = serviceLocator
                                     .get<AudioHandler>() as AppAudioHandler;
-                                audioHandler.playMediaItemList(items, index);
+                                audioHandler.playAudioEntityList(
+                                    updatedAudios, index);
                               },
                             ))
                         .toList(),

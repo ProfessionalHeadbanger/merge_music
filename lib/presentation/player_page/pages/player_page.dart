@@ -1,12 +1,15 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:merge_music/core/common/global_state/current_audio/current_audio_cubit.dart';
 import 'package:merge_music/core/common/widgets/animated_overflowed_text.dart';
 import 'package:merge_music/core/common/widgets/queue_sheet.dart';
 import 'package:merge_music/core/constants/icons_constants.dart';
 import 'package:merge_music/core/extensions/extensions.dart';
 import 'package:merge_music/core/utils/utils.dart';
+import 'package:merge_music/presentation/player_page/bloc/player_page_bloc.dart';
 import 'package:merge_music/service_locator.dart';
 
 class PlayerPage extends StatefulWidget {
@@ -23,6 +26,7 @@ class _PlayerPageState extends State<PlayerPage> {
   @override
   Widget build(BuildContext context) {
     final audioHandler = serviceLocator.get<AudioHandler>();
+    final currentAudio = context.watch<CurrentAudioCubit>().state;
 
     return Scaffold(
       appBar: AppBar(
@@ -112,9 +116,30 @@ class _PlayerPageState extends State<PlayerPage> {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (currentAudio != null) {
+                                final bloc = context.read<PlayerPageBloc>();
+                                final isLiked =
+                                    mediaItem.extras?['like'] == true;
+
+                                if (isLiked) {
+                                  bloc.add(DeleteAudioEvent(currentAudio));
+                                } else {
+                                  final wasDeleted = bloc
+                                      .recentlyDeletedAudioIds
+                                      .contains(currentAudio.id);
+                                  if (wasDeleted) {
+                                    bloc.add(RestoreAudioEvent(currentAudio));
+                                  } else {
+                                    bloc.add(AddAudioEvent(currentAudio));
+                                  }
+                                }
+                              }
+                            },
                             icon: SvgPicture.asset(
-                              IconsConstants.addOutline,
+                              mediaItem.extras?['like'] != null
+                                  ? IconsConstants.doneOutline
+                                  : IconsConstants.addOutline,
                               width: 28,
                               height: 28,
                               colorFilter: ColorFilter.mode(

@@ -196,6 +196,30 @@ class GetRecommendationsParams {
   });
 }
 
+class AddAndDeleteParams {
+  final int id;
+  final int ownerId;
+  final String accessToken;
+  final String v;
+
+  AddAndDeleteParams({
+    required this.id,
+    required this.ownerId,
+    required this.accessToken,
+    required this.v,
+  });
+}
+
+class AddAndDeletePartialParams {
+  final int id;
+  final int ownerId;
+
+  AddAndDeletePartialParams({
+    required this.id,
+    required this.ownerId,
+  });
+}
+
 class DeezerSearchParams {
   final String artist;
   final String track;

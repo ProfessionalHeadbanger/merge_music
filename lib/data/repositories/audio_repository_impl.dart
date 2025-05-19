@@ -325,4 +325,119 @@ class AudioRepositoryImpl implements AudioRepository {
       return left(Failure(e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, int>> addAudio(
+      AddAndDeletePartialParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final result = await audioRemoteDataSource.addAudio(
+          params: AddAndDeleteParams(
+            id: params.id,
+            ownerId: params.ownerId,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(result);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> deleteAudio(
+      AddAndDeletePartialParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final result = await audioRemoteDataSource.deleteAudio(
+          params: AddAndDeleteParams(
+            id: params.id,
+            ownerId: params.ownerId,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(result);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> deletePlaylist(
+      AddAndDeletePartialParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final result = await audioRemoteDataSource.deletePlaylist(
+          params: AddAndDeleteParams(
+            id: params.id,
+            ownerId: params.ownerId,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(result);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> followPlaylist(
+      AddAndDeletePartialParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        final result = await audioRemoteDataSource.followPlaylist(
+          params: AddAndDeleteParams(
+            id: params.id,
+            ownerId: params.ownerId,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(result);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> restoreAudio(
+      AddAndDeletePartialParams params) async {
+    try {
+      final tokenState = serviceLocator.get<AccessTokenCubit>().state;
+      if (tokenState is AccessTokenLoaded) {
+        await audioRemoteDataSource.restoreAudio(
+          params: AddAndDeleteParams(
+            id: params.id,
+            ownerId: params.ownerId,
+            accessToken: tokenState.token,
+            v: ApiConstants.v,
+          ),
+        );
+        return right(null);
+      }
+      return left(Failure('Access token is not loaded'));
+    } on ServerException catch (e) {
+      serviceLocator.get<Logger>().e('Error occured: $e');
+      return left(Failure(e.message));
+    }
+  }
 }
