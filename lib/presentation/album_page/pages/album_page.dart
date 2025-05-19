@@ -125,9 +125,26 @@ class _AlbumPageState extends State<AlbumPage> {
                               children: [
                                 Expanded(
                                   child: IconTextButton(
-                                    iconPath: IconsConstants.addOutline,
-                                    label: context.l10n.add,
-                                    onPressed: () {},
+                                    iconPath: widget.album.isFollowing
+                                        ? IconsConstants.doneOutline
+                                        : IconsConstants.addOutline,
+                                    label: widget.album.isFollowing
+                                        ? context.l10n.added
+                                        : context.l10n.add,
+                                    onPressed: () {
+                                      final bloc =
+                                          context.read<AlbumPageBloc>();
+
+                                      if (widget.album.isFollowing) {
+                                        bloc.add(
+                                          DeleteAlbumEvent(widget.album),
+                                        );
+                                      } else {
+                                        bloc.add(
+                                          FollowAlbumEvent(widget.album),
+                                        );
+                                      }
+                                    },
                                   ),
                                 ),
                                 Expanded(

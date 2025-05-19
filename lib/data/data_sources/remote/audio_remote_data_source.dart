@@ -321,7 +321,7 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
   Future<int> deletePlaylist({required AddAndDeleteParams params}) async {
     try {
       final response = await dio.get(
-        ApiConstants.baseUrl + ApiConstants.add,
+        ApiConstants.baseUrl + ApiConstants.deletePlaylist,
         queryParameters: {
           'owner_id': params.ownerId,
           'playlist_id': params.id,
@@ -342,7 +342,7 @@ class AudioRemoteDataSourceImpl implements AudioRemoteDataSource {
   Future<int> followPlaylist({required AddAndDeleteParams params}) async {
     try {
       final response = await dio.get(
-        ApiConstants.baseUrl + ApiConstants.add,
+        ApiConstants.baseUrl + ApiConstants.followPlaylist,
         queryParameters: {
           'owner_id': params.ownerId,
           'playlist_id': params.id,

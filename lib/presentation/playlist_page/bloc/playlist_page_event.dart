@@ -21,3 +21,17 @@ class LoadPlaylistAudios extends PlaylistPageEvent {
   @override
   List<Object> get props => [albumId, ownerId];
 }
+
+class FollowPlaylistEvent extends PlaylistPageEvent {
+  final PlaylistEntity playlist;
+  const FollowPlaylistEvent(this.playlist);
+  @override
+  List<Object> get props => [playlist];
+}
+
+class DeletePlaylistEvent extends PlaylistPageEvent {
+  final PlaylistEntity playlist;
+  const DeletePlaylistEvent(this.playlist);
+  @override
+  List<Object> get props => [playlist];
+}

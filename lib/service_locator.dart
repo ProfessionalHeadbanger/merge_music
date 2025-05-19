@@ -26,6 +26,8 @@ import 'package:merge_music/domain/repositories/deezer_repository.dart';
 import 'package:merge_music/domain/repositories/vk_login_repository.dart';
 import 'package:merge_music/domain/usecases/add_audio.dart';
 import 'package:merge_music/domain/usecases/delete_audio.dart';
+import 'package:merge_music/domain/usecases/delete_playlist.dart';
+import 'package:merge_music/domain/usecases/follow_playlist.dart';
 import 'package:merge_music/domain/usecases/get_albums_by_artist.dart';
 import 'package:merge_music/domain/usecases/get_audio_cover.dart';
 import 'package:merge_music/domain/usecases/get_audios_by_artist.dart';
@@ -268,9 +270,21 @@ Future<void> setupServiceLocator() async {
       serviceLocator(),
     ),
   );
+  serviceLocator.registerFactory(
+    () => FollowPlaylist(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => DeletePlaylist(
+      serviceLocator(),
+    ),
+  );
   serviceLocator.registerLazySingleton<AlbumPageBloc>(
     () => AlbumPageBloc(
       getPlaylistAudios: serviceLocator(),
+      followPlaylist: serviceLocator(),
+      deletePlaylist: serviceLocator(),
     ),
   );
 
@@ -278,6 +292,8 @@ Future<void> setupServiceLocator() async {
   serviceLocator.registerLazySingleton<PlaylistPageBloc>(
     () => PlaylistPageBloc(
       getPlaylistAudios: serviceLocator(),
+      followPlaylist: serviceLocator(),
+      deletePlaylist: serviceLocator(),
     ),
   );
 

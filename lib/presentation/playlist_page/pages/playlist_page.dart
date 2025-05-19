@@ -26,9 +26,12 @@ class PlaylistPage extends StatefulWidget {
 }
 
 class _PlaylistPageState extends State<PlaylistPage> {
+  late PlaylistEntity playlist;
+
   @override
   void initState() {
     super.initState();
+    playlist = widget.playlist;
     Future.microtask(
       () {
         if (mounted) {
@@ -115,9 +118,36 @@ class _PlaylistPageState extends State<PlaylistPage> {
                               children: [
                                 Expanded(
                                   child: IconTextButton(
-                                    iconPath: IconsConstants.addOutline,
-                                    label: context.l10n.add,
-                                    onPressed: () {},
+                                    iconPath: playlist.isFollowing
+                                        ? IconsConstants.doneOutline
+                                        : IconsConstants.addOutline,
+                                    label: playlist.isFollowing
+                                        ? context.l10n.added
+                                        : context.l10n.add,
+                                    onPressed: () {
+                                      final bloc =
+                                          context.read<PlaylistPageBloc>();
+
+                                      if (playlist.isFollowing) {
+                                        bloc.add(
+                                          DeletePlaylistEvent(playlist),
+                                        );
+                                        setState(() {
+                                          playlist = playlist.copyWith(
+                                            isFollowing: false,
+                                          );
+                                        });
+                                      } else {
+                                        bloc.add(
+                                          FollowPlaylistEvent(playlist),
+                                        );
+                                        setState(() {
+                                          playlist = playlist.copyWith(
+                                            isFollowing: true,
+                                          );
+                                        });
+                                      }
+                                    },
                                   ),
                                 ),
                                 Expanded(

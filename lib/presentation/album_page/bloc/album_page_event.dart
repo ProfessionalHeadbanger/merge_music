@@ -21,3 +21,17 @@ class LoadPlaylistAudios extends AlbumPageEvent {
   @override
   List<Object> get props => [albumId, ownerId];
 }
+
+class FollowAlbumEvent extends AlbumPageEvent {
+  final PlaylistEntity album;
+  const FollowAlbumEvent(this.album);
+  @override
+  List<Object> get props => [album];
+}
+
+class DeleteAlbumEvent extends AlbumPageEvent {
+  final PlaylistEntity album;
+  const DeleteAlbumEvent(this.album);
+  @override
+  List<Object> get props => [album];
+}
