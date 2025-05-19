@@ -107,99 +107,114 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        child: BlocBuilder<SearchPageBloc, SearchPageState>(
-          builder: (context, state) {
-            if (state is SearchPageEmptyHistory) {
+      body: RefreshIndicator(
+        onRefresh: () async {
+          final state = context.read<SearchPageBloc>().state;
+          if (state is SearchPageHistoryLoaded ||
+              state is SearchPageEmptyHistory) {
+            context.read<SearchPageBloc>().add(LoadSearchHistory());
+          } else if (state is SearchPageLoaded) {
+            context
+                .read<SearchPageBloc>()
+                .add(SearchByQuery(query: _lastQuery));
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: BlocBuilder<SearchPageBloc, SearchPageState>(
+            builder: (context, state) {
+              if (state is SearchPageEmptyHistory) {
+                return EmptyHistoryWidget();
+              }
+              if (state is SearchPageHistoryLoaded) {
+                return LoadedHistoryWidget(
+                  history: state.history,
+                  onQueryTap: (query) => _submitQuery(query),
+                  setControllerText: (text) => _controller.text = text,
+                );
+              }
+              if (state is SearchPageError) {
+                return Center(
+                  child: RetryButton(
+                    onPressed: () {
+                      context
+                          .read<SearchPageBloc>()
+                          .add(SearchByQuery(query: _lastQuery));
+                    },
+                  ),
+                );
+              }
+              if (state is SearchPageLoading) {
+                return const Center(child: LoadingWidget());
+              }
+              if (state is SearchPageLoaded) {
+                final likedTracks =
+                    state.tracks.where((track) => track.like ?? false).toList();
+                final notLikedTracks =
+                    state.tracks.where((track) => track.like == null).toList();
+
+                final userState =
+                    context.read<UserCubit>().state as UserLoggedIn;
+                final inMyPlaylists = state.playlists
+                    .where((playlist) =>
+                        (playlist.ownerId == userState.user.id ||
+                            playlist.isFollowing) &&
+                        playlist.type == 0)
+                    .toList();
+                final allPlaylists = state.playlists
+                    .where((playlist) =>
+                        (playlist.ownerId != userState.user.id &&
+                            !playlist.isFollowing) &&
+                        playlist.type == 0)
+                    .toList();
+
+                final likedAlbums =
+                    state.albums.where((album) => album.isFollowing).toList();
+                final notLikedAlbums =
+                    state.albums.where((album) => !album.isFollowing).toList();
+
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: CustomScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    slivers: [
+                      SliverDivider(color: context.color.tertiaryText!),
+                      SearchedTracksSliver(
+                        tracks: likedTracks,
+                        title: context.l10n.inMyTracks,
+                      ),
+                      SliverDivider(color: context.color.auxiliaryText!),
+                      SearchedTracksSliver(
+                        tracks: notLikedTracks,
+                        title: context.l10n.allTracks,
+                      ),
+                      SliverDivider(color: context.color.tertiaryText!),
+                      SearchedPlaylistsSliver(
+                        playlists: inMyPlaylists,
+                        title: context.l10n.inMyPlaylists,
+                      ),
+                      SliverDivider(color: context.color.auxiliaryText!),
+                      SearchedPlaylistsSliver(
+                        playlists: allPlaylists,
+                        title: context.l10n.allPlaylists,
+                      ),
+                      SliverDivider(color: context.color.auxiliaryText!),
+                      SearchedPlaylistsSliver(
+                          playlists: likedAlbums,
+                          title: context.l10n.inMyAlbums),
+                      SliverDivider(color: context.color.auxiliaryText!),
+                      SearchedPlaylistsSliver(
+                          playlists: notLikedAlbums,
+                          title: context.l10n.allAlbums),
+                      SliverDivider(color: context.color.tertiaryText!),
+                      SearchedArtistsSliver(artists: state.artists),
+                    ],
+                  ),
+                );
+              }
               return EmptyHistoryWidget();
-            }
-            if (state is SearchPageHistoryLoaded) {
-              return LoadedHistoryWidget(
-                history: state.history,
-                onQueryTap: (query) => _submitQuery(query),
-                setControllerText: (text) => _controller.text = text,
-              );
-            }
-            if (state is SearchPageError) {
-              return Center(
-                child: RetryButton(
-                  onPressed: () {
-                    context
-                        .read<SearchPageBloc>()
-                        .add(SearchByQuery(query: _lastQuery));
-                  },
-                ),
-              );
-            }
-            if (state is SearchPageLoading) {
-              return const Center(child: LoadingWidget());
-            }
-            if (state is SearchPageLoaded) {
-              final likedTracks =
-                  state.tracks.where((track) => track.like ?? false).toList();
-              final notLikedTracks =
-                  state.tracks.where((track) => track.like == null).toList();
-
-              final userState = context.read<UserCubit>().state as UserLoggedIn;
-              final inMyPlaylists = state.playlists
-                  .where((playlist) =>
-                      (playlist.ownerId == userState.user.id ||
-                          playlist.isFollowing) &&
-                      playlist.type == 0)
-                  .toList();
-              final allPlaylists = state.playlists
-                  .where((playlist) =>
-                      (playlist.ownerId != userState.user.id &&
-                          !playlist.isFollowing) &&
-                      playlist.type == 0)
-                  .toList();
-
-              final likedAlbums =
-                  state.albums.where((album) => album.isFollowing).toList();
-              final notLikedAlbums =
-                  state.albums.where((album) => !album.isFollowing).toList();
-
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: CustomScrollView(
-                  slivers: [
-                    SliverDivider(color: context.color.tertiaryText!),
-                    SearchedTracksSliver(
-                      tracks: likedTracks,
-                      title: context.l10n.inMyTracks,
-                    ),
-                    SliverDivider(color: context.color.auxiliaryText!),
-                    SearchedTracksSliver(
-                      tracks: notLikedTracks,
-                      title: context.l10n.allTracks,
-                    ),
-                    SliverDivider(color: context.color.tertiaryText!),
-                    SearchedPlaylistsSliver(
-                      playlists: inMyPlaylists,
-                      title: context.l10n.inMyPlaylists,
-                    ),
-                    SliverDivider(color: context.color.auxiliaryText!),
-                    SearchedPlaylistsSliver(
-                      playlists: allPlaylists,
-                      title: context.l10n.allPlaylists,
-                    ),
-                    SliverDivider(color: context.color.auxiliaryText!),
-                    SearchedPlaylistsSliver(
-                        playlists: likedAlbums, title: context.l10n.inMyAlbums),
-                    SliverDivider(color: context.color.auxiliaryText!),
-                    SearchedPlaylistsSliver(
-                        playlists: notLikedAlbums,
-                        title: context.l10n.allAlbums),
-                    SliverDivider(color: context.color.tertiaryText!),
-                    SearchedArtistsSliver(artists: state.artists),
-                    SliverDivider(color: context.color.tertiaryText!),
-                  ],
-                ),
-              );
-            }
-            return EmptyHistoryWidget();
-          },
+            },
+          ),
         ),
       ),
       bottomNavigationBar: const MiniPlayer(),

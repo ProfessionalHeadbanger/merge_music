@@ -46,69 +46,79 @@ class _MainPageState extends State<MainPage> {
           if (state is MainPageLoaded) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: CustomScrollView(
-                slivers: [
-                  SliverDivider(color: context.color.tertiaryText!),
-                  VkMixSliver(
-                    onPressed: () {
-                      context.read<MainPageBloc>().add(PlayRecommendations());
-                    },
-                  ),
-                  SliverDivider(color: context.color.tertiaryText!),
-                  AudioListSliver(),
-                  SliverDivider(color: context.color.tertiaryText!),
-                  BlocBuilder<UserAlbumsCubit, UserAlbumsState>(
-                    builder: (context, state) {
-                      if (state is! UserAlbumsLoaded) {
-                        return const SliverToBoxAdapter();
-                      }
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  context.read<MainPageBloc>().add(LoadMainPageData());
+                  await context
+                      .read<MainPageBloc>()
+                      .stream
+                      .firstWhere((newState) => newState is MainPageLoaded);
+                },
+                child: CustomScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  slivers: [
+                    SliverDivider(color: context.color.tertiaryText!),
+                    VkMixSliver(
+                      onPressed: () {
+                        context.read<MainPageBloc>().add(PlayRecommendations());
+                      },
+                    ),
+                    SliverDivider(color: context.color.tertiaryText!),
+                    AudioListSliver(),
+                    SliverDivider(color: context.color.tertiaryText!),
+                    BlocBuilder<UserAlbumsCubit, UserAlbumsState>(
+                      builder: (context, state) {
+                        if (state is! UserAlbumsLoaded) {
+                          return const SliverToBoxAdapter();
+                        }
 
-                      return PlaylistsSliver(
-                        playlists: state.albums
-                            .take(CommonConstants
-                                .numberOfPlaylistsInHorizontalList)
-                            .toList(),
-                        title: context.l10n.myAlbums,
-                      );
-                    },
-                  ),
-                  SliverDivider(color: context.color.auxiliaryText!),
-                  BlocBuilder<FollowedPlaylistsCubit, FollowedPlaylistsState>(
-                    builder: (context, state) {
-                      if (state is! FollowedPlaylistsLoaded) {
-                        return const SliverToBoxAdapter();
-                      }
+                        return PlaylistsSliver(
+                          playlists: state.albums
+                              .take(CommonConstants
+                                  .numberOfPlaylistsInHorizontalList)
+                              .toList(),
+                          title: context.l10n.myAlbums,
+                        );
+                      },
+                    ),
+                    SliverDivider(color: context.color.auxiliaryText!),
+                    BlocBuilder<FollowedPlaylistsCubit, FollowedPlaylistsState>(
+                      builder: (context, state) {
+                        if (state is! FollowedPlaylistsLoaded) {
+                          return const SliverToBoxAdapter();
+                        }
 
-                      return PlaylistsSliver(
-                        playlists: state.playlists
-                            .take(CommonConstants
-                                .numberOfPlaylistsInHorizontalList)
-                            .toList(),
-                        title: context.l10n.myFollowedPlaylists,
-                      );
-                    },
-                  ),
-                  SliverDivider(color: context.color.auxiliaryText!),
-                  BlocBuilder<UserPlaylistsCubit, UserPlaylistsState>(
-                    builder: (context, state) {
-                      if (state is! UserPlaylistsLoaded) {
-                        return const SliverToBoxAdapter();
-                      }
+                        return PlaylistsSliver(
+                          playlists: state.playlists
+                              .take(CommonConstants
+                                  .numberOfPlaylistsInHorizontalList)
+                              .toList(),
+                          title: context.l10n.myFollowedPlaylists,
+                        );
+                      },
+                    ),
+                    SliverDivider(color: context.color.auxiliaryText!),
+                    BlocBuilder<UserPlaylistsCubit, UserPlaylistsState>(
+                      builder: (context, state) {
+                        if (state is! UserPlaylistsLoaded) {
+                          return const SliverToBoxAdapter();
+                        }
 
-                      return PlaylistsSliver(
-                        playlists: state.playlists
-                            .take(CommonConstants
-                                .numberOfPlaylistsInHorizontalList)
-                            .toList(),
-                        title: context.l10n.myPlaylists,
-                      );
-                    },
-                  ),
-                  SliverPadding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    sliver: SliverDivider(color: context.color.tertiaryText!),
-                  ),
-                ],
+                        return PlaylistsSliver(
+                          playlists: state.playlists
+                              .take(CommonConstants
+                                  .numberOfPlaylistsInHorizontalList)
+                              .toList(),
+                          title: context.l10n.myPlaylists,
+                        );
+                      },
+                    ),
+                    SliverPadding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      sliver: SliverDivider(color: context.color.tertiaryText!),
+                    ),
+                  ],
+                ),
               ),
             );
           }

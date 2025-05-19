@@ -47,6 +47,7 @@ class LoadedHistoryWidget extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
             itemCount: history.length,
             itemBuilder: (context, index) {
               return ListTile(
