@@ -18,6 +18,7 @@ class VkLoginDataSourceImpl implements VkLoginDataSource {
       final response = await dio.get(
         ApiConstants.baseUrl + ApiConstants.usersGet,
         queryParameters: {
+          //'user_ids': params.userIds,
           'fields': params.fields?.join(','),
           'access_token': params.accessToken,
           'v': params.v,

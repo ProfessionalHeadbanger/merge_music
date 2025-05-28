@@ -1,7 +1,7 @@
 import 'package:merge_music/domain/entities/audio_entity.dart';
 
 class AudioModel extends AudioEntity {
-  AudioModel({
+  const AudioModel({
     required super.id,
     required super.ownerId,
     required super.artist,

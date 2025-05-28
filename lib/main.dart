@@ -21,6 +21,7 @@ import 'package:merge_music/presentation/player_page/bloc/player_page_bloc.dart'
 import 'package:merge_music/presentation/playlist_page/bloc/playlist_page_bloc.dart';
 import 'package:merge_music/presentation/search_page/bloc/search_page_bloc.dart';
 import 'package:merge_music/presentation/settings_page/bloc/settings_page_bloc.dart';
+import 'package:merge_music/presentation/show_all_artists_page/bloc/show_all_artists_page_bloc.dart';
 import 'package:merge_music/presentation/show_all_playlists_page/bloc/show_all_playlists_page_bloc.dart';
 import 'package:merge_music/presentation/vk_login/bloc/vk_login_bloc.dart';
 import 'package:merge_music/service_locator.dart';
@@ -85,6 +86,9 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<ShowAllPlaylistsPageBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<ShowAllArtistsPageBloc>(),
         ),
         BlocProvider(
           create: (_) => serviceLocator<PlayerPageBloc>(),

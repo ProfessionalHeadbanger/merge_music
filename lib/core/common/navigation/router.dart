@@ -10,7 +10,7 @@ import 'package:merge_music/presentation/playlist_page/pages/playlist_page.dart'
 import 'package:merge_music/presentation/root_page/root_page.dart';
 import 'package:merge_music/presentation/search_page/pages/search_page.dart';
 import 'package:merge_music/presentation/settings_page/pages/settings_page.dart';
-import 'package:merge_music/presentation/show_all_artists_page/show_all_artists_page.dart';
+import 'package:merge_music/presentation/show_all_artists_page/pages/show_all_artists_page.dart';
 import 'package:merge_music/presentation/show_all_playlists_page/pages/show_all_playlists_page.dart';
 import 'package:merge_music/presentation/show_all_tracks_page/show_all_tracks_page.dart';
 import 'package:merge_music/presentation/vk_login/pages/vk_login_input_login_page.dart';
