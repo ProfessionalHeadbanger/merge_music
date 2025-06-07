@@ -143,6 +143,7 @@ class _MainAppState extends State<MainApp> {
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: state.themeMode,
+            debugShowCheckedModeBanner: false,
           );
         },
       ),

@@ -72,15 +72,6 @@ class SettingsPage extends StatelessWidget {
                     ),
                   ),
                   ThemeSwitcherSliver(),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text(
-                        context.l10n.more_settings,
-                        style: context.text.mediumTitle,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
